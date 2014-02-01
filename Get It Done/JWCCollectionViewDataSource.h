@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface JWCCollectionViewDataSource : NSObject
-<UICollectionViewDataSource>
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *taskCollectionView;
 
 @end

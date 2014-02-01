@@ -7,7 +7,7 @@
 //
 
 #import "JWCCollectionViewCell.h"
-
+#import "UIColor+GetItDoneColors.h"
 @implementation JWCCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -19,13 +19,12 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    [super drawRect:rect];
+    self.subTaskTextView.textColor = [UIColor darkBlueColor];
+    self.layer.cornerRadius = 5;
 }
-*/
+
 
 @end

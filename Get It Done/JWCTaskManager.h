@@ -14,6 +14,10 @@
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
 
+
++ (JWCTaskManager *)sharedManager;
+
 - (void)addTask:(JWCTask *)task;
+- (void)setUpTasksArray;
 
 @end
