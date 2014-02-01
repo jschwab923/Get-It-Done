@@ -11,5 +11,7 @@
 @interface JWCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIColor *backgroundColorPortrait;
+@property (strong, nonatomic) UIColor *backgroundColorLandscape;
 
 @end

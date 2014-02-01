@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
 		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
+		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
 		6B6DF56E189C8B9B0027761B /* JWCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF56D189C8B9B0027761B /* JWCCollectionViewCell.m */; };
 		6B6DF572189C8D840027761B /* JWCCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF571189C8D840027761B /* JWCCollectionViewDataSource.m */; };
 		6B6DF576189C8DA20027761B /* JWCTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF575189C8DA20027761B /* JWCTaskManager.m */; };
@@ -69,6 +70,7 @@
 		6B17890B189D8CDD003664C5 /* SAMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMath.m; sourceTree = "<group>"; };
 		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
 		6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
+		6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33landscape@2x.png"; sourceTree = "<group>"; };
 		6B6DF56C189C8B9B0027761B /* JWCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCell.h; path = "Get It Done/JWCCollectionViewCell.h"; sourceTree = "<group>"; };
 		6B6DF56D189C8B9B0027761B /* JWCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCell.m; path = "Get It Done/JWCCollectionViewCell.m"; sourceTree = "<group>"; };
 		6B6DF570189C8D840027761B /* JWCCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCCollectionViewDataSource.h; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 		6BFD0A30189C68FB008C3698 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */,
 				6BFD0A3D189C6B88008C3698 /* iPhone5_33Flipped@2x.png */,
 				6BFD0A37189C6A92008C3698 /* iPhone5_26@2x.png */,
 				6BFD0A38189C6A92008C3698 /* iPhone5_33@2x.png */,
@@ -492,6 +495,7 @@
 			files = (
 				6BF5BF26189B645200B4EA9C /* Main_iPad.storyboard in Resources */,
 				6BFD0A3C189C6A92008C3698 /* iPhone5_34@2x.png in Resources */,
+				6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */,
 				6BFD0A3B189C6A92008C3698 /* iPhone5_33@2x.png in Resources */,
 				6BF5BF2B189B645200B4EA9C /* Images.xcassets in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,

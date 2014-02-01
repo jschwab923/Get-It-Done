@@ -12,7 +12,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    self.backgroundColorPortrait = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_33Flipped"]];
+    self.backgroundColorLandscape = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_33landscape"]];
     return YES;
 }
 							

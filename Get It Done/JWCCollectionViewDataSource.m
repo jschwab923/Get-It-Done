@@ -68,7 +68,7 @@
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                    context:nil];
-    CGSize roundedSize = CGSizeMake(250, ceil(boundingRect.size.height));
+    CGSize roundedSize = CGSizeMake(120, ceil(boundingRect.size.height));
     
     return roundedSize;
 }
