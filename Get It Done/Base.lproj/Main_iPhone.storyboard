@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uaN-tv-Ndc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="JWCRootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="APW-QG-5mJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="MQK-dK-O1T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bQ7-bH-H17">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-259" y="76"/>
+        </scene>
+        <!--Soon View Controller-->
+        <scene sceneID="DUN-3t-72q">
+            <objects>
+                <viewController id="uaN-tv-Ndc" customClass="JWCSoonViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NPI-an-CMR"/>
+                        <viewControllerLayoutGuide type="bottom" id="XuW-xl-awP"/>
+                    </layoutGuides>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="O19-Sz-MMr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33Flipped.png" translatesAutoresizingMaskIntoConstraints="NO" id="5gN-22-Zik">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Current Progress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VsY-CK-XLE">
+                                <rect key="frame" x="20" y="20" width="280" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" red="0.21981481950000001" green="0.32639373100000002" blue="0.60813934950000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rsD-cm-XZJ">
+                                <rect key="frame" x="79" y="109" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Eix-GK-D6w">
+                                <rect key="frame" x="20" y="305" width="280" height="198"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WtB-1l-S0h">
+                                    <size key="itemSize" width="277" height="50"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SubtaskCell" id="hfO-ic-fzA" customClass="JWCCollectionViewCell">
+                                        <rect key="frame" x="2" y="55" width="277" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="277" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAB-5P-Fvu">
+                                                    <rect key="frame" x="20" y="0.0" width="257" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.21981481950000001" green="0.32639373100000002" blue="0.60813934950000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="subTaskTextView" destination="HAB-5P-Fvu" id="XLb-7C-c9f"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderCell" id="sme-zY-NY1" customClass="JWCCollectionViewHeader">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJs-FO-TYx">
+                                            <rect key="frame" x="20" y="0.0" width="202" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.21981481950000001" green="0.32639373100000002" blue="0.60813934950000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                        </textView>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmotionHappy" translatesAutoresizingMaskIntoConstraints="NO" id="svl-86-PcG">
+                                            <rect key="frame" x="230" y="8" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="taskDescriptionTextView" destination="DJs-FO-TYx" id="gBY-dC-t7Y"/>
+                                        <outlet property="taskImageView" destination="svl-86-PcG" id="SBj-OR-EZF"/>
+                                    </connections>
+                                </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ftq-aD-7nI" id="1z1-v7-QT0"/>
+                                    <outlet property="delegate" destination="uaN-tv-Ndc" id="wwR-Mz-gTo"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="rsD-cm-XZJ" firstAttribute="centerX" secondItem="VsY-CK-XLE" secondAttribute="centerX" constant="-6" id="6X7-KC-R4E"/>
+                            <constraint firstItem="5gN-22-Zik" firstAttribute="centerY" secondItem="O19-Sz-MMr" secondAttribute="centerY" id="8Aq-4W-Lzs"/>
+                            <constraint firstAttribute="bottom" secondItem="5gN-22-Zik" secondAttribute="bottom" id="FSi-80-VeU"/>
+                            <constraint firstItem="rsD-cm-XZJ" firstAttribute="top" secondItem="VsY-CK-XLE" secondAttribute="bottom" constant="24" id="GWY-eI-qfA"/>
+                            <constraint firstItem="5gN-22-Zik" firstAttribute="centerX" secondItem="O19-Sz-MMr" secondAttribute="centerX" id="MrY-xh-PhN"/>
+                            <constraint firstAttribute="trailing" secondItem="5gN-22-Zik" secondAttribute="trailing" id="Y2X-xp-Kv5"/>
+                            <constraint firstItem="5gN-22-Zik" firstAttribute="top" secondItem="O19-Sz-MMr" secondAttribute="top" id="ezG-v8-0t3"/>
+                            <constraint firstItem="5gN-22-Zik" firstAttribute="leading" secondItem="O19-Sz-MMr" secondAttribute="leading" id="vNi-sR-ABf"/>
+                        </constraints>
+                    </scrollView>
+                    <connections>
+                        <outlet property="label" destination="VsY-CK-XLE" id="moH-Gp-omP"/>
+                        <outlet property="progressContainerView" destination="rsD-cm-XZJ" id="Uf4-ZC-gMw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pam-Vy-1d3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Ftq-aD-7nI" customClass="JWCCollectionViewDataSource"/>
+            </objects>
+            <point key="canvasLocation" x="318" y="-320"/>
+        </scene>
+        <!--Add Task View Controller-->
+        <scene sceneID="rMk-jJ-cwk">
+            <objects>
+                <viewController id="cC2-UZ-iOs" customClass="JWCAddTaskViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eOY-qJ-amu"/>
+                        <viewControllerLayoutGuide type="bottom" id="cYF-BU-5lA"/>
+                    </layoutGuides>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="r78-gj-UIb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33.png" translatesAutoresizingMaskIntoConstraints="NO" id="05H-7o-kU5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="05H-7o-kU5" secondAttribute="centerX" id="85P-lI-fUa"/>
+                            <constraint firstItem="05H-7o-kU5" firstAttribute="top" secondItem="r78-gj-UIb" secondAttribute="top" id="AIq-MC-bdR"/>
+                            <constraint firstAttribute="bottom" secondItem="05H-7o-kU5" secondAttribute="bottom" id="FgA-H5-eVh"/>
+                            <constraint firstAttribute="trailing" secondItem="05H-7o-kU5" secondAttribute="trailing" id="LYo-s9-IzM"/>
+                            <constraint firstItem="05H-7o-kU5" firstAttribute="leading" secondItem="r78-gj-UIb" secondAttribute="leading" id="OcX-g3-Kh5"/>
+                            <constraint firstItem="05H-7o-kU5" firstAttribute="centerY" secondItem="r78-gj-UIb" secondAttribute="centerY" id="uzY-KZ-vCz"/>
+                        </constraints>
+                    </scrollView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygj-3d-da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="683" y="385"/>
+        </scene>
+        <!--Task Done View Controller-->
+        <scene sceneID="fMu-Kt-yMc">
+            <objects>
+                <viewController id="wol-gf-s8F" customClass="JWCTaskDoneViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A1J-RR-Jag"/>
+                        <viewControllerLayoutGuide type="bottom" id="61G-hN-1vZ"/>
+                    </layoutGuides>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="wRt-Xl-r7t">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33.png" translatesAutoresizingMaskIntoConstraints="NO" id="h6v-cV-eTE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="h6v-cV-eTE" firstAttribute="centerY" secondItem="wRt-Xl-r7t" secondAttribute="centerY" id="0us-rO-xG9"/>
+                            <constraint firstAttribute="bottom" secondItem="h6v-cV-eTE" secondAttribute="bottom" id="52J-vt-Kuc"/>
+                            <constraint firstAttribute="trailing" secondItem="h6v-cV-eTE" secondAttribute="trailing" id="UPl-rM-NXy"/>
+                            <constraint firstAttribute="centerX" secondItem="h6v-cV-eTE" secondAttribute="centerX" id="cnI-vb-aaR"/>
+                            <constraint firstItem="h6v-cV-eTE" firstAttribute="top" secondItem="wRt-Xl-r7t" secondAttribute="top" id="dog-xv-x2k"/>
+                            <constraint firstItem="h6v-cV-eTE" firstAttribute="leading" secondItem="wRt-Xl-r7t" secondAttribute="leading" id="gD4-G3-Die"/>
+                        </constraints>
+                    </scrollView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0l-td-Nfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746" y="-320"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="EmotionHappy" width="48" height="48"/>
+        <image name="iPhone5_33.png" width="320" height="567"/>
+        <image name="iPhone5_33Flipped.png" width="320" height="567"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
