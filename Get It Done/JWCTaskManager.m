@@ -57,7 +57,7 @@
         newTask.start = [NSDate date];
         newTask.due = [NSDate dateWithTimeInterval:2000 sinceDate:newTask.start];
         
-        for (int j = 0; j < i+3; j++) {
+        for (int j = 0; j < i+9; j++) {
             NSString *subTask = [NSString stringWithFormat:@"Longer than average sub task here #%i", j + i];
             [[newTask subTasks] addObject:subTask];
         }

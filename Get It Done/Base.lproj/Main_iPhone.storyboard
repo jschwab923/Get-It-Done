@@ -47,7 +47,7 @@
                                 <color key="textColor" red="0.21981481950000001" green="0.32639373100000002" blue="0.60813934950000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPy-mY-3j1">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPy-mY-3j1">
                                 <rect key="frame" x="85" y="76" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -145,8 +145,6 @@
                             <constraint firstAttribute="trailing" secondItem="qRh-a1-32a" secondAttribute="trailing" id="MVJ-bm-klW"/>
                             <constraint firstItem="QPy-mY-3j1" firstAttribute="top" secondItem="1qN-NO-tgO" secondAttribute="bottom" constant="8" id="a8q-ds-sIf"/>
                             <constraint firstAttribute="trailing" secondItem="KpL-sk-Rbl" secondAttribute="trailing" id="fod-bu-P3O"/>
-                            <constraint firstItem="1qN-NO-tgO" firstAttribute="centerX" secondItem="QPy-mY-3j1" secondAttribute="centerX" id="qg4-cM-OKO"/>
-                            <constraint firstItem="QPy-mY-3j1" firstAttribute="leading" secondItem="qTb-gt-w1s" secondAttribute="leading" constant="85" id="x4p-Vg-LM6"/>
                             <constraint firstItem="V0V-dU-PIQ" firstAttribute="top" secondItem="qRh-a1-32a" secondAttribute="bottom" id="ygI-Zm-oov"/>
                         </constraints>
                     </view>

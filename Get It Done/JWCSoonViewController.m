@@ -41,10 +41,7 @@
 {
     [super viewDidLoad];
     
-    // Setup contraints for handling rotation
-    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.label attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    
-    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [self setUpConstraints];
     
     self.label.textColor = [UIColor darkBlueColor];
     
@@ -73,12 +70,37 @@
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
         [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
     {
-        [self.view addConstraint:_landScapeCollectionViewTopConstraint];
+        [self.view removeConstraint:_portraitCollectionViewBottomConstraint];
+        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
+                                    _landScapeCollectionViewLeftConstraint]];
     } else {
-        [self.view removeConstraint:_landScapeCollectionViewTopConstraint];
+        [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
+                                       _landScapeCollectionViewLeftConstraint]];
+        
         [self.view addConstraint:_portraitCollectionViewBottomConstraint];
     }
     
+}
+
+#pragma mark - Convenience Methods
+
+- (void)setUpConstraints
+{
+    // Setup contraints for handling rotation
+    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTrailing relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeLeading multiplier:1 constant:5];
+    
+    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    
+    // Add appropriate constraints based on initial device orientation
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
+        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
+    {
+        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
+                                    _landScapeCollectionViewLeftConstraint]];
+    } else {
+        [self.view addConstraint:_portraitCollectionViewBottomConstraint];
+    }
 }
 
 @end
