@@ -12,6 +12,12 @@
 
 @interface JWCSoonViewController ()
 
+{
+    NSLayoutConstraint *_landScapeCollectionViewTopConstraint;
+    NSLayoutConstraint *_landScapeCollectionViewLeftConstraint;
+    NSLayoutConstraint *_portraitCollectionViewBottomConstraint;
+}
+
 @property (nonatomic) M13ProgressViewPie *progressViewPie;
 @property (weak, nonatomic) IBOutlet UIView *progressContainerView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewTasks;
@@ -35,14 +41,10 @@
 {
     [super viewDidLoad];
     
-    // Used to access preloaded background color with image
-    JWCAppDelegate *appDelegate = (JWCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    // Setup contraints for handling rotation
+    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.label attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     
-    self.view.contentMode = UIViewContentModeScaleAspectFill;
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.view.backgroundColor = appDelegate.backgroundColorPortrait;
-    }
+    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     
     self.label.textColor = [UIColor darkBlueColor];
     
@@ -67,36 +69,16 @@
 #pragma mark - Rotation Handling
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    // Used to access preloaded background color from image
-    JWCAppDelegate *appDelegate = (JWCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.view.contentMode = UIViewContentModeScaleAspectFill;
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft||
-            [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
-        {
-            self.view.backgroundColor = appDelegate.backgroundColorLandscape;
-        } else {
-            self.view.backgroundColor = appDelegate.backgroundColorPortrait;
-        }
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
+        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+    {
+        [self.view addConstraint:_landScapeCollectionViewTopConstraint];
+    } else {
+        [self.view removeConstraint:_landScapeCollectionViewTopConstraint];
+        [self.view addConstraint:_portraitCollectionViewBottomConstraint];
     }
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    CGFloat newX = CGRectGetWidth(self.label.frame)+5;
-    CGFloat newY = CGRectGetHeight(self.label.frame)+5;
-    CGFloat newWidth = CGRectGetWidth(self.view.frame)/2 - 20;
-    CGFloat newHeight = CGRectGetHeight(self.view.frame);
     
-    CGRect newFrame = CGRectMake(newX, newY, newWidth, newHeight);
-    
-    CGPoint newCenter = CGPointMake(CGRectGetMidX(self.view.frame) + 20, CGRectGetHeight(self.view.frame)/2);
-    
-    [UIView animateWithDuration:duration animations:^{
-        self.collectionViewTasks.center = newCenter;
-        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
-    }];
 }
 
 @end

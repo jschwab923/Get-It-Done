@@ -13,8 +13,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.backgroundColorPortrait = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_33Flipped"]];
-    self.backgroundColorLandscape = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_33landscape"]];
     return YES;
 }
 							
