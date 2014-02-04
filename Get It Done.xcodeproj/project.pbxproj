@@ -10,11 +10,17 @@
 		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
 		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
 		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
-		6B6DF56E189C8B9B0027761B /* JWCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF56D189C8B9B0027761B /* JWCCollectionViewCell.m */; };
-		6B6DF572189C8D840027761B /* JWCCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF571189C8D840027761B /* JWCCollectionViewDataSource.m */; };
+		6B501C5418A16629005478E6 /* JWCAddTaskCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */; };
+		6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */; };
+		6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */; };
+		6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF571189C8D840027761B /* JWCSoonCollectionViewDataSource.m */; };
 		6B6DF576189C8DA20027761B /* JWCTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF575189C8DA20027761B /* JWCTaskManager.m */; };
-		6B6DF5A2189CA48C0027761B /* JWCCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF5A1189CA48C0027761B /* JWCCollectionViewHeader.m */; };
+		6B6DF5A2189CA48C0027761B /* JWCSoonCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF5A1189CA48C0027761B /* JWCSoonCollectionViewHeader.m */; };
 		6B6DF5A5189CAF990027761B /* JWCTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF5A4189CAF990027761B /* JWCTask.m */; };
+		6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705BA18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m */; };
+		6B7705BE18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */; };
+		6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */; };
+		6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */; };
 		6BF5BF10189B645200B4EA9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF0F189B645200B4EA9C /* Foundation.framework */; };
 		6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */; };
 		6BF5BF14189B645200B4EA9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF13189B645200B4EA9C /* UIKit.framework */; };
@@ -71,16 +77,29 @@
 		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
 		6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
 		6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33landscape@2x.png"; sourceTree = "<group>"; };
-		6B6DF56C189C8B9B0027761B /* JWCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCell.h; path = "Get It Done/JWCCollectionViewCell.h"; sourceTree = "<group>"; };
-		6B6DF56D189C8B9B0027761B /* JWCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCell.m; path = "Get It Done/JWCCollectionViewCell.m"; sourceTree = "<group>"; };
-		6B6DF570189C8D840027761B /* JWCCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCCollectionViewDataSource.h; sourceTree = "<group>"; };
-		6B6DF571189C8D840027761B /* JWCCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCCollectionViewDataSource.m; sourceTree = "<group>"; };
+		6B501C5218A16629005478E6 /* JWCAddTaskCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCAddTaskCollectionViewHeader.h; path = "Get It Done/JWCAddTaskCollectionViewHeader.h"; sourceTree = "<group>"; };
+		6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCAddTaskCollectionViewHeader.m; path = "Get It Done/JWCAddTaskCollectionViewHeader.m"; sourceTree = "<group>"; };
+		6B501C5B18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCAddSubtaskCollectionViewFooter.h; path = "Get It Done/JWCAddSubtaskCollectionViewFooter.h"; sourceTree = "<group>"; };
+		6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCAddSubtaskCollectionViewFooter.m; path = "Get It Done/JWCAddSubtaskCollectionViewFooter.m"; sourceTree = "<group>"; };
+		6B6DF56C189C8B9B0027761B /* JWCSoonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCSoonCollectionViewCell.h; path = "Get It Done/JWCSoonCollectionViewCell.h"; sourceTree = "<group>"; };
+		6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCSoonCollectionViewCell.m; path = "Get It Done/JWCSoonCollectionViewCell.m"; sourceTree = "<group>"; };
+		6B6DF570189C8D840027761B /* JWCSoonCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCSoonCollectionViewDataSource.h; sourceTree = "<group>"; };
+		6B6DF571189C8D840027761B /* JWCSoonCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCSoonCollectionViewDataSource.m; sourceTree = "<group>"; };
 		6B6DF574189C8DA20027761B /* JWCTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTaskManager.h; path = "Get It Done/JWCTaskManager.h"; sourceTree = "<group>"; };
 		6B6DF575189C8DA20027761B /* JWCTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTaskManager.m; path = "Get It Done/JWCTaskManager.m"; sourceTree = "<group>"; };
-		6B6DF5A0189CA48C0027761B /* JWCCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewHeader.h; path = "Get It Done/JWCCollectionViewHeader.h"; sourceTree = "<group>"; };
-		6B6DF5A1189CA48C0027761B /* JWCCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewHeader.m; path = "Get It Done/JWCCollectionViewHeader.m"; sourceTree = "<group>"; };
+		6B6DF5A0189CA48C0027761B /* JWCSoonCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCSoonCollectionViewHeader.h; path = "Get It Done/JWCSoonCollectionViewHeader.h"; sourceTree = "<group>"; };
+		6B6DF5A1189CA48C0027761B /* JWCSoonCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCSoonCollectionViewHeader.m; path = "Get It Done/JWCSoonCollectionViewHeader.m"; sourceTree = "<group>"; };
 		6B6DF5A3189CAF990027761B /* JWCTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTask.h; path = "Get It Done/JWCTask.h"; sourceTree = "<group>"; };
 		6B6DF5A4189CAF990027761B /* JWCTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTask.m; path = "Get It Done/JWCTask.m"; sourceTree = "<group>"; };
+		6B7705B918A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTaskDescriptionCollectionViewCell.h; path = "Get It Done/JWCTaskDescriptionCollectionViewCell.h"; sourceTree = "<group>"; };
+		6B7705BA18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTaskDescriptionCollectionViewCell.m; path = "Get It Done/JWCTaskDescriptionCollectionViewCell.m"; sourceTree = "<group>"; };
+		6B7705BC18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCAddTaskCollectionViewDataSource.h; sourceTree = "<group>"; };
+		6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCAddTaskCollectionViewDataSource.m; sourceTree = "<group>"; };
+		6B7705C218A18BF4007DF72D /* JWCCollectionViewCellProof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCellProof.h; path = "Get It Done/JWCCollectionViewCellProof.h"; sourceTree = "<group>"; };
+		6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellProof.m; path = "Get It Done/JWCCollectionViewCellProof.m"; sourceTree = "<group>"; };
+		6B7705C618A191B9007DF72D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6B7705C718A195E5007DF72D /* JWCCollectionViewCellTitlePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCellTitlePoints.h; path = "Get It Done/JWCCollectionViewCellTitlePoints.h"; sourceTree = "<group>"; };
+		6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellTitlePoints.m; path = "Get It Done/JWCCollectionViewCellTitlePoints.m"; sourceTree = "<group>"; };
 		6BF5BF0C189B645200B4EA9C /* Get It Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get It Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF5BF0F189B645200B4EA9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,10 +205,9 @@
 			children = (
 				6BF5BF21189B645200B4EA9C /* Main_iPhone.storyboard */,
 				6BF5BF24189B645200B4EA9C /* Main_iPad.storyboard */,
-				6B6DF56C189C8B9B0027761B /* JWCCollectionViewCell.h */,
-				6B6DF56D189C8B9B0027761B /* JWCCollectionViewCell.m */,
-				6B6DF5A0189CA48C0027761B /* JWCCollectionViewHeader.h */,
-				6B6DF5A1189CA48C0027761B /* JWCCollectionViewHeader.m */,
+				6B7705BF18A18B7E007DF72D /* CollectionView Headers */,
+				6B7705C018A18B8C007DF72D /* CollectionView Footers */,
+				6B7705C118A18B9A007DF72D /* CollectionView Cells */,
 			);
 			name = View;
 			path = ..;
@@ -198,8 +216,10 @@
 		6B6DF573189C8D910027761B /* Data Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6B6DF570189C8D840027761B /* JWCCollectionViewDataSource.h */,
-				6B6DF571189C8D840027761B /* JWCCollectionViewDataSource.m */,
+				6B7705BC18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.h */,
+				6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */,
+				6B6DF570189C8D840027761B /* JWCSoonCollectionViewDataSource.h */,
+				6B6DF571189C8D840027761B /* JWCSoonCollectionViewDataSource.m */,
 			);
 			name = "Data Controllers";
 			sourceTree = "<group>";
@@ -221,6 +241,56 @@
 			children = (
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		6B7705BF18A18B7E007DF72D /* CollectionView Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6B501C5218A16629005478E6 /* JWCAddTaskCollectionViewHeader.h */,
+				6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */,
+				6B6DF5A0189CA48C0027761B /* JWCSoonCollectionViewHeader.h */,
+				6B6DF5A1189CA48C0027761B /* JWCSoonCollectionViewHeader.m */,
+			);
+			name = "CollectionView Headers";
+			sourceTree = "<group>";
+		};
+		6B7705C018A18B8C007DF72D /* CollectionView Footers */ = {
+			isa = PBXGroup;
+			children = (
+				6B501C5B18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.h */,
+				6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */,
+			);
+			name = "CollectionView Footers";
+			sourceTree = "<group>";
+		};
+		6B7705C118A18B9A007DF72D /* CollectionView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6B7705C218A18BF4007DF72D /* JWCCollectionViewCellProof.h */,
+				6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */,
+				6B7705C718A195E5007DF72D /* JWCCollectionViewCellTitlePoints.h */,
+				6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */,
+				6B7705B918A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.h */,
+				6B7705BA18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m */,
+				6B6DF56C189C8B9B0027761B /* JWCSoonCollectionViewCell.h */,
+				6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */,
+			);
+			name = "CollectionView Cells";
+			sourceTree = "<group>";
+		};
+		6B7705C518A18C14007DF72D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6BFD0A29189C547E008C3698 /* JWCTaskDoneViewController.h */,
+				6BFD0A2A189C547E008C3698 /* JWCTaskDoneViewController.m */,
+				6BF5BF4B189B64DB00B4EA9C /* JWCAddTaskViewController.h */,
+				6BF5BF4C189B64DB00B4EA9C /* JWCAddTaskViewController.m */,
+				6BF5BF48189B64A400B4EA9C /* JWCSoonViewController.h */,
+				6BF5BF49189B64A400B4EA9C /* JWCSoonViewController.m */,
+				6BF5BF27189B645200B4EA9C /* JWCRootViewController.h */,
+				6BF5BF28189B645200B4EA9C /* JWCRootViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		6BF5BF03189B645100B4EA9C = {
@@ -280,6 +350,7 @@
 				6BF5BF18189B645200B4EA9C /* InfoPlist.strings */,
 				6BF5BF1B189B645200B4EA9C /* main.m */,
 				6BF5BF1D189B645200B4EA9C /* Get It Done-Prefix.pch */,
+				6B7705C618A191B9007DF72D /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -306,14 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				6B6DF573189C8D910027761B /* Data Controllers */,
-				6BFD0A29189C547E008C3698 /* JWCTaskDoneViewController.h */,
-				6BFD0A2A189C547E008C3698 /* JWCTaskDoneViewController.m */,
-				6BF5BF4B189B64DB00B4EA9C /* JWCAddTaskViewController.h */,
-				6BF5BF4C189B64DB00B4EA9C /* JWCAddTaskViewController.m */,
-				6BF5BF48189B64A400B4EA9C /* JWCSoonViewController.h */,
-				6BF5BF49189B64A400B4EA9C /* JWCSoonViewController.m */,
-				6BF5BF27189B645200B4EA9C /* JWCRootViewController.h */,
-				6BF5BF28189B645200B4EA9C /* JWCRootViewController.m */,
+				6B7705C518A18C14007DF72D /* View Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -520,12 +584,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6DF56E189C8B9B0027761B /* JWCCollectionViewCell.m in Sources */,
+				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
+				6B501C5418A16629005478E6 /* JWCAddTaskCollectionViewHeader.m in Sources */,
+				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
+				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
 				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,
 				6BFD0A63189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m in Sources */,
 				6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */,
 				6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */,
 				6BFD0A6A189C6FC3008C3698 /* M13ProgressViewRing.m in Sources */,
+				6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */,
 				6BFD0A2E189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m in Sources */,
 				6BFD0A6B189C6FC3008C3698 /* M13ProgressViewSegmentedBar.m in Sources */,
 				6BF5BF1C189B645200B4EA9C /* main.m in Sources */,
@@ -536,19 +604,21 @@
 				6BFD0A6D189C6FC3008C3698 /* M13ProgressViewStripedBar.m in Sources */,
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
 				6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */,
-				6B6DF572189C8D840027761B /* JWCCollectionViewDataSource.m in Sources */,
+				6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */,
 				6BFD0A65189C6FC3008C3698 /* M13ProgressViewBar.m in Sources */,
 				6BFD0A66189C6FC3008C3698 /* M13ProgressViewBorderedBar.m in Sources */,
 				6BF5BF29189B645200B4EA9C /* JWCRootViewController.m in Sources */,
 				6B6DF5A5189CAF990027761B /* JWCTask.m in Sources */,
 				6BFD0A62189C6FC3008C3698 /* UIImage+ImageEffects.m in Sources */,
 				6BFD0A2B189C547E008C3698 /* JWCTaskDoneViewController.m in Sources */,
+				6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */,
+				6B7705BE18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m in Sources */,
 				6BFD0A71189C7410008C3698 /* UIColor+GetItDoneColors.m in Sources */,
 				6BF5BF4D189B64DB00B4EA9C /* JWCAddTaskViewController.m in Sources */,
 				6BFD0A61189C6FC3008C3698 /* M13ProgressHUD.m in Sources */,
 				6B17890E189D8CDD003664C5 /* SAMath.m in Sources */,
 				6BFD0A67189C6FC3008C3698 /* M13ProgressViewFilteredImage.m in Sources */,
-				6B6DF5A2189CA48C0027761B /* JWCCollectionViewHeader.m in Sources */,
+				6B6DF5A2189CA48C0027761B /* JWCSoonCollectionViewHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

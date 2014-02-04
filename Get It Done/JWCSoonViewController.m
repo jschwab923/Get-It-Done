@@ -10,6 +10,7 @@
 #import "M13ProgressViewPie.h"
 #import "UIColor+GetItDoneColors.h"
 #import "JWCTaskManager.h"
+#import "JWCViewControllerAnimatedTransition.h"
 
 @interface JWCSoonViewController ()
 
@@ -81,12 +82,13 @@
         [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
                                     _landScapeCollectionViewLeftConstraint,
                                     _landScapeProgressViewConstraint]];
+        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
     } else {
         [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
                                        _landScapeCollectionViewLeftConstraint,
                                        _landScapeProgressViewConstraint]];
-        
         [self.view addConstraint:_portraitCollectionViewBottomConstraint];
+        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
     }
 }
 
@@ -117,5 +119,31 @@
         [self.view addConstraint:_portraitCollectionViewBottomConstraint];
     }
 }
+
+#pragma mark - Custom Transition Methods
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
+    
+    UIViewController *destinationViewController = segue.destinationViewController;
+    
+    destinationViewController.transitioningDelegate = self;
+    destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
+    
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
+    animator.presenting = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
+    return animator;
+}
+
 
 @end

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCCollectionViewCell : UICollectionViewCell
+@interface JWCSoonCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UITextView *subTaskTextView;
+@property (weak, nonatomic) IBOutlet UIButton *buttonSubtaskDone;
 
 @end

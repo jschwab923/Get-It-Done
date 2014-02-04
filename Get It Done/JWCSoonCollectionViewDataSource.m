@@ -6,17 +6,16 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCCollectionViewDataSource.h"
-#import "JWCCollectionViewCell.h"
-#import "JWCCollectionViewHeader.h"
-#import "UIColor+GetItDoneColors.h"
+#import "JWCSoonCollectionViewDataSource.h"
+#import "JWCSoonCollectionViewCell.h"
+#import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
 
-@interface JWCCollectionViewDataSource ()
+@interface JWCSoonCollectionViewDataSource ()
 
 @end
 
-@implementation JWCCollectionViewDataSource
+@implementation JWCSoonCollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -25,7 +24,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JWCCollectionViewCell *subTaskCell = (JWCCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
+    JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
     
     //TODO: Customize cell based on current task
     // Properties based on current task
@@ -40,10 +39,10 @@
 {
     UICollectionReusableView *supplementaryElement;
     if (kind == UICollectionElementKindSectionHeader) {
-        JWCCollectionViewHeader *headerCell = (JWCCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
+        JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
         
         // Default properties
-        headerCell.taskDescriptionTextView.textColor = [UIColor darkBlueColor];
+
         
         //TODO: Customize header cell based on current task
         // Properties based on current task
@@ -68,7 +67,7 @@
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                    context:nil];
-    CGSize roundedSize = CGSizeMake(120, ceil(boundingRect.size.height));
+    CGSize roundedSize = CGSizeMake(ceil(boundingRect.size.width), ceil(boundingRect.size.height)+10);
     
     return roundedSize;
 }
