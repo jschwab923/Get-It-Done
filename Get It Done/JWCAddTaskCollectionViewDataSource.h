@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface JWCAddTaskCollectionViewDataSource : NSObject
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate>
+
+@property (nonatomic) JWCTask *taskBeingAdded;
 
 @end

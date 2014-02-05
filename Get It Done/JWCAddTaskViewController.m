@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
+#import "JWCTask.h"
+#import "JWCTaskManager.h"
+
 #import "JWCAddTaskViewController.h"
 #import "JWCAddSubtaskCollectionViewFooter.h"
 #import "JWCCollectionViewHeaderAddTask.h"
@@ -25,7 +28,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        JWCAddTaskCollectionViewDataSource *dataSource = (JWCAddTaskCollectionViewDataSource *)self.collectionViewAddTask.dataSource;
+        // Intialize task to store data as it's added in the UI fields
+        dataSource.taskBeingAdded = [[JWCTask alloc] init];
     }
     return self;
 }
@@ -34,6 +39,12 @@
 {
     [super viewDidLoad];
     
+    // Setup tap recognizer for dismissing keyboard
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self 
+action:@selector(tappedCollectionView:)];
+    
+    [self.collectionViewAddTask addGestureRecognizer:tapGesture];
+    
     // Register collection view supplementary views
     [self.collectionViewAddTask registerClass:[JWCCollectionViewHeaderAddTask class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER];
      [self.collectionViewAddTask registerClass:[JWCAddSubtaskCollectionViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER];
@@ -41,9 +52,6 @@
     // Register collection view cells
     [self.collectionViewAddTask registerClass:[JWCCollectionViewCellTitlePoints class] forCellWithReuseIdentifier:REUSE_TITLE_POINTS];
     [self.collectionViewAddTask registerClass:[JWCTaskDescriptionCollectionViewCell class] forCellWithReuseIdentifier:REUSE_DESCRIPTION];
-    // Created in a Nib
-//    [self.collectionViewAddTask registerNib:[UINib nibWithNibName:@"ProofPickerCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:REUSE_PROOF];
-    
     
 }
 
@@ -52,10 +60,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)pressedAddSubtask:(id)sender
+- (IBAction)pressedAddButton:(UIBarButtonItem *)sender
 {
-    
+
+}
+
+#pragma mark - Gesture Recognizer Methods
+- (void)tappedCollectionView:(UIGestureRecognizer *)tapGesture
+{
+    NSArray *indexPathsForVisibleItems = [self.collectionViewAddTask indexPathsForVisibleItems];
+    for (NSIndexPath *currentIndexPath in indexPathsForVisibleItems) {
+        UICollectionViewCell *currentCell = [self.collectionViewAddTask cellForItemAtIndexPath:currentIndexPath];
+        for (UIView *subview in currentCell.subviews) {
+            [subview resignFirstResponder];
+        }
+    }
 }
 
 @end

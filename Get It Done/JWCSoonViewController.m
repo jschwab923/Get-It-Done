@@ -11,6 +11,7 @@
 #import "UIColor+GetItDoneColors.h"
 #import "JWCTaskManager.h"
 #import "JWCViewControllerAnimatedTransition.h"
+#import "JWCViewStatsViewController.h"
 
 @interface JWCSoonViewController ()
 
@@ -19,6 +20,7 @@
     NSLayoutConstraint *_landScapeCollectionViewLeftConstraint;
     NSLayoutConstraint *_landScapeProgressViewConstraint;
     NSLayoutConstraint *_portraitCollectionViewBottomConstraint;
+    NSLayoutConstraint *_portraitCollectionViewTopConstraint;
 }
 
 @property (nonatomic) M13ProgressViewPie *progressViewPie;
@@ -26,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewTasks;
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barButtonViewStats;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barButtonAddTask;
 
 @end
 
@@ -55,6 +59,7 @@
     //TODO: Remove this default progress and base on current progress
     [self.progressViewPie setProgress:.7 animated:YES];
     
+    
     [self setUpConstraintsAndFramesForCurrentDevice];
     
 }
@@ -78,7 +83,9 @@
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
         [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
     {
-        [self.view removeConstraint:_portraitCollectionViewBottomConstraint];
+        [self.view removeConstraints:@[_portraitCollectionViewBottomConstraint,
+                                       _portraitCollectionViewTopConstraint]];
+        
         [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
                                     _landScapeCollectionViewLeftConstraint,
                                     _landScapeProgressViewConstraint]];
@@ -87,7 +94,9 @@
         [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
                                        _landScapeCollectionViewLeftConstraint,
                                        _landScapeProgressViewConstraint]];
-        [self.view addConstraint:_portraitCollectionViewBottomConstraint];
+        
+        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
+                                    _portraitCollectionViewTopConstraint]];
         [self.collectionViewTasks.collectionViewLayout invalidateLayout];
     }
 }
@@ -101,6 +110,8 @@
     _landScapeProgressViewConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
     
     _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
+    
     
     // Add appropriate constraints based on initial device orientation and screen size
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
@@ -116,20 +127,21 @@
                                         _landScapeProgressViewConstraint]];
         }
     } else {
-        [self.view addConstraint:_portraitCollectionViewBottomConstraint];
+        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
+                                    _portraitCollectionViewTopConstraint]];
     }
 }
 
 #pragma mark - Custom Transition Methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super prepareForSegue:segue sender:sender];
-    
-    UIViewController *destinationViewController = segue.destinationViewController;
-    
-    destinationViewController.transitioningDelegate = self;
-    destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
-    
+    if ([segue.identifier isEqualToString: @"ViewStatsSeque"]) {
+        JWCViewStatsViewController *destinationViewController = (JWCViewStatsViewController *)segue.destinationViewController;
+        
+        destinationViewController.transitioningDelegate = self;
+        destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
+        destinationViewController.segue = segue;
+    }
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
@@ -144,6 +156,5 @@
     JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
     return animator;
 }
-
 
 @end

@@ -18,4 +18,9 @@
 #define REUSE_PROOF_HEADER @"ProofHeader"
 
 #define DEFAULT_FONT [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
+
+#define TAG_TITLE_TEXTVIEW 122
+#define TAG_POINTS_TEXTVIEW 123
+#define TAG_DESCRIPTION_TEXTFIELD 124
+
 #endif

@@ -26,6 +26,8 @@
     self.textViewDescription.layer.cornerRadius = 3;
     self.textViewDescription.text = @"Describe what needs to get done";
     self.textViewDescription.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
+    [self.textViewDescription setReturnKeyType:UIReturnKeyDone];
+    self.textViewDescription.tag = TAG_DESCRIPTION_TEXTFIELD;
     [self addSubview:self.textViewDescription];
 }
 

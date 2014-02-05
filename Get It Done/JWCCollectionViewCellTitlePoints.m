@@ -23,23 +23,23 @@
 {
     self.title = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(rect)*.7, 30)];
     self.title.center = CGPointMake(self.title.center.x, CGRectGetMidY(rect));
+    self.title.backgroundColor = [UIColor whiteColor];
+    self.title.layer.cornerRadius = 3;
+    self.title.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
+    self.title.placeholder = @"Title";
+    self.title.tag = TAG_TITLE_TEXTVIEW;
+    [self addSubview:self.title];
+
     self.points = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.title.bounds)+10, 0, CGRectGetWidth(rect)*.25, 30)];
     self.points.center = CGPointMake(self.points.center.x, CGRectGetMidY(rect));
-    
     self.points.keyboardType = UIKeyboardTypeNumberPad;
     self.points.backgroundColor = [UIColor whiteColor];
     self.points.layer.cornerRadius = 3;
     self.points.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
     self.points.placeholder = @"Points";
+    self.points.tag = TAG_POINTS_TEXTVIEW;
     [self addSubview:self.points];
     
-    self.title.backgroundColor = [UIColor whiteColor];
-    self.title.layer.cornerRadius = 3;
-    self.title.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
-    self.title.placeholder = @"Title";
-    [self addSubview:self.title];
-    
 }
-
 
 @end

@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
+#import "JWCTask.h"
+#import "JWCTaskManager.h"
+
 #import "JWCAddTaskCollectionViewDataSource.h"
 #import "JWCAddSubtaskCollectionViewFooter.h"
 #import "JWCCollectionViewHeaderAddTask.h"
@@ -13,6 +16,10 @@
 #import "JWCCollectionViewCellTitlePoints.h"
 #import "JWCCollectionViewCellProof.h"
 #import "JWCCollectionViewFooterPartner.h"
+
+@interface JWCAddTaskCollectionViewDataSource ()
+
+@end
 
 @implementation JWCAddTaskCollectionViewDataSource
 
@@ -46,11 +53,20 @@
         case 0:
             switch (indexPath.row) {
                 case 0:
+                {
                     currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
+                    JWCCollectionViewCellTitlePoints *tempCell = (JWCCollectionViewCellTitlePoints *)currentCell;
+                    tempCell.title.delegate = self;
+                    tempCell.points.delegate = self;
                     break;
+                }
                 case 1:
+                {
                     currentCell = (JWCTaskDescriptionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
+                    JWCTaskDescriptionCollectionViewCell *tempCell = (JWCTaskDescriptionCollectionViewCell *)currentCell;
+                    tempCell.textViewDescription.delegate = self;
                     break;
+                }
                 default:
                     break;
             }
@@ -109,6 +125,25 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     return CGSizeMake(250, 50);
+}
+
+#pragma mark - UITextView/Field Delegate Methods
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField.tag == TAG_TITLE_TEXTVIEW) {
+        self.taskBeingAdded.title = textField.text;
+    } else if (textField.tag == TAG_POINTS_TEXTVIEW) {
+        self.taskBeingAdded.points = [NSNumber numberWithInteger:[textField.text integerValue]];
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    if (textView.tag == TAG_DESCRIPTION_TEXTFIELD) {
+        self.taskBeingAdded.taskDescription = textView.text;
+    }
+    return YES;
 }
 
 @end

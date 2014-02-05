@@ -7,12 +7,23 @@
 //
 
 #import "JWCAppDelegate.h"
+#import "UIColor+GetItDoneColors.h"
 
 @implementation JWCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIFont fontWithName:@"HelveticaNeue-Thin" size:18], NSFontAttributeName, nil];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"iPhone5_33flipped"]
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+   
     return YES;
 }
 							

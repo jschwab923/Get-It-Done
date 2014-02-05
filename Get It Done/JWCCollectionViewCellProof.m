@@ -54,7 +54,6 @@
         pickerViewLabel.text = @"Answer question/s";
     }
     return pickerViewLabel;
-    
 }
 
 #pragma mark - IBOutlets

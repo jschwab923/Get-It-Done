@@ -51,7 +51,7 @@
         
         newTask.taskID = [NSUUID UUID];
         newTask.title = [NSString stringWithFormat:@"Task #%i", i];
-        newTask.description = [NSString stringWithFormat:@"This is task #%i and it needs to get done", i];
+        newTask.taskDescription = [NSString stringWithFormat:@"This is task #%i and it needs to get done", i];
         newTask.proofType = @"Describe";
         newTask.proof = nil;
         newTask.start = [NSDate date];

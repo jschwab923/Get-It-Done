@@ -10,4 +10,6 @@
 
 @interface JWCCollectionViewFooterPartner : UICollectionReusableView
 
+@property (nonatomic) UIImageView *partnerImage;
+
 @end

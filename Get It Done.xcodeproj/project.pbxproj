@@ -10,6 +10,8 @@
 		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
 		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
 		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
+		6B271D8018A2AC8A00518805 /* JWCLeftSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B271D7F18A2AC8A00518805 /* JWCLeftSegue.m */; };
+		6B271D8318A2ACEE00518805 /* JWCViewStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B271D8218A2ACEE00518805 /* JWCViewStatsViewController.m */; };
 		6B477ECF18A1D89500A1CD9A /* JWCTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B477ECE18A1D89500A1CD9A /* JWCTask.m */; };
 		6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5318A16629005478E6 /* JWCCollectionViewHeaderAddTask.m */; };
 		6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */; };
@@ -60,6 +62,16 @@
 		6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A5D189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m */; };
 		6BFD0A6D189C6FC3008C3698 /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A5F189C6FC3008C3698 /* M13ProgressViewStripedBar.m */; };
 		6BFD0A71189C7410008C3698 /* UIColor+GetItDoneColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A70189C7410008C3698 /* UIColor+GetItDoneColors.m */; };
+		6BFFC73B18A2E0560099ACB0 /* KGModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC73A18A2E0560099ACB0 /* KGModal.m */; };
+		6BFFC73E18A2E16C0099ACB0 /* JWCTaskPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC73D18A2E16C0099ACB0 /* JWCTaskPartner.m */; };
+		6BFFC74418A2E6C20099ACB0 /* JWCContactCollectionViewSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC74318A2E6C20099ACB0 /* JWCContactCollectionViewSource.m */; };
+		6BFFC74718A2E7270099ACB0 /* JWCContactsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */; };
+		6BFFC74918A2E8410099ACB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BFFC74818A2E8410099ACB0 /* MessageUI.framework */; };
+		6BFFC74D18A2E8830099ACB0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */; };
+		6BFFC77918A2EAE80099ACB0 /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */; };
+		6BFFC77A18A2EAE80099ACB0 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC76918A2EAE80099ACB0 /* APContact.m */; };
+		6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */; };
+		6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76C18A2EAE80099ACB0 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +90,10 @@
 		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
 		6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
 		6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33landscape@2x.png"; sourceTree = "<group>"; };
+		6B271D7E18A2AC8A00518805 /* JWCLeftSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCLeftSegue.h; sourceTree = "<group>"; };
+		6B271D7F18A2AC8A00518805 /* JWCLeftSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCLeftSegue.m; sourceTree = "<group>"; };
+		6B271D8118A2ACEE00518805 /* JWCViewStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCViewStatsViewController.h; path = ../JWCViewStatsViewController.h; sourceTree = "<group>"; };
+		6B271D8218A2ACEE00518805 /* JWCViewStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCViewStatsViewController.m; path = ../JWCViewStatsViewController.m; sourceTree = "<group>"; };
 		6B477ECD18A1D89500A1CD9A /* JWCTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTask.h; path = "Get It Done/JWCTask.h"; sourceTree = "<group>"; };
 		6B477ECE18A1D89500A1CD9A /* JWCTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTask.m; path = "Get It Done/JWCTask.m"; sourceTree = "<group>"; };
 		6B501C5218A16629005478E6 /* JWCCollectionViewHeaderAddTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewHeaderAddTask.h; path = "Get It Done/JWCCollectionViewHeaderAddTask.h"; sourceTree = "<group>"; };
@@ -165,6 +181,23 @@
 		6BFD0A5F189C6FC3008C3698 /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		6BFD0A6F189C7410008C3698 /* UIColor+GetItDoneColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GetItDoneColors.h"; sourceTree = "<group>"; };
 		6BFD0A70189C7410008C3698 /* UIColor+GetItDoneColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GetItDoneColors.m"; sourceTree = "<group>"; };
+		6BFFC73918A2E0560099ACB0 /* KGModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGModal.h; sourceTree = "<group>"; };
+		6BFFC73A18A2E0560099ACB0 /* KGModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGModal.m; sourceTree = "<group>"; };
+		6BFFC73C18A2E16C0099ACB0 /* JWCTaskPartner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTaskPartner.h; path = "Get It Done/JWCTaskPartner.h"; sourceTree = "<group>"; };
+		6BFFC73D18A2E16C0099ACB0 /* JWCTaskPartner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTaskPartner.m; path = "Get It Done/JWCTaskPartner.m"; sourceTree = "<group>"; };
+		6BFFC74218A2E6C20099ACB0 /* JWCContactCollectionViewSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCContactCollectionViewSource.h; sourceTree = "<group>"; };
+		6BFFC74318A2E6C20099ACB0 /* JWCContactCollectionViewSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCContactCollectionViewSource.m; sourceTree = "<group>"; };
+		6BFFC74518A2E7270099ACB0 /* JWCContactsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCContactsLoader.h; path = "Get It Done/JWCContactsLoader.h"; sourceTree = "<group>"; };
+		6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCContactsLoader.m; path = "Get It Done/JWCContactsLoader.m"; sourceTree = "<group>"; };
+		6BFFC74818A2E8410099ACB0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		6BFFC76618A2EAE80099ACB0 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
+		6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
+		6BFFC76818A2EAE80099ACB0 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
+		6BFFC76918A2EAE80099ACB0 /* APContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APContact.m; sourceTree = "<group>"; };
+		6BFFC76A18A2EAE80099ACB0 /* APTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTypes.h; sourceTree = "<group>"; };
+		6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		6BFFC76C18A2EAE80099ACB0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +205,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BFFC74D18A2E8830099ACB0 /* AddressBook.framework in Frameworks */,
+				6BFFC74918A2E8410099ACB0 /* MessageUI.framework in Frameworks */,
 				6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */,
 				6BF5BF14189B645200B4EA9C /* UIKit.framework in Frameworks */,
 				6BF5BF10189B645200B4EA9C /* Foundation.framework in Frameworks */,
@@ -216,24 +251,30 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		6B6DF573189C8D910027761B /* Data Controllers */ = {
+		6B6DF573189C8D910027761B /* View Data Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6B7705BC18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.h */,
 				6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */,
 				6B6DF570189C8D840027761B /* JWCSoonCollectionViewDataSource.h */,
 				6B6DF571189C8D840027761B /* JWCSoonCollectionViewDataSource.m */,
+				6BFFC74218A2E6C20099ACB0 /* JWCContactCollectionViewSource.h */,
+				6BFFC74318A2E6C20099ACB0 /* JWCContactCollectionViewSource.m */,
 			);
-			name = "Data Controllers";
+			name = "View Data Controllers";
 			sourceTree = "<group>";
 		};
 		6B6DF577189C8DAB0027761B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6B477ECD18A1D89500A1CD9A /* JWCTask.h */,
-				6B477ECE18A1D89500A1CD9A /* JWCTask.m */,
+				6BFFC74518A2E7270099ACB0 /* JWCContactsLoader.h */,
+				6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */,
 				6B6DF574189C8DA20027761B /* JWCTaskManager.h */,
 				6B6DF575189C8DA20027761B /* JWCTaskManager.m */,
+				6B477ECD18A1D89500A1CD9A /* JWCTask.h */,
+				6B477ECE18A1D89500A1CD9A /* JWCTask.m */,
+				6BFFC73C18A2E16C0099ACB0 /* JWCTaskPartner.h */,
+				6BFFC73D18A2E16C0099ACB0 /* JWCTaskPartner.m */,
 			);
 			name = Model;
 			path = ..;
@@ -280,6 +321,8 @@
 		6B7705C518A18C14007DF72D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6B271D8118A2ACEE00518805 /* JWCViewStatsViewController.h */,
+				6B271D8218A2ACEE00518805 /* JWCViewStatsViewController.m */,
 				6BFD0A29189C547E008C3698 /* JWCTaskDoneViewController.h */,
 				6BFD0A2A189C547E008C3698 /* JWCTaskDoneViewController.m */,
 				6BF5BF4B189B64DB00B4EA9C /* JWCAddTaskViewController.h */,
@@ -336,6 +379,8 @@
 		6BF5BF0E189B645200B4EA9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */,
+				6BFFC74818A2E8410099ACB0 /* MessageUI.framework */,
 				6BF5BF0F189B645200B4EA9C /* Foundation.framework */,
 				6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */,
 				6BF5BF13189B645200B4EA9C /* UIKit.framework */,
@@ -352,7 +397,7 @@
 				6B6DF577189C8DAB0027761B /* Model */,
 				6B6DF56F189C8C180027761B /* View */,
 				6BF5BF47189B647B00B4EA9C /* Controllers */,
-				6BFD0A2F189C5C53008C3698 /* Animated Transitions */,
+				6BFD0A2F189C5C53008C3698 /* Custom Transitions */,
 				6BF5BF2A189B645200B4EA9C /* Images.xcassets */,
 				6BF5BF16189B645200B4EA9C /* Supporting Files */,
 			);
@@ -365,8 +410,7 @@
 				6B6DF57B189C8F280027761B /* Icons */,
 				6BFD0A6E189C73D3008C3698 /* Categories */,
 				6BFD0A30189C68FB008C3698 /* Backgrounds */,
-				6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */,
-				6B178909189D8CDD003664C5 /* SAMultisectorControl */,
+				6BFFC73818A2E03E0099ACB0 /* Third Party */,
 				6BF5BF17189B645200B4EA9C /* Get It Done-Info.plist */,
 				6BF5BF18189B645200B4EA9C /* InfoPlist.strings */,
 				6BF5BF1B189B645200B4EA9C /* main.m */,
@@ -397,19 +441,21 @@
 		6BF5BF47189B647B00B4EA9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6B6DF573189C8D910027761B /* Data Controllers */,
+				6B6DF573189C8D910027761B /* View Data Controllers */,
 				6B7705C518A18C14007DF72D /* View Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		6BFD0A2F189C5C53008C3698 /* Animated Transitions */ = {
+		6BFD0A2F189C5C53008C3698 /* Custom Transitions */ = {
 			isa = PBXGroup;
 			children = (
+				6B271D7E18A2AC8A00518805 /* JWCLeftSegue.h */,
+				6B271D7F18A2AC8A00518805 /* JWCLeftSegue.m */,
 				6BFD0A2C189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.h */,
 				6BFD0A2D189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m */,
 			);
-			name = "Animated Transitions";
+			name = "Custom Transitions";
 			sourceTree = "<group>";
 		};
 		6BFD0A30189C68FB008C3698 /* Backgrounds */ = {
@@ -501,6 +547,49 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		6BFFC73718A2E02B0099ACB0 /* KGModalView */ = {
+			isa = PBXGroup;
+			children = (
+				6BFFC73918A2E0560099ACB0 /* KGModal.h */,
+				6BFFC73A18A2E0560099ACB0 /* KGModal.m */,
+			);
+			name = KGModalView;
+			sourceTree = "<group>";
+		};
+		6BFFC73818A2E03E0099ACB0 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				6BFFC74E18A2EAE80099ACB0 /* APAddressBook-master */,
+				6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */,
+				6B178909189D8CDD003664C5 /* SAMultisectorControl */,
+				6BFFC73718A2E02B0099ACB0 /* KGModalView */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		6BFFC74E18A2EAE80099ACB0 /* APAddressBook-master */ = {
+			isa = PBXGroup;
+			children = (
+				6BFFC76518A2EAE80099ACB0 /* Classes */,
+				6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */,
+				6BFFC76C18A2EAE80099ACB0 /* README.md */,
+			);
+			name = "APAddressBook-master";
+			path = "../../../../../Downloads/APAddressBook-master";
+			sourceTree = "<group>";
+		};
+		6BFFC76518A2EAE80099ACB0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6BFFC76618A2EAE80099ACB0 /* APAddressBook.h */,
+				6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */,
+				6BFFC76818A2EAE80099ACB0 /* APContact.h */,
+				6BFFC76918A2EAE80099ACB0 /* APContact.m */,
+				6BFFC76A18A2EAE80099ACB0 /* APTypes.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -583,6 +672,8 @@
 				6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */,
 				6BFD0A3B189C6A92008C3698 /* iPhone5_33@2x.png in Resources */,
 				6BF5BF2B189B645200B4EA9C /* Images.xcassets in Resources */,
+				6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */,
+				6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,
 				6BF5BF1A189B645200B4EA9C /* InfoPlist.strings in Resources */,
 				6BFD0A3E189C6B88008C3698 /* iPhone5_33Flipped@2x.png in Resources */,
@@ -608,6 +699,7 @@
 				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
 				6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */,
 				6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m in Sources */,
+				6BFFC77A18A2EAE80099ACB0 /* APContact.m in Sources */,
 				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
 				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
 				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,
@@ -615,17 +707,24 @@
 				6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */,
 				6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */,
 				6BFD0A6A189C6FC3008C3698 /* M13ProgressViewRing.m in Sources */,
+				6BFFC74718A2E7270099ACB0 /* JWCContactsLoader.m in Sources */,
 				6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */,
 				6B477ECF18A1D89500A1CD9A /* JWCTask.m in Sources */,
 				6BFD0A2E189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m in Sources */,
 				6BFD0A6B189C6FC3008C3698 /* M13ProgressViewSegmentedBar.m in Sources */,
+				6BFFC73E18A2E16C0099ACB0 /* JWCTaskPartner.m in Sources */,
 				6BF5BF1C189B645200B4EA9C /* main.m in Sources */,
+				6BFFC73B18A2E0560099ACB0 /* KGModal.m in Sources */,
 				6B6DF576189C8DA20027761B /* JWCTaskManager.m in Sources */,
 				6BFD0A68189C6FC3008C3698 /* M13ProgressViewImage.m in Sources */,
 				6BFD0A64189C6FC3008C3698 /* M13ProgressView.m in Sources */,
 				6BFD0A69189C6FC3008C3698 /* M13ProgressViewPie.m in Sources */,
+				6B271D8018A2AC8A00518805 /* JWCLeftSegue.m in Sources */,
+				6BFFC77918A2EAE80099ACB0 /* APAddressBook.m in Sources */,
+				6B271D8318A2ACEE00518805 /* JWCViewStatsViewController.m in Sources */,
 				6BFD0A6D189C6FC3008C3698 /* M13ProgressViewStripedBar.m in Sources */,
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
+				6BFFC74418A2E6C20099ACB0 /* JWCContactCollectionViewSource.m in Sources */,
 				6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */,
 				6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */,
 				6BFD0A65189C6FC3008C3698 /* M13ProgressViewBar.m in Sources */,

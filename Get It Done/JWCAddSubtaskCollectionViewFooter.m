@@ -7,6 +7,7 @@
 //
 
 #import "JWCAddSubtaskCollectionViewFooter.h"
+#import "KGModal.h"
 
 @implementation JWCAddSubtaskCollectionViewFooter
 
@@ -36,6 +37,17 @@
     addSubtaskButton.backgroundColor = [UIColor clearColor];
     [self addSubview:addSubtaskButton];
     
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedAddSubtask:)];
+    [addSubtaskButton addGestureRecognizer:tapRecognizer];
+}
+
+- (void)tappedAddSubtask:(UITapGestureRecognizer *)tapGesture
+{
+    UICollectionViewFlowLayout *contactLayout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionView *contactsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 275, 300) collectionViewLayout:contactLayout];
+    contactsCollectionView.backgroundColor = [UIColor clearColor];
+    
+    [[KGModal sharedInstance] showWithContentView:contactsCollectionView andAnimated:YES];
 }
 
 

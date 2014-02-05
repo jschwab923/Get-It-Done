@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JWCTask.h"
 
-@interface JWCTaskManager : NSObject
+@interface JWCTaskManager : NSObject 
 
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
