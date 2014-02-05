@@ -56,7 +56,7 @@
             }
             break;
         case 1:
-            currentCell = (JWCCollectionViewCellProof *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_PROOF forIndexPath:indexPath];
+            currentCell = (JWCCollectionViewCellProof *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProofCell" forIndexPath:indexPath];
             break;
         default:
             break;

@@ -16,4 +16,6 @@
 #define REUSE_PROOF @"ProofCell"
 #define REUSE_PARTNER_FOOTER @"PartnerFooter"
 #define REUSE_PROOF_HEADER @"ProofHeader"
+
+#define DEFAULT_FONT [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
 #endif

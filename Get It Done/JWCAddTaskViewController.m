@@ -41,7 +41,8 @@
     // Register collection view cells
     [self.collectionViewAddTask registerClass:[JWCCollectionViewCellTitlePoints class] forCellWithReuseIdentifier:REUSE_TITLE_POINTS];
     [self.collectionViewAddTask registerClass:[JWCTaskDescriptionCollectionViewCell class] forCellWithReuseIdentifier:REUSE_DESCRIPTION];
-    [self.collectionViewAddTask registerClass:[JWCCollectionViewCellProof class] forCellWithReuseIdentifier:REUSE_PROOF];
+    // Created in a Nib
+//    [self.collectionViewAddTask registerNib:[UINib nibWithNibName:@"ProofPickerCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:REUSE_PROOF];
     
     
 }
