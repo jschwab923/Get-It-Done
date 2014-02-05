@@ -10,7 +10,7 @@
 		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
 		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
 		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
-		6B501C5418A16629005478E6 /* JWCAddTaskCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */; };
+		6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5318A16629005478E6 /* JWCCollectionViewHeaderAddTask.m */; };
 		6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */; };
 		6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */; };
 		6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DF571189C8D840027761B /* JWCSoonCollectionViewDataSource.m */; };
@@ -21,6 +21,7 @@
 		6B7705BE18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */; };
 		6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */; };
 		6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */; };
+		6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */; };
 		6BF5BF10189B645200B4EA9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF0F189B645200B4EA9C /* Foundation.framework */; };
 		6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */; };
 		6BF5BF14189B645200B4EA9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF13189B645200B4EA9C /* UIKit.framework */; };
@@ -77,8 +78,8 @@
 		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
 		6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
 		6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33landscape@2x.png"; sourceTree = "<group>"; };
-		6B501C5218A16629005478E6 /* JWCAddTaskCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCAddTaskCollectionViewHeader.h; path = "Get It Done/JWCAddTaskCollectionViewHeader.h"; sourceTree = "<group>"; };
-		6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCAddTaskCollectionViewHeader.m; path = "Get It Done/JWCAddTaskCollectionViewHeader.m"; sourceTree = "<group>"; };
+		6B501C5218A16629005478E6 /* JWCCollectionViewHeaderAddTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewHeaderAddTask.h; path = "Get It Done/JWCCollectionViewHeaderAddTask.h"; sourceTree = "<group>"; };
+		6B501C5318A16629005478E6 /* JWCCollectionViewHeaderAddTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewHeaderAddTask.m; path = "Get It Done/JWCCollectionViewHeaderAddTask.m"; sourceTree = "<group>"; };
 		6B501C5B18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCAddSubtaskCollectionViewFooter.h; path = "Get It Done/JWCAddSubtaskCollectionViewFooter.h"; sourceTree = "<group>"; };
 		6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCAddSubtaskCollectionViewFooter.m; path = "Get It Done/JWCAddSubtaskCollectionViewFooter.m"; sourceTree = "<group>"; };
 		6B6DF56C189C8B9B0027761B /* JWCSoonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCSoonCollectionViewCell.h; path = "Get It Done/JWCSoonCollectionViewCell.h"; sourceTree = "<group>"; };
@@ -100,6 +101,8 @@
 		6B7705C618A191B9007DF72D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6B7705C718A195E5007DF72D /* JWCCollectionViewCellTitlePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCellTitlePoints.h; path = "Get It Done/JWCCollectionViewCellTitlePoints.h"; sourceTree = "<group>"; };
 		6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellTitlePoints.m; path = "Get It Done/JWCCollectionViewCellTitlePoints.m"; sourceTree = "<group>"; };
+		6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterPartner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewFooterPartner.h; path = "Get It Done/JWCCollectionViewFooterPartner.h"; sourceTree = "<group>"; };
+		6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewFooterPartner.m; path = "Get It Done/JWCCollectionViewFooterPartner.m"; sourceTree = "<group>"; };
 		6BF5BF0C189B645200B4EA9C /* Get It Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get It Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF5BF0F189B645200B4EA9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -246,10 +249,10 @@
 		6B7705BF18A18B7E007DF72D /* CollectionView Headers */ = {
 			isa = PBXGroup;
 			children = (
-				6B501C5218A16629005478E6 /* JWCAddTaskCollectionViewHeader.h */,
-				6B501C5318A16629005478E6 /* JWCAddTaskCollectionViewHeader.m */,
 				6B6DF5A0189CA48C0027761B /* JWCSoonCollectionViewHeader.h */,
 				6B6DF5A1189CA48C0027761B /* JWCSoonCollectionViewHeader.m */,
+				6B501C5218A16629005478E6 /* JWCCollectionViewHeaderAddTask.h */,
+				6B501C5318A16629005478E6 /* JWCCollectionViewHeaderAddTask.m */,
 			);
 			name = "CollectionView Headers";
 			sourceTree = "<group>";
@@ -259,6 +262,8 @@
 			children = (
 				6B501C5B18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.h */,
 				6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */,
+				6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterPartner.h */,
+				6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */,
 			);
 			name = "CollectionView Footers";
 			sourceTree = "<group>";
@@ -266,14 +271,8 @@
 		6B7705C118A18B9A007DF72D /* CollectionView Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6B7705C218A18BF4007DF72D /* JWCCollectionViewCellProof.h */,
-				6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */,
-				6B7705C718A195E5007DF72D /* JWCCollectionViewCellTitlePoints.h */,
-				6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */,
-				6B7705B918A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.h */,
-				6B7705BA18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m */,
-				6B6DF56C189C8B9B0027761B /* JWCSoonCollectionViewCell.h */,
-				6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */,
+				6B7705CB18A1B077007DF72D /* Soon Cells */,
+				6B7705CA18A1B06C007DF72D /* Add Task Cells */,
 			);
 			name = "CollectionView Cells";
 			sourceTree = "<group>";
@@ -291,6 +290,28 @@
 				6BF5BF28189B645200B4EA9C /* JWCRootViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6B7705CA18A1B06C007DF72D /* Add Task Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6B7705C718A195E5007DF72D /* JWCCollectionViewCellTitlePoints.h */,
+				6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */,
+				6B7705B918A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.h */,
+				6B7705BA18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m */,
+				6B7705C218A18BF4007DF72D /* JWCCollectionViewCellProof.h */,
+				6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */,
+			);
+			name = "Add Task Cells";
+			sourceTree = "<group>";
+		};
+		6B7705CB18A1B077007DF72D /* Soon Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6B6DF56C189C8B9B0027761B /* JWCSoonCollectionViewCell.h */,
+				6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */,
+			);
+			name = "Soon Cells";
 			sourceTree = "<group>";
 		};
 		6BF5BF03189B645100B4EA9C = {
@@ -585,7 +606,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
-				6B501C5418A16629005478E6 /* JWCAddTaskCollectionViewHeader.m in Sources */,
+				6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */,
+				6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m in Sources */,
 				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
 				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
 				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,

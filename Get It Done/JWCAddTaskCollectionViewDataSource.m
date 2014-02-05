@@ -8,11 +8,18 @@
 
 #import "JWCAddTaskCollectionViewDataSource.h"
 #import "JWCAddSubtaskCollectionViewFooter.h"
-#import "JWCAddTaskCollectionViewHeader.h"
+#import "JWCCollectionViewHeaderAddTask.h"
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewCellTitlePoints.h"
+#import "JWCCollectionViewCellProof.h"
+#import "JWCCollectionViewFooterPartner.h"
 
 @implementation JWCAddTaskCollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -23,22 +30,14 @@
         case 1:
             return 1;
             break;
-        case 3:
-            return 1;
-            break;
         default:
             return 0;
             break;
     }
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    //TODO: Add other sections
-    return 1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
     UICollectionViewCell *currentCell;
@@ -56,8 +55,7 @@
             }
             break;
         case 1:
-            break;
-        case 2:
+            currentCell = (JWCCollectionViewCellProof *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_PROOF forIndexPath:indexPath];
             break;
         default:
             break;
@@ -72,19 +70,27 @@
     UICollectionReusableView *reusableView;
     
     if (kind == UICollectionElementKindSectionHeader) {
+        
+        JWCCollectionViewHeaderAddTask *header = (JWCCollectionViewHeaderAddTask *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER forIndexPath:indexPath];
+        
         switch (indexPath.section) {
             case 0:
-                reusableView = (JWCAddTaskCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER forIndexPath:indexPath];
+                header.headerLabel.text = @"What needs to get done?";
+                reusableView = header;
                 break;
-                
+            case 1:
+                header.headerLabel.text = @"How will you prove it's done?";
+                reusableView = header;
             default:
                 break;
         }
     } else if (kind == UICollectionElementKindSectionFooter) {
         switch (indexPath.section) {
             case 0:
-                reusableView = (JWCAddTaskCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER forIndexPath:indexPath];
+                reusableView = (JWCAddSubtaskCollectionViewFooter *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER forIndexPath:indexPath];
                 break;
+            case 1:
+                reusableView = (JWCCollectionViewFooterPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
             default:
                 break;
         }

@@ -24,6 +24,7 @@
 {
     self.textViewDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect),CGRectGetHeight(rect))];
     self.textViewDescription.text = @"Describe what needs to get done";
+    self.textViewDescription.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
     [self addSubview:self.textViewDescription];
 }
 

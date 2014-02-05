@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCAddTaskCollectionViewHeader : UICollectionReusableView
+@interface JWCCollectionViewHeaderAddTask : UICollectionReusableView
 
+@property (nonatomic) UILabel *headerLabel;
 
 @end

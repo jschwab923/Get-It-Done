@@ -19,10 +19,10 @@
     return self;
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    
-//}
+- (void)drawRect:(CGRect)rect
+{
+    
+}
 
 
 @end
