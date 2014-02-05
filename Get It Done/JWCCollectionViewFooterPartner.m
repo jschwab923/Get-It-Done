@@ -21,15 +21,17 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    UILabel *partnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(rect)*.6, CGRectGetHeight(rect))];
+    UILabel *partnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(rect)-10, 0, CGRectGetWidth(rect)*.6, CGRectGetHeight(rect))];
     
     partnerLabel.text = @"Who will help you?";
-    partnerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
+    partnerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
     partnerLabel.backgroundColor = [UIColor clearColor];
     
     [self addSubview:partnerLabel];
     
-    UIImageView *partnerImage = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(rect)-50, 5, 30, 30)];
+    UIImageView *partnerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+    partnerImage.center = CGPointMake(CGRectGetWidth(rect)-20, CGRectGetMidY(rect));
+    
     partnerImage.contentMode = UIViewContentModeScaleAspectFill;
     partnerImage.image = [UIImage imageNamed:@"Group"];
     
