@@ -57,4 +57,45 @@
     
 }
 
+#pragma mark - IBOutlets
+- (IBAction)pressedProofPickerInfo:(UIButton *)sender
+{
+    NSString *selectedTitle;
+    NSString *message;
+    switch ([self.pickerViewProof selectedRowInComponent:0]) {
+        case 0:
+            selectedTitle = @"Describe Finished Task";
+            message = @"When you've finished the task, write down a few sentences about it. Reflect on how it went, anything that was difficult, something you learned etc.";
+            break;
+        case 1:
+            selectedTitle = @"Take a Picture";
+            message = @"Take and upload a picture of something that proves you got it done.";
+            break;
+        case 2:
+            selectedTitle = @"Answer question/s";
+            message = @"Enter in some questions that can only be answered once you've finished the task. Then answer them when you've gotten it done.";
+        default:
+            break;
+    }
+    UIAlertView *proofInfoAlertView;
+    
+    if ([self.pickerViewProof selectedRowInComponent:0] == 2) {
+        proofInfoAlertView = [[UIAlertView alloc] initWithTitle:selectedTitle
+                                                        message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Submit questions", nil];
+        [proofInfoAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+
+    } else {
+        proofInfoAlertView = [[UIAlertView alloc] initWithTitle:selectedTitle
+                                                        message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    }
+    
+    [proofInfoAlertView show];
+}
+
+#pragma mark - UIAlertView Delegate 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
+
 @end
