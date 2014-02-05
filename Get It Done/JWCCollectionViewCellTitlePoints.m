@@ -21,8 +21,10 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    self.title = [[UITextField alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(rect)/2, CGRectGetWidth(rect)*.7, 30)];
-    self.points = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.title.bounds)+5, CGRectGetHeight(rect)/2, CGRectGetWidth(rect)*.25, 30)];
+    self.title = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(rect)*.7, 30)];
+    self.title.center = CGPointMake(self.title.center.x, CGRectGetMidY(rect));
+    self.points = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.title.bounds)+10, 0, CGRectGetWidth(rect)*.25, 30)];
+    self.points.center = CGPointMake(self.points.center.x, CGRectGetMidY(rect));
     
     self.points.keyboardType = UIKeyboardTypeNumberPad;
     self.points.backgroundColor = [UIColor whiteColor];

@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.headerLabel = [[UILabel alloc] initWithFrame:frame];
+        self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
         [self addSubview:self.headerLabel];
     }
     return self;

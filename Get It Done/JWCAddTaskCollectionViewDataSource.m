@@ -47,9 +47,12 @@
             switch (indexPath.row) {
                 case 0:
                     currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
+                    currentCell.backgroundColor = [UIColor blueColor];
                     break;
                 case 1:
                     currentCell = (JWCTaskDescriptionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
+                    currentCell.backgroundColor = [UIColor blueColor];
+                    break;
                 default:
                     break;
             }
@@ -76,11 +79,16 @@
         switch (indexPath.section) {
             case 0:
                 header.headerLabel.text = @"What needs to get done?";
+                //TODO: Remove
+                header.backgroundColor = [UIColor blueColor];
                 reusableView = header;
                 break;
             case 1:
                 header.headerLabel.text = @"How will you prove it's done?";
+                //TODO: Remove
+                header.backgroundColor = [UIColor purpleColor];
                 reusableView = header;
+                break;
             default:
                 break;
         }
@@ -88,9 +96,11 @@
         switch (indexPath.section) {
             case 0:
                 reusableView = (JWCAddSubtaskCollectionViewFooter *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER forIndexPath:indexPath];
+                reusableView.backgroundColor = [UIColor blueColor];
                 break;
             case 1:
                 reusableView = (JWCCollectionViewFooterPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
+                reusableView.backgroundColor = [UIColor blueColor];
             default:
                 break;
         }
