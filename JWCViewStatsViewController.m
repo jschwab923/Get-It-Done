@@ -36,32 +36,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Custom Transition Methods
-- (IBAction)pressedBack:(id)sender
+//#pragma mark - Custom Transition Methods
+//- (IBAction)pressedBack:(id)sender
+//{
+//    UIViewController *destinationViewController = self.segue.sourceViewController;
+//    
+//    destinationViewController.transitioningDelegate = self;
+//    destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
+//}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super prepareForSegue:self.segue sender:sender];
-    
-    UIViewController *destinationViewController = self.segue.destinationViewController;
+    UIViewController *destinationViewController = self.segue.sourceViewController;
     
     destinationViewController.transitioningDelegate = self;
     destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
-    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
-    animator.presenting = YES;
-    return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
-    return animator;
-}
-- (IBAction)panGesturePanned:(id)sender
-{
-    
-}
+//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+//{
+//    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
+//    animator.presenting = YES;
+//    return animator;
+//}
+//
+//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+//{
+//    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
+//    return animator;
+//}
+//- (IBAction)panGesturePanned:(id)sender
+//{
+//    
+//}
 
 @end

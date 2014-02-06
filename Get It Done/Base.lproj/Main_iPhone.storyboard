@@ -383,7 +383,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAP-nr-yrd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-60" y="797"/>
+            <point key="canvasLocation" x="172" y="511"/>
         </scene>
     </scenes>
     <resources>
