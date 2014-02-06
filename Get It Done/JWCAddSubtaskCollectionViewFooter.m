@@ -131,12 +131,12 @@
     NSArray *visibleIndexPaths = [_subtasksCollectionView indexPathsForVisibleItems];
     for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
         JWCCollectionViewCellTitlePoints *currentCell = (JWCCollectionViewCellTitlePoints *)[_subtasksCollectionView cellForItemAtIndexPath:currentIndexPath];
-        //TODO: Verify if it should be < or <=
+
         if (currentIndexPath.row < [pendingSubtasks count]) {
             JWCSubtask *editedSubtask = (JWCSubtask *)pendingSubtasks[currentIndexPath.row];
             editedSubtask.subTaskDescription = currentCell.title.text;
             editedSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
-        } else {
+        } else if (![currentCell.title.text isEqualToString:@""]){
             JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
             newSubtask.subTaskDescription = currentCell.title.text;
             newSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];

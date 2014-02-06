@@ -59,9 +59,14 @@
     //TODO: Remove this default progress and base on current progress
     [self.progressViewPie setProgress:.7 animated:YES];
     
+    //[self setUpConstraintsAndFramesForCurrentDevice];
     
-    [self setUpConstraintsAndFramesForCurrentDevice];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    //[self updateCustomConstraints];
+    [self.collectionViewTasks reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,7 +78,7 @@
 #pragma mark - Rotation Handling
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self updateCustomConstraints];
+    //[self updateCustomConstraints];
 }
 
 #pragma mark - Contraints and Orientation Methods

@@ -21,6 +21,7 @@
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;
+- (void)commitPendingTask;
 - (void)setUpTasksArray;
 
 @end

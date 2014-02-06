@@ -61,7 +61,7 @@ action:@selector(tappedCollectionView:)];
 }
 - (IBAction)pressedAddButton:(UIBarButtonItem *)sender
 {
-
+    [[JWCTaskManager sharedManager] commitPendingTask];
 }
 
 #pragma mark - Gesture Recognizer Methods
