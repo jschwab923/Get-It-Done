@@ -18,7 +18,9 @@
 {
     NSLayoutConstraint *_landScapeCollectionViewTopConstraint;
     NSLayoutConstraint *_landScapeCollectionViewLeftConstraint;
-    NSLayoutConstraint *_landScapeProgressViewConstraint;
+    NSLayoutConstraint *_landScapeCollectionViewBottomConstraint;
+    NSLayoutConstraint *_landScapeProgressViewLeftConstraint;
+    
     NSLayoutConstraint *_portraitCollectionViewBottomConstraint;
     NSLayoutConstraint *_portraitCollectionViewTopConstraint;
 }
@@ -59,7 +61,7 @@
     //TODO: Remove this default progress and base on current progress
     [self.progressViewPie setProgress:.7 animated:YES];
     
-    //[self setUpConstraintsAndFramesForCurrentDevice];
+    [self setUpConstraintsAndFramesForCurrentDevice];
     
 }
 
@@ -78,7 +80,7 @@
 #pragma mark - Rotation Handling
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    //[self updateCustomConstraints];
+    [self updateCustomConstraints];
 }
 
 #pragma mark - Contraints and Orientation Methods
@@ -93,12 +95,14 @@
         
         [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
                                     _landScapeCollectionViewLeftConstraint,
-                                    _landScapeProgressViewConstraint]];
+                                    _landScapeCollectionViewBottomConstraint,
+                                    _landScapeProgressViewLeftConstraint]];
         [self.collectionViewTasks.collectionViewLayout invalidateLayout];
     } else {
         [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
                                        _landScapeCollectionViewLeftConstraint,
-                                       _landScapeProgressViewConstraint]];
+                                       _landScapeProgressViewLeftConstraint,
+                                       _landScapeCollectionViewBottomConstraint]];
         
         [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
                                     _portraitCollectionViewTopConstraint]];
@@ -111,8 +115,9 @@
     // Setup contraints for handling rotation
     _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeRight multiplier:1 constant:5];
+    _landScapeCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     
-    _landScapeProgressViewConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
+    _landScapeProgressViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
     
     _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
@@ -126,10 +131,12 @@
     {
         if (screenSize.height == 480) {
             [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
-                                        _landScapeProgressViewConstraint]];
+                                        _landScapeProgressViewLeftConstraint,
+                                        _landScapeCollectionViewBottomConstraint]];
         } else if (screenSize.height == 568) {
             [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
-                                        _landScapeProgressViewConstraint]];
+                                        _landScapeProgressViewLeftConstraint,
+                                        _landScapeCollectionViewBottomConstraint]];
         }
     } else {
         [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,

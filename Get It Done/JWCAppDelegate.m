@@ -19,6 +19,7 @@
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"iPhone5_33flipped"]
                                        forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"iPhone5_33landscape"] forBarMetrics:UIBarMetricsLandscapePhone];
     
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     

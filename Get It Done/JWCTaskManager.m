@@ -81,6 +81,7 @@
     self.currentTask = self.pendingTask;
     
     [_tasks addObject:self.pendingTask];
+    self.pendingTask = [[JWCTask alloc] init];
 }
 
 

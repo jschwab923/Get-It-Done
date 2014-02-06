@@ -70,7 +70,15 @@
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                    context:nil];
-    CGSize roundedSize = CGSizeMake(ceil(boundingRect.size.width), ceil(boundingRect.size.height)+10);
+//    CGFloat widthForOrientation;
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+//        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+//    {
+//        widthForOrientation = 100;
+//    } else {
+//        widthForOrientation = 250;
+//    }
+    CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+10);
     
     return roundedSize;
 }
