@@ -12,6 +12,12 @@
 #import "JWCTask.h"
 #import "KGModal.h"
 
+@interface JWCCollectionViewFooterPartner ()
+{
+    UITapGestureRecognizer *_buttonTouched;
+}
+@end
+
 @implementation JWCCollectionViewFooterPartner
 
 - (id)initWithFrame:(CGRect)frame
@@ -25,13 +31,13 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    UILabel *partnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(rect)-10, 0, CGRectGetWidth(rect)*.6, CGRectGetHeight(rect))];
+    self.partnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(rect)-10, 0, CGRectGetWidth(rect)*.6, CGRectGetHeight(rect))];
     
-    partnerLabel.text = @"Who will help you?";
-    partnerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    partnerLabel.backgroundColor = [UIColor clearColor];
+    self.partnerLabel.text = @"Who will help you?";
+    self.partnerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    self.partnerLabel.backgroundColor = [UIColor clearColor];
     
-    [self addSubview:partnerLabel];
+    [self addSubview:self.partnerLabel];
     
     self.partnerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     self.partnerImage.center = CGPointMake(CGRectGetWidth(rect)-20, CGRectGetMidY(rect));
@@ -39,10 +45,10 @@
     self.partnerImage.contentMode = UIViewContentModeScaleAspectFill;
     self.partnerImage.image = [UIImage imageNamed:@"Group"];
     
-    UITapGestureRecognizer *buttonTouched = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(pressedAddPartner:)];
+    _buttonTouched = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                             action:@selector(pressedAddPartner:)];
 
-    [partnerLabel addGestureRecognizer:buttonTouched];
+    [self.partnerLabel addGestureRecognizer:_buttonTouched];
     
     [self addSubview:self.partnerImage];
 }
@@ -55,6 +61,12 @@
     contactsCollectionView.backgroundColor = [UIColor clearColor];
 
     [[KGModal sharedInstance] showWithContentView:contactsCollectionView andAnimated:YES];
+}
+
+- (void)prepareForReuse
+{
+    self.partnerImage.image = nil;
+    [self.partnerLabel removeGestureRecognizer:_buttonTouched];
 }
 
 @end

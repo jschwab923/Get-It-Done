@@ -72,6 +72,7 @@
 		6BFFC77A18A2EAE80099ACB0 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC76918A2EAE80099ACB0 /* APContact.m */; };
 		6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */; };
 		6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76C18A2EAE80099ACB0 /* README.md */; };
+		6BFFC78218A309DB0099ACB0 /* JWCSubtask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,8 @@
 		6BFFC76A18A2EAE80099ACB0 /* APTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTypes.h; sourceTree = "<group>"; };
 		6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		6BFFC76C18A2EAE80099ACB0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6BFFC78018A309DB0099ACB0 /* JWCSubtask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCSubtask.h; path = "Get It Done/JWCSubtask.h"; sourceTree = "<group>"; };
+		6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCSubtask.m; path = "Get It Done/JWCSubtask.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +276,8 @@
 				6B6DF575189C8DA20027761B /* JWCTaskManager.m */,
 				6B477ECD18A1D89500A1CD9A /* JWCTask.h */,
 				6B477ECE18A1D89500A1CD9A /* JWCTask.m */,
+				6BFFC78018A309DB0099ACB0 /* JWCSubtask.h */,
+				6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */,
 				6BFFC73C18A2E16C0099ACB0 /* JWCTaskPartner.h */,
 				6BFFC73D18A2E16C0099ACB0 /* JWCTaskPartner.m */,
 			);
@@ -739,6 +744,7 @@
 				6BFD0A61189C6FC3008C3698 /* M13ProgressHUD.m in Sources */,
 				6B17890E189D8CDD003664C5 /* SAMath.m in Sources */,
 				6BFD0A67189C6FC3008C3698 /* M13ProgressViewFilteredImage.m in Sources */,
+				6BFFC78218A309DB0099ACB0 /* JWCSubtask.m in Sources */,
 				6B6DF5A2189CA48C0027761B /* JWCSoonCollectionViewHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

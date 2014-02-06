@@ -7,6 +7,7 @@
 //
 
 #import "JWCTaskManager.h"
+#import "JWCSubtask.h"
 
 @implementation JWCTaskManager
 {
@@ -47,7 +48,6 @@
 {
     for (int i = 0; i < 3; i++) {
         JWCTask *newTask = [JWCTask new];
-        newTask.subTasks = [NSMutableArray new];
         
         newTask.taskID = [NSUUID UUID];
         newTask.title = [NSString stringWithFormat:@"Task #%i", i];
@@ -58,8 +58,13 @@
         newTask.due = [NSDate dateWithTimeInterval:2000 sinceDate:newTask.start];
         
         for (int j = 0; j < i+3; j++) {
-            NSString *subTask = [NSString stringWithFormat:@"Here is a subtask and it is #%i", j + i];
-            [[newTask subTasks] addObject:subTask];
+            NSString *subTaskDescription = [NSString stringWithFormat:@"Here is a subtask and it is #%i", j + i];
+            NSNumber *taskPercent = [NSNumber numberWithInt:(j*40)%100];
+            JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
+            newSubtask.subTaskDescription = subTaskDescription;
+            newSubtask.percent = taskPercent;
+            
+            [[newTask subTasks] addObject:newSubtask];
         }
         
         [self addTask:newTask];
@@ -67,6 +72,7 @@
     
 // TODO: Figure out how to set current task dynamically
     self.currentTask = [self.tasks objectAtIndex:0];
+    self.pendingTask = [[JWCTask alloc] init];
 }
 
 @end

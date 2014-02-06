@@ -11,6 +11,5 @@
 @interface JWCAddTaskCollectionViewDataSource : NSObject
 <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate>
 
-@property (nonatomic) JWCTask *taskBeingAdded;
 
 @end

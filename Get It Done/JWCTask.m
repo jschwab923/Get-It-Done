@@ -7,6 +7,7 @@
 //
 
 #import "JWCTask.h"
+#import "JWCSubtask.h"
 
 @implementation JWCTask
 
@@ -14,6 +15,7 @@
 {
     if (self = [super init]) {
         self.taskID = [NSUUID UUID];
+        self.subTasks = [[NSMutableArray alloc] init];
     }
     return self;
 }

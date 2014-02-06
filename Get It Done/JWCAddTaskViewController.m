@@ -28,9 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        JWCAddTaskCollectionViewDataSource *dataSource = (JWCAddTaskCollectionViewDataSource *)self.collectionViewAddTask.dataSource;
-        // Intialize task to store data as it's added in the UI fields
-        dataSource.taskBeingAdded = [[JWCTask alloc] init];
+        
     }
     return self;
 }
@@ -49,6 +47,7 @@ action:@selector(tappedCollectionView:)];
     [self.collectionViewAddTask registerClass:[JWCCollectionViewHeaderAddTask class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER];
      [self.collectionViewAddTask registerClass:[JWCAddSubtaskCollectionViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER];
     [self.collectionViewAddTask registerClass:[JWCCollectionViewFooterPartner class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER];
+    
     // Register collection view cells
     [self.collectionViewAddTask registerClass:[JWCCollectionViewCellTitlePoints class] forCellWithReuseIdentifier:REUSE_TITLE_POINTS];
     [self.collectionViewAddTask registerClass:[JWCTaskDescriptionCollectionViewCell class] forCellWithReuseIdentifier:REUSE_DESCRIPTION];
@@ -72,7 +71,10 @@ action:@selector(tappedCollectionView:)];
     for (NSIndexPath *currentIndexPath in indexPathsForVisibleItems) {
         UICollectionViewCell *currentCell = [self.collectionViewAddTask cellForItemAtIndexPath:currentIndexPath];
         for (UIView *subview in currentCell.subviews) {
-            [subview resignFirstResponder];
+            if ([subview isKindOfClass:[UITextField class]] ||
+                [subview isKindOfClass:[UITextView class]]) {
+                [subview resignFirstResponder];
+            }
         }
     }
 }

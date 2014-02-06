@@ -10,6 +10,7 @@
 #import "JWCSoonCollectionViewCell.h"
 #import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
+#import "JWCSubtask.h"
 
 @interface JWCSoonCollectionViewDataSource ()
 
@@ -30,8 +31,10 @@
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     NSMutableArray *subTasks = currentTask.subTasks;
+    JWCSubtask *currentSubtask = (JWCSubtask *)subTasks[indexPath.row];
     
-    subTaskCell.subTaskTextView.text = [subTasks objectAtIndex:indexPath.row];;
+    subTaskCell.subTaskTextView.text = currentSubtask.subTaskDescription;
+    //TODO: Display subtask percent
     return subTaskCell;
 }
 
@@ -61,9 +64,9 @@
     CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-    NSString *currentSubTaskString = [currentTask.subTasks objectAtIndex:indexPath.row];
+    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
     
-    CGRect boundingRect = [currentSubTaskString boundingRectWithSize:textSize
+    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                    context:nil];

@@ -77,7 +77,6 @@
         default:
             break;
     }
-    
     return currentCell;
 }
 
@@ -130,10 +129,11 @@
 #pragma mark - UITextView/Field Delegate Methods
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    JWCTask *currentPendingTask = [[JWCTaskManager sharedManager] pendingTask];
     if (textField.tag == TAG_TITLE_TEXTVIEW) {
-        self.taskBeingAdded.title = textField.text;
+        currentPendingTask.title = textField.text;
     } else if (textField.tag == TAG_POINTS_TEXTVIEW) {
-        self.taskBeingAdded.points = [NSNumber numberWithInteger:[textField.text integerValue]];
+        currentPendingTask.points = [NSNumber numberWithInteger:[textField.text integerValue]];
     }
     return YES;
 }
@@ -141,7 +141,7 @@
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     if (textView.tag == TAG_DESCRIPTION_TEXTFIELD) {
-        self.taskBeingAdded.taskDescription = textView.text;
+        [[JWCTaskManager sharedManager] pendingTask].taskDescription = textView.text;
     }
     return YES;
 }

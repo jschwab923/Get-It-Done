@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface JWCAddSubtaskCollectionViewFooter : UICollectionReusableView
-
+<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate>
 
 @end

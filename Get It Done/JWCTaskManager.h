@@ -14,6 +14,9 @@
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
 
+// Used to persist temporary progress when adding a task
+@property (nonatomic) JWCTask *pendingTask;
+
 
 + (JWCTaskManager *)sharedManager;
 

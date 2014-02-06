@@ -25,6 +25,7 @@
 @property (nonatomic) NSDate *due;
 
 @property (nonatomic) NSMutableArray *subTasks;
+@property (nonatomic) NSMutableArray *subTaskPercents;
 @property (nonatomic) JWCTaskPartner *partner;
 
 @end
