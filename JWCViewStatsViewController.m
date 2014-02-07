@@ -10,8 +10,12 @@
 #import "JWCViewControllerAnimatedTransition.h"
 #import "BEMSimpleLineGraphView.h"
 #import "JWCTaskManager.h"
+#import "KGModal.h"
 
-@interface JWCViewStatsViewController () <BEMSimpleLineGraphDelegate>
+@interface JWCViewStatsViewController () <BEMSimpleLineGraphDelegate, BEMAnimationDelegate>
+{
+    UILabel *_pointsLabel;
+}
 
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *graphView;
 
@@ -32,9 +36,16 @@
 {
     [super viewDidLoad];
     
-    self.graphView.delegate = self;
-    self.graphView.colorBottom = [UIColor colorWithRed:0.000 green:0.770 blue:0.884 alpha:0.820];
+    _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
     
+    _pointsLabel.font = DEFAULT_FONT;
+    _pointsLabel.textColor = [UIColor darkGrayColor];
+    [self.graphView addSubview:_pointsLabel];
+    
+    self.graphView.animationGraphEntranceSpeed = 3;
+    self.graphView.delegate = self;
+    self.graphView.enableTouchReport = YES;
+    self.graphView.colorBottom = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_4.png"]];
     [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
 }
 
@@ -61,13 +72,22 @@
 #pragma mark - BEMSimpleLineGraph Methods
 - (int)numberOfPointsInGraph
 {
-    return 8;
+    return 10;
 }
 
 - (float)valueForIndex:(NSInteger)index
 {
-    float randomNum = ((float)rand() / RAND_MAX) * 5;
-    return randomNum;
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 4, 10, 6, 4};
+    return _defaultValues[index];
+}
+
+- (void)didTouchGraphWithClosestIndex:(int)index
+{
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 4, 10, 6, 4};
+    
+    
+    _pointsLabel.text = [NSString stringWithFormat:@"%i", _defaultValues[index]];
+    
 }
 
 @end

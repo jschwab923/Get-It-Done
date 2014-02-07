@@ -335,7 +335,7 @@
                                 </connections>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ZJ-7B-OAD" customClass="BEMSimpleLineGraphView">
-                                <rect key="frame" x="0.0" y="103" width="320" height="445"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>

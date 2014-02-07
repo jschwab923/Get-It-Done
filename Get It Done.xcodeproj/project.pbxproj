@@ -31,6 +31,12 @@
 		6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */; };
 		6BA2A7FA18A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */; };
 		6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */; };
+		6BF5316B18A4D7D700D90E5E /* iPhone5_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316618A4D7D700D90E5E /* iPhone5_5@2x.png */; };
+		6BF5316C18A4D7D700D90E5E /* iPhone5_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316718A4D7D700D90E5E /* iPhone5_7@2x.png */; };
+		6BF5316D18A4D7D700D90E5E /* iPhone5_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316818A4D7D700D90E5E /* iPhone5_8@2x.png */; };
+		6BF5316E18A4D7D700D90E5E /* iPhone5_15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316918A4D7D700D90E5E /* iPhone5_15@2x.png */; };
+		6BF5316F18A4D7D700D90E5E /* iPhone5_17@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316A18A4D7D700D90E5E /* iPhone5_17@2x.png */; };
+		6BF5317118A4D80100D90E5E /* iPhone5_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5317018A4D80100D90E5E /* iPhone5_4@2x.png */; };
 		6BF5BF10189B645200B4EA9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF0F189B645200B4EA9C /* Foundation.framework */; };
 		6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */; };
 		6BF5BF14189B645200B4EA9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF13189B645200B4EA9C /* UIKit.framework */; };
@@ -140,6 +146,12 @@
 		6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionReusableFooterLabel.m; path = "Get It Done/JWCCollectionReusableFooterLabel.m"; sourceTree = "<group>"; };
 		6BA2A7FB18A42A450062C4B0 /* JWCViewLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCViewLine.h; path = "Get It Done/JWCViewLine.h"; sourceTree = "<group>"; };
 		6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCViewLine.m; path = "Get It Done/JWCViewLine.m"; sourceTree = "<group>"; };
+		6BF5316618A4D7D700D90E5E /* iPhone5_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_5@2x.png"; sourceTree = "<group>"; };
+		6BF5316718A4D7D700D90E5E /* iPhone5_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_7@2x.png"; sourceTree = "<group>"; };
+		6BF5316818A4D7D700D90E5E /* iPhone5_8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_8@2x.png"; sourceTree = "<group>"; };
+		6BF5316918A4D7D700D90E5E /* iPhone5_15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_15@2x.png"; sourceTree = "<group>"; };
+		6BF5316A18A4D7D700D90E5E /* iPhone5_17@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_17@2x.png"; sourceTree = "<group>"; };
+		6BF5317018A4D80100D90E5E /* iPhone5_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_4@2x.png"; sourceTree = "<group>"; };
 		6BF5BF0C189B645200B4EA9C /* Get It Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get It Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF5BF0F189B645200B4EA9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -505,6 +517,12 @@
 		6BFD0A30189C68FB008C3698 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				6BF5316618A4D7D700D90E5E /* iPhone5_5@2x.png */,
+				6BF5317018A4D80100D90E5E /* iPhone5_4@2x.png */,
+				6BF5316718A4D7D700D90E5E /* iPhone5_7@2x.png */,
+				6BF5316818A4D7D700D90E5E /* iPhone5_8@2x.png */,
+				6BF5316918A4D7D700D90E5E /* iPhone5_15@2x.png */,
+				6BF5316A18A4D7D700D90E5E /* iPhone5_17@2x.png */,
 				6B1394D118A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png */,
 				6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */,
 				6BFD0A3D189C6B88008C3698 /* iPhone5_33Flipped@2x.png */,
@@ -721,9 +739,15 @@
 				6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */,
 				6BFD0A3B189C6A92008C3698 /* iPhone5_33@2x.png in Resources */,
 				6BF5BF2B189B645200B4EA9C /* Images.xcassets in Resources */,
+				6BF5316C18A4D7D700D90E5E /* iPhone5_7@2x.png in Resources */,
+				6BF5316D18A4D7D700D90E5E /* iPhone5_8@2x.png in Resources */,
+				6BF5316F18A4D7D700D90E5E /* iPhone5_17@2x.png in Resources */,
 				6B1394D218A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png in Resources */,
+				6BF5316B18A4D7D700D90E5E /* iPhone5_5@2x.png in Resources */,
+				6BF5317118A4D80100D90E5E /* iPhone5_4@2x.png in Resources */,
 				6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */,
 				6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */,
+				6BF5316E18A4D7D700D90E5E /* iPhone5_15@2x.png in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,
 				6BF5BF1A189B645200B4EA9C /* InfoPlist.strings in Resources */,
 				6BFD0A3E189C6B88008C3698 /* iPhone5_33Flipped@2x.png in Resources */,

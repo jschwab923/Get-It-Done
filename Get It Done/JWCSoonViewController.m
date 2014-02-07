@@ -76,8 +76,17 @@
 {
     [super viewWillAppear:animated];
     [self updateCustomConstraints];
-    [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressFloatValue] animated:YES];
+    if ([[JWCTaskManager sharedManager] getProgressFloatValue] < .1) {
+        [self.progressViewPie setProgress:.1 animated:YES];
+    } else {
+        [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressFloatValue] animated:YES];
+    }
     [self.collectionViewTasks reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.progressViewPie setProgress:0 animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
