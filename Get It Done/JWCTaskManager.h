@@ -9,15 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "JWCTask.h"
 
-@interface JWCTaskManager : NSObject
+@interface JWCTaskManager : NSObject 
 
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
+
+// Used to persist temporary progress when adding a task
+@property (nonatomic) JWCTask *pendingTask;
 
 
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;
+- (void)commitPendingTask;
 - (void)setUpTasksArray;
 
 @end

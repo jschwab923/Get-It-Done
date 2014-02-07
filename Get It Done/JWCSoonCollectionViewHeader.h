@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCCollectionViewHeader : UICollectionReusableView
+@interface JWCSoonCollectionViewHeader : UICollectionReusableView
 
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *taskImageView;

@@ -7,6 +7,7 @@
 //
 
 #import "JWCTaskManager.h"
+#import "JWCSubtask.h"
 
 @implementation JWCTaskManager
 {
@@ -20,6 +21,8 @@
     
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
+        sharedManager.currentTask = [[JWCTask alloc] init];
+        sharedManager.pendingTask = [[JWCTask alloc] init];
         [sharedManager setUpTasksArray];
     });
     
@@ -47,19 +50,22 @@
 {
     for (int i = 0; i < 3; i++) {
         JWCTask *newTask = [JWCTask new];
-        newTask.subTasks = [NSMutableArray new];
         
-        newTask.taskID = [NSUUID UUID];
         newTask.title = [NSString stringWithFormat:@"Task #%i", i];
-        newTask.description = [NSString stringWithFormat:@"This is task #%i and it needs to get done", i];
+        newTask.taskDescription = [NSString stringWithFormat:@"This is task #%i and it needs to get done", i];
         newTask.proofType = @"Describe";
         newTask.proof = nil;
         newTask.start = [NSDate date];
         newTask.due = [NSDate dateWithTimeInterval:2000 sinceDate:newTask.start];
         
         for (int j = 0; j < i+3; j++) {
-            NSString *subTask = [NSString stringWithFormat:@"Longer than average sub task here #%i", j + i];
-            [[newTask subTasks] addObject:subTask];
+            NSString *subTaskDescription = [NSString stringWithFormat:@"Here is a subtask and it is #%i", j + i];
+            NSNumber *taskPercent = [NSNumber numberWithInt:(j*40)%100];
+            JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
+            newSubtask.subTaskDescription = subTaskDescription;
+            newSubtask.percent = taskPercent;
+            
+            [[newTask subTasks] addObject:newSubtask];
         }
         
         [self addTask:newTask];
@@ -68,5 +74,14 @@
 // TODO: Figure out how to set current task dynamically
     self.currentTask = [self.tasks objectAtIndex:0];
 }
+
+- (void)commitPendingTask
+{
+    //TODO:REMOVE THIS LINE
+    self.currentTask = self.pendingTask;
+    
+    [_tasks addObject:self.pendingTask];
+}
+
 
 @end

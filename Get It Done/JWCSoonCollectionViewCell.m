@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCCollectionViewCell.h"
+#import "JWCSoonCollectionViewCell.h"
 #import "UIColor+GetItDoneColors.h"
-@implementation JWCCollectionViewCell
+@implementation JWCSoonCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,12 +19,10 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    self.subTaskTextView.textColor = [UIColor darkBlueColor];
-    self.layer.cornerRadius = 5;
-}
+//- (void)drawRect:(CGRect)rect
+//{
+// 
+//}
 
 
 @end

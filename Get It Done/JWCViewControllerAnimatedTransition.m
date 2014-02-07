@@ -26,10 +26,15 @@
         [[transitionContext containerView] addSubview:fromViewController.view];
         [[transitionContext containerView] addSubview:toViewController.view];
         
-        toViewController.view.transform = CGAffineTransformMakeScale(0, 0);
+        toViewController.view.center = CGPointMake(-CGRectGetWidth(fromViewController.view.frame)/2,fromViewController.view.center.y);
+        [toViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
+        [toViewController.view.layer setShadowOpacity:.5];
+        [toViewController.view.layer setShadowOffset:CGSizeMake(5, 5)];
         
-        [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext] delay:0 options:0 animations:^{
-            toViewController.view.transform = CGAffineTransformIdentity;
+        [UIView animateKeyframesWithDuration:.4 delay:0 options:0 animations:^{
+            CGPoint fromViewOriginalCenter = fromViewController.view.center;
+            fromViewController.view.center = CGPointMake(CGRectGetWidth(fromViewController.view.frame) + fromViewOriginalCenter.x, fromViewOriginalCenter.y);
+            toViewController.view.center = fromViewOriginalCenter;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
         }];
@@ -38,7 +43,7 @@
         [[transitionContext containerView] addSubview:fromViewController.view];
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]  animations:^{
-            toViewController.view.transform = CGAffineTransformMakeScale(0, 0);
+            toViewController.view.center = CGPointMake(-CGRectGetWidth(fromViewController.view.frame)/2,fromViewController.view.center.y);
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
         }];

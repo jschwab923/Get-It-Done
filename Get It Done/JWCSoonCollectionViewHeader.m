@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCCollectionViewHeader.h"
+#import "JWCSoonCollectionViewHeader.h"
 
-@implementation JWCCollectionViewHeader
+@implementation JWCSoonCollectionViewHeader
 
 - (id)initWithFrame:(CGRect)frame
 {

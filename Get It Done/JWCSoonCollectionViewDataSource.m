@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCCollectionViewDataSource.h"
-#import "JWCCollectionViewCell.h"
-#import "JWCCollectionViewHeader.h"
-#import "UIColor+GetItDoneColors.h"
+#import "JWCSoonCollectionViewDataSource.h"
+#import "JWCSoonCollectionViewCell.h"
+#import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
+#import "JWCSubtask.h"
 
-@interface JWCCollectionViewDataSource ()
+@interface JWCSoonCollectionViewDataSource ()
 
 @end
 
-@implementation JWCCollectionViewDataSource
+@implementation JWCSoonCollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -25,14 +25,16 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JWCCollectionViewCell *subTaskCell = (JWCCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
+    JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
     
     //TODO: Customize cell based on current task
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     NSMutableArray *subTasks = currentTask.subTasks;
+    JWCSubtask *currentSubtask = (JWCSubtask *)subTasks[indexPath.row];
     
-    subTaskCell.subTaskTextView.text = [subTasks objectAtIndex:indexPath.row];;
+    subTaskCell.subTaskTextView.text = currentSubtask.subTaskDescription;
+    //TODO: Display subtask percent
     return subTaskCell;
 }
 
@@ -40,10 +42,10 @@
 {
     UICollectionReusableView *supplementaryElement;
     if (kind == UICollectionElementKindSectionHeader) {
-        JWCCollectionViewHeader *headerCell = (JWCCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
+        JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
         
         // Default properties
-        headerCell.taskDescriptionTextView.textColor = [UIColor darkBlueColor];
+
         
         //TODO: Customize header cell based on current task
         // Properties based on current task
@@ -62,15 +64,21 @@
     CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-    NSString *currentSubTaskString = [currentTask.subTasks objectAtIndex:indexPath.row];
+    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
     
-    CGRect boundingRect = [currentSubTaskString boundingRectWithSize:textSize
+    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                    context:nil];
-    CGSize roundedSize = CGSizeMake(250, ceil(boundingRect.size.height));
+    CGSize roundedSize = CGSizeMake(ceil(boundingRect.size.width), ceil(boundingRect.size.height)+10);
     
     return roundedSize;
+}
+
+- (void)    collectionView:(UICollectionView *)collectionView
+  didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 @end
