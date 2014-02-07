@@ -24,6 +24,8 @@
 		6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */; };
 		6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */; };
 		6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */; };
+		6BA2A7FA18A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */; };
+		6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */; };
 		6BF5BF10189B645200B4EA9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF0F189B645200B4EA9C /* Foundation.framework */; };
 		6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */; };
 		6BF5BF14189B645200B4EA9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF13189B645200B4EA9C /* UIKit.framework */; };
@@ -120,6 +122,10 @@
 		6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellTitlePoints.m; path = "Get It Done/JWCCollectionViewCellTitlePoints.m"; sourceTree = "<group>"; };
 		6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterPartner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewFooterPartner.h; path = "Get It Done/JWCCollectionViewFooterPartner.h"; sourceTree = "<group>"; };
 		6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterPartner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewFooterPartner.m; path = "Get It Done/JWCCollectionViewFooterPartner.m"; sourceTree = "<group>"; };
+		6BA2A7F818A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionReusableFooterLabel.h; path = "Get It Done/JWCCollectionReusableFooterLabel.h"; sourceTree = "<group>"; };
+		6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionReusableFooterLabel.m; path = "Get It Done/JWCCollectionReusableFooterLabel.m"; sourceTree = "<group>"; };
+		6BA2A7FB18A42A450062C4B0 /* JWCViewLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCViewLine.h; path = "Get It Done/JWCViewLine.h"; sourceTree = "<group>"; };
+		6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCViewLine.m; path = "Get It Done/JWCViewLine.m"; sourceTree = "<group>"; };
 		6BF5BF0C189B645200B4EA9C /* Get It Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get It Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF5BF0F189B645200B4EA9C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6BF5BF11189B645200B4EA9C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -246,6 +252,8 @@
 			children = (
 				6BF5BF21189B645200B4EA9C /* Main_iPhone.storyboard */,
 				6BF5BF24189B645200B4EA9C /* Main_iPad.storyboard */,
+				6BA2A7FB18A42A450062C4B0 /* JWCViewLine.h */,
+				6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */,
 				6B7705BF18A18B7E007DF72D /* CollectionView Headers */,
 				6B7705C018A18B8C007DF72D /* CollectionView Footers */,
 				6B7705C118A18B9A007DF72D /* CollectionView Cells */,
@@ -306,6 +314,8 @@
 		6B7705C018A18B8C007DF72D /* CollectionView Footers */ = {
 			isa = PBXGroup;
 			children = (
+				6BA2A7F818A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.h */,
+				6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */,
 				6B501C5B18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.h */,
 				6B501C5C18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m */,
 				6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterPartner.h */,
@@ -643,6 +653,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Jeff Schwab";
 				TargetAttributes = {
+					6BF5BF0B189B645100B4EA9C = {
+						DevelopmentTeam = UQCRLH6BPC;
+					};
 					6BF5BF2F189B645200B4EA9C = {
 						TestTargetID = 6BF5BF0B189B645100B4EA9C;
 					};
@@ -712,6 +725,7 @@
 				6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */,
 				6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */,
 				6BFD0A6A189C6FC3008C3698 /* M13ProgressViewRing.m in Sources */,
+				6BA2A7FA18A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m in Sources */,
 				6BFFC74718A2E7270099ACB0 /* JWCContactsLoader.m in Sources */,
 				6B501C5D18A16C03005478E6 /* JWCAddSubtaskCollectionViewFooter.m in Sources */,
 				6B477ECF18A1D89500A1CD9A /* JWCTask.m in Sources */,
@@ -727,6 +741,7 @@
 				6B271D8018A2AC8A00518805 /* JWCLeftSegue.m in Sources */,
 				6BFFC77918A2EAE80099ACB0 /* APAddressBook.m in Sources */,
 				6B271D8318A2ACEE00518805 /* JWCViewStatsViewController.m in Sources */,
+				6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */,
 				6BFD0A6D189C6FC3008C3698 /* M13ProgressViewStripedBar.m in Sources */,
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
 				6BFFC74418A2E6C20099ACB0 /* JWCContactCollectionViewSource.m in Sources */,
@@ -884,10 +899,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Get It Done/Get It Done-Prefix.pch";
 				INFOPLIST_FILE = "Get It Done/Get It Done-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -898,10 +916,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Get It Done/Get It Done-Prefix.pch";
 				INFOPLIST_FILE = "Get It Done/Get It Done-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

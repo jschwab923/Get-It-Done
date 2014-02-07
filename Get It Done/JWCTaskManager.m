@@ -54,7 +54,6 @@
         newTask.title = [NSString stringWithFormat:@"Task #%i", i];
         newTask.taskDescription = [NSString stringWithFormat:@"This is task #%i and it needs to get done", i];
         newTask.proofType = @"Describe";
-        newTask.proof = nil;
         newTask.start = [NSDate date];
         newTask.due = [NSDate dateWithTimeInterval:2000 sinceDate:newTask.start];
         
@@ -75,13 +74,14 @@
     self.currentTask = [self.tasks objectAtIndex:0];
 }
 
+
 - (void)commitPendingTask
 {
-    //TODO:REMOVE THIS LINE
-    self.currentTask = self.pendingTask;
-    
-    [_tasks addObject:self.pendingTask];
-    self.pendingTask = [[JWCTask alloc] init];
+    if ([[_tasks lastObject] isEqual:self.pendingTask]) {
+        [_tasks replaceObjectAtIndex:[_tasks count]-1 withObject:self.pendingTask];
+    } else {
+        [_tasks addObject:self.pendingTask];
+    }
 }
 
 

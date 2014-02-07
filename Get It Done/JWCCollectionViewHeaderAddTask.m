@@ -16,15 +16,16 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+        self.headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
         [self addSubview:self.headerLabel];
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    self.headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//
+//}
 
 
 @end

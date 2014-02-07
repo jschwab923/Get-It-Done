@@ -31,10 +31,11 @@
         [toViewController.view.layer setShadowOpacity:.5];
         [toViewController.view.layer setShadowOffset:CGSizeMake(7, 7)];
         
-        [UIView animateWithDuration:.4 delay:0 options:0 animations:^{
+        [UIView animateWithDuration:.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGPoint fromViewOriginalCenter = fromViewController.view.center;
             fromViewController.view.center = CGPointMake(CGRectGetWidth(fromViewController.view.frame), fromViewOriginalCenter.y);
             toViewController.view.center = fromViewOriginalCenter;
+            
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
         }];

@@ -13,7 +13,9 @@
 #import "JWCViewControllerAnimatedTransition.h"
 #import "JWCViewStatsViewController.h"
 
-@interface JWCSoonViewController ()
+#import "JWCSoonCollectionViewDataSource.h"
+
+@interface JWCSoonViewController () <CollectionScrollViewDelegate>
 
 {
     NSLayoutConstraint *_landScapeCollectionViewTopConstraint;
@@ -58,19 +60,27 @@
     self.progressViewPie.primaryColor = [UIColor darkBlueColor];
     self.progressViewPie.secondaryColor = [UIColor darkBlueColor];
     
-    //TODO: Remove this default progress and base on current progress
-    [self.progressViewPie setProgress:.7 animated:YES];
+    
     
     [self setUpConstraintsAndFramesForCurrentDevice];
     
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     //[self updateCustomConstraints];
     [self.collectionViewTasks reloadData];
+
+    [self.progressViewPie setProgress:.7 animated:YES];
+
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.progressViewPie setProgress:0.f animated:NO];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -156,6 +166,11 @@
     }
 }
 
+- (IBAction)viewStatsSegue:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
@@ -167,6 +182,16 @@
 {
     JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
     return animator;
+}
+
+#pragma mark - ScrollView Methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat newHeight = 150.f - scrollView.contentOffset.y;
+    [_progressContainerView.subviews[0] setFrame:CGRectMake(scrollView.contentOffset.y / 2.f, 0, newHeight , newHeight)];
+    [_progressContainerView.subviews[0] setNeedsDisplay];
+
+    
 }
 
 @end

@@ -11,6 +11,8 @@
 
 @interface JWCTask : NSObject <NSCoding>
 
+-(BOOL)containsNilProperties;
+
 @property (nonatomic) NSUUID *taskID;
 
 @property (nonatomic) NSString *title;
@@ -19,7 +21,9 @@
 @property (nonatomic) NSString *proofType;
 
 // Depends on proof type - NSString/UIImage. Maybe Video
-@property (nonatomic) id proof;
+@property (nonatomic) NSString *proofDescribe;
+@property (nonatomic) NSMutableArray *proofQuestions;
+@property (nonatomic) UIImage *proofImage;
 
 @property (nonatomic) NSDate *start;
 @property (nonatomic) NSDate *due;

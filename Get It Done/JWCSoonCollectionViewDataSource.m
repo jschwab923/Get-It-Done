@@ -59,28 +59,35 @@
 // TODO: Get cells resizing based on text view content
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
- 
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+
+    // Get height of text
+//    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
+//    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+//    
+//    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
+//    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
     
-    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
+//    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
+//                                                   options:NSStringDrawingUsesLineFragmentOrigin
+//                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+//                                                   context:nil];
     
-    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
-                                                   options:NSStringDrawingUsesLineFragmentOrigin
-                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
-                                                   context:nil];
-//    CGFloat widthForOrientation;
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
-//        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
-//    {
-//        widthForOrientation = 100;
-//    } else {
-//        widthForOrientation = 250;
-//    }
-    CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+10);
+    CGFloat heightForOrientation;
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+    {
+        heightForOrientation = 50;
+    } else {
+        heightForOrientation = 80;
+    }
+    CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, heightForOrientation);
     
     return roundedSize;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.delegate scrollViewDidScroll:scrollView];
 }
 
 - (void)    collectionView:(UICollectionView *)collectionView

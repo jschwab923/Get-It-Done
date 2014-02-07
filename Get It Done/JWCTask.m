@@ -20,6 +20,23 @@
     return self;
 }
 
+- (BOOL)containsNilProperties
+{
+    for (JWCSubtask *currentSubtask in self.subTasks) {
+        if (currentSubtask.percent < 0) {
+            return YES;
+        }
+            
+    }
+    
+    return
+        self.title == nil ||
+        self.taskDescription == nil ||
+        self.proofType == nil ||
+        self.subTasks == nil ||
+        self.points <= 0;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
@@ -27,7 +44,9 @@
         self.title = [aDecoder decodeObjectForKey:@"title"];
         self.taskDescription = [aDecoder decodeObjectForKey:@"taskDescription"];
         self.proofType = [aDecoder decodeObjectForKey:@"proofType"];
-        self.proof = [aDecoder decodeObjectForKey:@"proof"];
+        self.proofQuestions = [aDecoder decodeObjectForKey:@"proofQuestions"];
+        self.proofDescribe = [aDecoder decodeObjectForKey:@"proofDescribe"];
+        self.proofImage = [aDecoder decodeObjectForKey:@"proofImage"];
         self.start = [aDecoder decodeObjectForKey:@"start"];
         self.due = [aDecoder decodeObjectForKey:@"due"];
         self.subTasks = [aDecoder decodeObjectForKey:@"subTasks"];
@@ -43,12 +62,33 @@
     [aCoder encodeObject:self.title forKey:@"title"];
     [aCoder encodeObject:self.taskDescription forKey:@"taskDescription"];
     [aCoder encodeObject:self.proofType forKey:@"proofType"];
-    [aCoder encodeObject:self.proof forKey:@"proof"];
+    [aCoder encodeObject:self.proofQuestions forKey:@"proofQuestions"];
+    [aCoder encodeObject:self.proofImage forKey:@"proofImage"];
+    [aCoder encodeObject:self.proofDescribe forKey:@"proofDescribe"];
     [aCoder encodeObject:self.start forKey:@"start"];
     [aCoder encodeObject:self.due forKey:@"due"];
     [aCoder encodeObject:self.subTasks forKey:@"subTasks"];
     [aCoder encodeObject:self.partner forKey:@"partner"];
     [aCoder encodeObject:self.points forKey:@"points"];
+}
+
+- (void)setProofType:(NSString *)proofType
+{
+    _proofType = proofType;
+    if ([proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+        if (!self.proofQuestions) {
+            self.proofQuestions = [[NSMutableArray alloc] init];
+        }
+    } else if ([proofType isEqualToString:PROOF_TYPE_PICTURE]) {
+        if (!self.proofImage) {
+            self.proofImage = [[UIImage alloc] init];
+        }
+    } else if ([proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+        if (!self.proofDescribe) {
+            self.proofDescribe = [[NSString alloc] init];
+        }
+    }
+    
 }
 
 @end

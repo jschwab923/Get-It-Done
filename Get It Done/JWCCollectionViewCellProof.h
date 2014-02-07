@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface JWCCollectionViewCellProof : UICollectionViewCell
-<UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
+<UIPickerViewDataSource, UIPickerViewDelegate,
+UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerViewProof;
 
