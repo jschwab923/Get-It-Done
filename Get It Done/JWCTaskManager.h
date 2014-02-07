@@ -17,11 +17,21 @@
 // Used to persist temporary progress when adding a task
 @property (nonatomic) JWCTask *pendingTask;
 
+@property (nonatomic) NSNumber *progress;
+@property (nonatomic) NSMutableArray *stats;
+
+//TODO: Make this depend on the actual subtask percent values
+@property (nonatomic, readwrite) CGFloat numberOfSubtasksDone;
+
 
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;
 - (void)commitPendingTask;
-- (void)setUpTasksArray;
+- (void)currentTaskDone;
 
+- (void)loadCurrentTasks;
+- (BOOL)saveCurrentTasks;
+
+- (CGFloat)getProgressFloatValue;
 @end

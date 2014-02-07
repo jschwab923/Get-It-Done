@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCLeftSegue.h"
+#import "JWCBottomUpSegue.h"
 #import "JWCSoonViewController.h"
 #import "JWCViewStatsViewController.h"
 
-@implementation JWCLeftSegue
+@implementation JWCBottomUpSegue
 
 - (void)perform
 {

@@ -12,6 +12,8 @@
 #import "JWCTaskManager.h"
 #import "JWCViewControllerAnimatedTransition.h"
 #import "JWCViewStatsViewController.h"
+#import "JWCSubtask.h"
+#import "JWCSoonCollectionViewCell.h"
 
 #import "JWCSoonCollectionViewDataSource.h"
 
@@ -25,7 +27,14 @@
     
     NSLayoutConstraint *_portraitCollectionViewBottomConstraint;
     NSLayoutConstraint *_portraitCollectionViewTopConstraint;
+    
 }
+
+//Only visible when all subtasks marked as done
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (nonatomic) UITapGestureRecognizer *taskDoneTapRecognizer;
+
+@property (nonatomic) UIImageView *imageViewProgressFace;
 
 @property (nonatomic) M13ProgressViewPie *progressViewPie;
 @property (weak, nonatomic) IBOutlet UIView *progressContainerView;
@@ -43,7 +52,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -60,20 +69,15 @@
     self.progressViewPie.primaryColor = [UIColor darkBlueColor];
     self.progressViewPie.secondaryColor = [UIColor darkBlueColor];
     
-    
-    
     [self setUpConstraintsAndFramesForCurrentDevice];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //[self updateCustomConstraints];
+    [self updateCustomConstraints];
+    [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressFloatValue] animated:YES];
     [self.collectionViewTasks reloadData];
-
-    [self.progressViewPie setProgress:.7 animated:YES];
-
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -184,14 +188,71 @@
     return animator;
 }
 
-#pragma mark - ScrollView Methods
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat newHeight = 150.f - scrollView.contentOffset.y;
-    [_progressContainerView.subviews[0] setFrame:CGRectMake(scrollView.contentOffset.y / 2.f, 0, newHeight , newHeight)];
-    [_progressContainerView.subviews[0] setNeedsDisplay];
+//#pragma mark - ScrollView Methods
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    CGFloat newHeight = 150.f - scrollView.contentOffset.y;
+//    [_progressContainerView.subviews[0] setFrame:CGRectMake(scrollView.contentOffset.y / 2.f, 0, newHeight , newHeight)];
+//    [_progressContainerView.subviews[0] setNeedsDisplay];
+//}
 
+- (IBAction)pressedSubtaskDone:(UIButton *)sender
+{
+    NSUInteger subCount = [[JWCTaskManager sharedManager].currentTask.subTasks count];
     
+    if (!sender.isSelected) {
+        sender.selected = YES;
+        [[JWCTaskManager sharedManager] setNumberOfSubtasksDone:[JWCTaskManager sharedManager].numberOfSubtasksDone + 1.0];
+        [[JWCTaskManager sharedManager] setProgress:[NSNumber numberWithFloat:[JWCTaskManager sharedManager].numberOfSubtasksDone/subCount]];
+    } else {
+        sender.selected = NO;
+        [[JWCTaskManager sharedManager] setNumberOfSubtasksDone:[JWCTaskManager sharedManager].numberOfSubtasksDone - 1.0];
+        [[JWCTaskManager sharedManager] setProgress:[NSNumber numberWithFloat:[JWCTaskManager sharedManager].numberOfSubtasksDone/subCount]];
+    }
+    
+    // TODO: SET THIS PROGRESS VALUE WITH THE ACTUAL SELECTED SUBTASK PERCENT VALUE
+    CGFloat currentProgress = [[JWCTaskManager sharedManager] getProgressFloatValue];
+
+    [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+        [self.progressViewPie setProgress:currentProgress animated:YES];
+    } completion:^(BOOL finished) {
+        if ([[JWCTaskManager sharedManager] getProgressFloatValue] >= .99) {
+            [self showDoneButton];
+        } else {
+            [self hideDoneButton];
+        }
+    }];
+}
+
+#pragma mark - Convenience Methods
+- (void)showDoneButton
+{
+    self.doneButton.titleLabel.textColor = [UIColor colorWithRed:0.166 green:0.667 blue:0.808 alpha:1.000];
+    self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
+    self.doneButton.hidden = NO;
+    
+    self.taskDoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doneButtonPressed:)];
+    [self.progressContainerView addGestureRecognizer:self.taskDoneTapRecognizer];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        self.doneButton.transform = CGAffineTransformIdentity;
+        self.progressViewPie.primaryColor = [UIColor clearColor];
+    }];
+}
+
+- (void)doneButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"TaskDoneSegue" sender:self];
+}
+
+- (void)hideDoneButton
+{
+    if (self.taskDoneTapRecognizer) {
+        [self.progressContainerView removeGestureRecognizer:self.taskDoneTapRecognizer];
+    }
+  
+    self.doneButton.hidden = YES;
+    self.progressViewPie.primaryColor = [UIColor darkBlueColor];
 }
 
 @end

@@ -23,7 +23,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    self.textViewDescription.frame = CGRectMake(0, 0, CGRectGetWidth(rect),CGRectGetHeight(rect));
+    self.textViewDescription.frame = CGRectMake(5, 0, CGRectGetWidth(rect)-11,CGRectGetHeight(rect));
     self.textViewDescription.layer.cornerRadius = 3;
     self.textViewDescription.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
     [self.textViewDescription setReturnKeyType:UIReturnKeyDone];

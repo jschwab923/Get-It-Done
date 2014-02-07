@@ -27,7 +27,6 @@
 {
     JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
     
-    //TODO: Customize cell based on current task
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     NSMutableArray *subTasks = currentTask.subTasks;
@@ -85,10 +84,10 @@
     return roundedSize;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self.delegate scrollViewDidScroll:scrollView];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    [self.delegate scrollViewDidScroll:scrollView];
+//}
 
 - (void)    collectionView:(UICollectionView *)collectionView
   didSelectItemAtIndexPath:(NSIndexPath *)indexPath

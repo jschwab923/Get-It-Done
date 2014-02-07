@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCLeftSegue : UIStoryboardSegue
+@interface JWCBottomUpSegue : UIStoryboardSegue
 
 @end

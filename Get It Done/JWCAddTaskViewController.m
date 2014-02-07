@@ -14,15 +14,10 @@
 #import "JWCCollectionViewHeaderAddTask.h"
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewCellTitlePoints.h"
-#import "JWCAddTaskCollectionViewDataSource.h"
 #import "JWCCollectionViewCellProof.h"
 #import "JWCCollectionViewFooterPartner.h"
 
 #import "KGModal.h"
-
-@interface JWCAddTaskViewController ()
-
-@end
 
 @implementation JWCAddTaskViewController
 
@@ -40,8 +35,7 @@
     [super viewDidLoad];
     
     // Setup tap recognizer for dismissing keyboard
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self 
-action:@selector(tappedCollectionView:)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];
     
     [self.collectionViewAddTask addGestureRecognizer:tapGesture];
     
@@ -63,6 +57,16 @@ action:@selector(tappedCollectionView:)];
     JWCCollectionViewCellProof *proofCell = (JWCCollectionViewCellProof *)[self.collectionViewAddTask cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     
     [proofCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionViewAddTask.collectionViewLayout invalidateLayout];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [JWCTaskManager sharedManager].pendingTask = [[JWCTask alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,43 +134,49 @@ action:@selector(tappedCollectionView:)];
     }
 }
 
-#pragma mark - Convenience Methods
-//- (void)traverseCollectionViewAndSaveInfo
-//{
-//    NSArray *indexPathsForVisibleItems = [self.collectionViewAddTask indexPathsForVisibleItems];
-//    for (NSIndexPath *currentIndexPath in indexPathsForVisibleItems) {
-//        UICollectionViewCell *currentCell = [self.collectionViewAddTask cellForItemAtIndexPath:currentIndexPath];
-//        for (UIView *subview in currentCell.subviews) {
-//            switch (subview.tag) {
-//                case TAG_TITLE_TEXTVIEW:
-//                {
-//                    UITextView *temp1 = (UITextView *)subview;
-//                    [[JWCTaskManager sharedManager] pendingTask].title = temp1.text;
-//                    break;
-//                }
-//                case TAG_POINTS_TEXTVIEW:
-//                {
-//                    UITextView *temp2 = (UITextView *)subview;
-//                    [[JWCTaskManager sharedManager] pendingTask].points = [NSNumber numberWithInt:temp2.text.intValue];;
-//                    break;
-//                }
-//                case TAG_PROOF_PICKER:
-//                {
-//                    UIPickerView *tempPicker = (UIPickerView *)subview;
-//                    UILabel *pickerLabel = (UILabel *)[tempPicker viewForRow:[tempPicker selectedRowInComponent:0] forComponent:0];
-//                    [[[JWCTaskManager sharedManager] pendingTask] setProofType:pickerLabel.text];
-//                    break;
-//                }
-//                case TAG_DESCRIPTION_TEXTFIELD:
-//                {
-//                    UITextField *tempDescription = (UITextField *)subview;
-//                    [[JWCTaskManager sharedManager] pendingTask].taskDescription = tempDescription.text;
-//                }
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-//}
+#pragma mark - UICollectionViewDelegate Methods
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                return CGSizeMake(CGRectGetWidth(collectionView.frame), 30);
+                break;
+            }
+            case 1:
+            {
+                return CGSizeMake(CGRectGetWidth(collectionView.frame), 40);
+                break;
+            }
+            default:
+                break;
+        }
+    } else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                return CGSizeMake(CGRectGetWidth(collectionView.frame), 80);
+                break;
+            default:
+                break;
+        }
+    }
+    return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 60);
+    } else if (section == 1) {
+        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
+    }
+    return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50);
+}
 
 @end

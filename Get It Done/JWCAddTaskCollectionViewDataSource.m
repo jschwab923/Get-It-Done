@@ -24,6 +24,7 @@
 
 @implementation JWCAddTaskCollectionViewDataSource
 
+#pragma mark - UICollectionViewDataSource Methods
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
@@ -117,46 +118,6 @@
     }
     
     return reusableView;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0) {
-        switch (indexPath.row) {
-            case 0:
-                return CGSizeMake(CGRectGetWidth(collectionView.frame), 30);
-                break;
-            case 1:
-                return CGSizeMake(CGRectGetWidth(collectionView.frame), 40);
-                break;
-            default:
-                break;
-        }
-    } else if (indexPath.section == 1) {
-        switch (indexPath.row) {
-            case 0:
-                return CGSizeMake(CGRectGetWidth(collectionView.frame), 80);
-                break;
-            default:
-                break;
-        }
-    }
-    return CGSizeMake(CGRectGetWidth(collectionView.frame), 50);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 60);
-    } else if (section == 1) {
-        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
-    }
-    return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50);
 }
 
 #pragma mark - UITextView/Field Delegate Methods
