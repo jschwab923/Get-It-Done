@@ -75,9 +75,9 @@
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
         [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
     {
-        heightForOrientation = 50;
+        heightForOrientation = 40;
     } else {
-        heightForOrientation = 80;
+        heightForOrientation = 40;
     }
     CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, heightForOrientation);
     

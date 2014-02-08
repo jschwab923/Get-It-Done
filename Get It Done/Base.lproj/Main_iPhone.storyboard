@@ -178,14 +178,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="barButtonAddTask" destination="3zM-AJ-QG0" id="73u-DF-QRX"/>
                         <outlet property="collectionViewTasks" destination="KpL-sk-Rbl" id="hlB-D4-tqC"/>
                         <outlet property="doneButton" destination="lh9-7U-p9C" id="s71-ei-2qC"/>
                         <outlet property="label" destination="1qN-NO-tgO" id="b3d-Gp-X7p"/>
                         <outlet property="progressContainerView" destination="QPy-mY-3j1" id="4BL-7R-GAx"/>
-                        <segue destination="wol-gf-s8F" kind="modal" identifier="TaskDoneSegue" customClass="JWCBottomUpSegue" modalTransitionStyle="partialCurl" id="Z4u-W8-jMl"/>
+                        <segue destination="wol-gf-s8F" kind="modal" identifier="ProofDescribeSegue" customClass="JWCBottomUpSegue" modalTransitionStyle="crossDissolve" id="Z4u-W8-jMl"/>
+                        <segue destination="CYa-SA-3zG" kind="modal" identifier="ProofPictureSegue" modalTransitionStyle="flipHorizontal" id="xpS-hB-QNE"/>
+                        <segue destination="hQQ-Ru-pGG" kind="modal" identifier="ProofQuestionsSegue" modalTransitionStyle="flipHorizontal" id="3Va-Jv-79i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pam-Vy-1d3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -195,7 +196,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="810" y="193"/>
+            <point key="canvasLocation" x="805" y="161"/>
         </scene>
         <!--Add Task View Controller - Get It Done-->
         <scene sceneID="rMk-jJ-cwk">
@@ -213,7 +214,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Na-FU-SZq">
+                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Na-FU-SZq">
                                 <rect key="frame" x="0.0" y="68" width="320" height="453"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -374,7 +375,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33DarkUpperRight.png" translatesAutoresizingMaskIntoConstraints="NO" id="h6v-cV-eTE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33Flipped.png" translatesAutoresizingMaskIntoConstraints="NO" id="h6v-cV-eTE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -392,7 +393,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0l-td-Nfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810" y="965"/>
+            <point key="canvasLocation" x="366" y="971"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="E6D-h6-wlJ">
+            <objects>
+                <viewController id="CYa-SA-3zG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rUX-6e-lwi"/>
+                        <viewControllerLayoutGuide type="bottom" id="rRH-Rs-HVH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o3X-D2-PVO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iPhone5_33Flipped.png" translatesAutoresizingMaskIntoConstraints="NO" id="FBE-a0-JH1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="okm-Bd-56r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805" y="971"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="a8v-cT-26o">
+            <objects>
+                <viewController id="hQQ-Ru-pGG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l08-Ba-OKY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kkj-iY-CKp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XE9-sF-ZMg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iPhone5_33Flipped.png" translatesAutoresizingMaskIntoConstraints="NO" id="qr1-D5-vzD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaE-9s-P7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213" y="971"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OfQ-0l-Mea">
@@ -418,7 +467,6 @@
         <image name="Quiet" width="80" height="80"/>
         <image name="RefreshLargeArrows" width="64" height="63"/>
         <image name="iPhone5_33.png" width="320" height="567"/>
-        <image name="iPhone5_33DarkUpperRight.png" width="320" height="567"/>
         <image name="iPhone5_33Flipped.png" width="320" height="567"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

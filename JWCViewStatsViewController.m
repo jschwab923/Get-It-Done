@@ -77,13 +77,13 @@
 
 - (float)valueForIndex:(NSInteger)index
 {
-    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 4, 10, 6, 4};
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
     return _defaultValues[index];
 }
 
 - (void)didTouchGraphWithClosestIndex:(int)index
 {
-    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 4, 10, 6, 4};
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
     
     
     _pointsLabel.text = [NSString stringWithFormat:@"%i", _defaultValues[index]];

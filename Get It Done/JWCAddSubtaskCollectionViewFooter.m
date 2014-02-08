@@ -16,6 +16,10 @@
 @interface JWCAddSubtaskCollectionViewFooter ()
 {
     UICollectionView *_subtasksCollectionView;
+    
+    UITextField *_selectedTextField;
+    
+    CGPoint _keyboardOffset;
 }
 @end
 
@@ -48,8 +52,9 @@
     [self addSubview:addSubtaskButton];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedAddSubtask:)];
-    //TODO: Add gesture to both label and button
-    [addSubtaskButton addGestureRecognizer:tapRecognizer];
+    //TODO: Add gesture to just label and button
+    [addSubtaskLabel addGestureRecognizer:tapRecognizer];
+    [self addGestureRecognizer:tapRecognizer];
 }
 
 - (void)tappedAddSubtask:(UITapGestureRecognizer *)tapGesture
@@ -69,7 +74,19 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];
     [_subtasksCollectionView addGestureRecognizer:tapGestureRecognizer];
     
+    
+    // Setup notification center observers for keyboard showing and modal view being dismissed
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotificationWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotificationDismissed:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
     [[KGModal sharedInstance] showWithContentView:_subtasksCollectionView andAnimated:YES];
+    
 }
 
 #pragma mark - UICollectionViewDataSource/Delegate methods
@@ -146,6 +163,12 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _selectedTextField = textField;
+    return YES;
+}
+
 #pragma mark - Gesture Recognizer Methods
 - (void)tappedCollectionView:(UIGestureRecognizer *)tapGesture
 {
@@ -159,6 +182,31 @@
             }
         }
     }
+}
+
+#pragma mark - Notification Center Methods
+- (void)keyboardNotificationWillShow:(NSNotification *)note
+{
+    NSDictionary *userInfo = [note userInfo];
+
+    NSValue *keyboardEndValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
+    
+    CGFloat bottomOfSelectedTextField = CGRectGetMaxY(_selectedTextField.superview.frame);
+    CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
+    
+    if (bottomOfSelectedTextField >= keyboardEndHeight+4) {
+        CGFloat difference = bottomOfSelectedTextField - keyboardEndHeight;
+        _keyboardOffset = CGPointMake(0, difference);
+        [_subtasksCollectionView setContentOffset:_keyboardOffset animated:YES];
+    }
+    
+}
+
+- (void)keyboardNotificationDismissed:(NSNotification *)note
+{
+    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
+    [_subtasksCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
 }
 
 @end

@@ -93,13 +93,23 @@
         
         switch (indexPath.section) {
             case 0:
+            {
                 header.headerLabel.text = @"What needs to get done?";
+                JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.7, 1)];
+                titleUnderline.backgroundColor = [UIColor blackColor];
+                [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
+            }
             case 1:
+            {
                 header.headerLabel.text = @"How will you prove it's done?";
+                JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.8, 1)];
+                titleUnderline.backgroundColor = [UIColor blackColor];
+                [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
+            }
             default:
                 break;
         }

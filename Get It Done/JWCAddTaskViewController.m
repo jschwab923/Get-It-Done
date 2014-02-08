@@ -120,6 +120,8 @@
         confirmationLabel.frame = roundedSizeFrame;
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
     }
+    
+    
 }
 
 #pragma mark - Gesture Recognizer Methods
@@ -135,7 +137,9 @@
 }
 
 #pragma mark - UICollectionViewDelegate Methods
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         switch (indexPath.row) {
@@ -164,12 +168,16 @@
     return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
         return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 60);

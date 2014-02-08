@@ -47,10 +47,11 @@
     
     _buttonTouched = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                              action:@selector(pressedAddPartner:)];
-
-    [self.partnerLabel addGestureRecognizer:_buttonTouched];
+    
+    [self addGestureRecognizer:_buttonTouched];
     
     [self addSubview:self.partnerImage];
+
 }
 
 #pragma mark - Gesture Recognizer Methods

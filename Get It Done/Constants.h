@@ -29,11 +29,9 @@
 #define PROOF_TYPE_PICTURE @"Take a picture"
 #define PROOF_TYPE_DESCRIBE @"Describe Finished Task"
 
-//typedef enum {
-//    PROOF_TYPE_QUESTIONS,
-//    PROOF_TYPE_PICTURE,
-//    PROOF_TYPE_DESCRIBE
-//} PROOF_TYPE;
+#define SEGUE_PROOF_DESCRIBE @"ProofDescribeSegue"
+#define SEGUE_PROOF_QUESTIONS @"ProofQuestionsSegue"
+#define SEGUE_PROOF_PICTURE @"ProofPictureSegue"
 
 #endif
 

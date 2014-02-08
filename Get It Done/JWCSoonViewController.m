@@ -251,7 +251,7 @@
 
 - (void)doneButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:@"TaskDoneSegue" sender:self];
+    [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
 }
 
 - (void)hideDoneButton
