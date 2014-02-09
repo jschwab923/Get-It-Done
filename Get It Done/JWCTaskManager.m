@@ -7,7 +7,6 @@
 //
 
 #import "JWCTaskManager.h"
-#import "JWCSubtask.h"
 
 @implementation JWCTaskManager
 {
@@ -34,25 +33,20 @@
     return [_tasks copy];
 }
 
+- (NSMutableArray *)doneTasks
+{
+    if (!_doneTasks) {
+        _doneTasks = [NSMutableArray new];
+    }
+    return _doneTasks;
+}
+
 - (NSArray *)stats
 {
     if (!_stats) {
         _stats = [NSMutableArray new];
     }
     return _stats;
-}
-
-- (CGFloat)getProgressFloatValue
-{
-    return self.progress.floatValue;
-}
-
-- (NSNumber *)progress
-{
-    if (!_progress) {
-        _progress = [NSNumber numberWithFloat:0];
-    }
-    return _progress;
 }
 
 - (JWCTask *)currentTask
@@ -83,31 +77,58 @@
 
 - (void)currentTaskDone
 {
+    [self.doneTasks addObject:self.currentTask];
     [_tasks removeObjectAtIndex:0];
     self.currentTask = [_tasks firstObject];
+}
+
+- (CGFloat)getProgressPercent
+{
+    return self.currentTask.progressPoints.floatValue/self.currentTask.points.floatValue;
+}
+
+- (void)updateTaskProgress:(NSNumber *)points withSubtask:(JWCSubtask *)subtask
+{
+    NSInteger newProgress = points.integerValue;
+    NSInteger oldProgress = self.currentTask.progressPoints.integerValue;
+    if (!subtask.done) {
+        self.currentTask.progressPoints = [NSNumber numberWithInteger:(oldProgress-newProgress)];
+        self.currentTask.numberOfTimesSubtasksUndone = [NSNumber numberWithInteger:self.currentTask.numberOfTimesSubtasksUndone.integerValue + 1];
+    } else {
+        self.currentTask.progressPoints = [NSNumber numberWithInteger:(oldProgress + newProgress)];
+    }
 }
 
 #pragma mark - Loading and saving methods
 - (void)loadCurrentTasks
 {
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    self.tasks = [self loadArrayFromFile:@"CurrentTasks" fromFolder:@"CurrentTasksFolder"];
     
-    NSString *currentTasksDirectory = [documentsDirectory stringByAppendingPathComponent:@"CurrentTasksFolder"];
-    NSString *currentTasksFilePath = [currentTasksDirectory stringByAppendingPathComponent:@"CurrentTasks"];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:currentTasksDirectory]) {
-        self.tasks = [[NSKeyedUnarchiver unarchiveObjectWithFile:currentTasksFilePath] mutableCopy];
-    }
     self.pendingTask = [[JWCTask alloc] init];
-    self.currentTask = [_tasks firstObject];
+    self.currentTask = [self.tasks firstObject];
+}
+
+- (void)loadDoneTasks
+{
+    self.doneTasks = [self loadArrayFromFile:@"DoneTasks" fromFolder:@"DoneTasksFolder"];
 }
 
 - (BOOL)saveCurrentTasks
 {
+    return [self createFolder:@"CurrentTasksFolder" andFile:@"CurrentTasks"];
+}
+
+- (BOOL)saveDoneTasks
+{
+    return [self createFolder:@"DoneTasksFolder" andFile:@"DoneTasks"];
+}
+
+- (BOOL)createFolder:(NSString *)folder andFile:(NSString *)file
+{
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     
-    NSString *currentTasksDirectory = [documentsDirectory stringByAppendingPathComponent:@"CurrentTasksFolder"];
-    NSString *currentTasksFilePath = [currentTasksDirectory stringByAppendingPathComponent:@"CurrentTasks"];
+    NSString *currentTasksDirectory = [documentsDirectory stringByAppendingPathComponent:folder];
+    NSString *currentTasksFilePath = [currentTasksDirectory stringByAppendingPathComponent:file];
     
     NSError *directoryCreateError;
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentTasksDirectory]) {
@@ -121,6 +142,20 @@
         return YES;
     }
     return NO;
+}
+
+- (NSMutableArray *)loadArrayFromFile:(NSString *)file fromFolder:(NSString *)folder
+{
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    
+    NSString *currentTasksDirectory = [documentsDirectory stringByAppendingPathComponent:folder];
+    NSString *currentTasksFilePath = [currentTasksDirectory stringByAppendingPathComponent:file];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:currentTasksDirectory]) {
+        return [[NSKeyedUnarchiver unarchiveObjectWithFile:currentTasksFilePath] mutableCopy];
+    } else {
+        return [NSMutableArray new];
+    }
 }
 
 @end

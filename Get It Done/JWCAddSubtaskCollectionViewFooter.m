@@ -8,6 +8,7 @@
 
 #import "JWCAddSubtaskCollectionViewFooter.h"
 #import "JWCCollectionViewHeaderAddTask.h"
+#import "JWCReusableFooterAddSubtaskModalView.h"
 #import "JWCCollectionViewCellTitlePoints.h"
 #import "JWCTaskManager.h"
 #import "JWCSubtask.h"
@@ -16,10 +17,10 @@
 @interface JWCAddSubtaskCollectionViewFooter ()
 {
     UICollectionView *_subtasksCollectionView;
-    
     UITextField *_selectedTextField;
-    
     CGPoint _keyboardOffset;
+    
+    NSInteger _addSubtaskModalButtonPressedCount;
 }
 @end
 
@@ -30,8 +31,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        _addSubtaskModalButtonPressedCount = 1;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -68,6 +75,7 @@
     
     // Register reusable collection view cells and supplementary views
     [_subtasksCollectionView registerClass:[JWCCollectionViewHeaderAddTask class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER];
+    [_subtasksCollectionView registerClass:[JWCReusableFooterAddSubtaskModalView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AddSubtaskModalFooter"];
     [_subtasksCollectionView registerClass:[JWCCollectionViewCellTitlePoints class]
                    forCellWithReuseIdentifier:REUSE_TITLE_POINTS];
     
@@ -97,7 +105,10 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[[JWCTaskManager sharedManager] pendingTask].subTasks count] + 1;
+    if ([[JWCTaskManager sharedManager].pendingTask.subTasks count]) {
+        return [[[JWCTaskManager sharedManager] pendingTask].subTasks count] + 1;
+    }
+    return _addSubtaskModalButtonPressedCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -110,6 +121,9 @@
     
     currentCell.title.delegate = self;
     currentCell.points.delegate = self;
+    
+    currentCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
+    currentCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
     
     if (indexPath.row < [[[JWCTaskManager sharedManager] pendingTask].subTasks count]) {
         JWCSubtask *currentSubtask = (JWCSubtask *)[[JWCTaskManager sharedManager] pendingTask].subTasks[indexPath.row];
@@ -127,6 +141,12 @@
         JWCCollectionViewHeaderAddTask *tempView = (JWCCollectionViewHeaderAddTask *)currentView;
         tempView.headerLabel.text = @"Description | % of Total";
         tempView.headerLabel.textColor = [UIColor whiteColor];
+    } else if (kind == UICollectionElementKindSectionFooter) {
+        currentView = (JWCReusableFooterAddSubtaskModalView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AddSubtaskModalFooter" forIndexPath:indexPath];
+        JWCReusableFooterAddSubtaskModalView *tempView = (JWCReusableFooterAddSubtaskModalView *)currentView;
+        [tempView.addButton addTarget:self
+                               action:@selector(pressedAddSubtaskModalButton:)
+                     forControlEvents:UIControlEventTouchUpInside];
     }
     return currentView;
 }
@@ -139,6 +159,11 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(CGRectGetWidth(collectionView.frame), 50);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 20);
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -195,7 +220,7 @@
     CGFloat bottomOfSelectedTextField = CGRectGetMaxY(_selectedTextField.superview.frame);
     CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
     
-    if (bottomOfSelectedTextField >= keyboardEndHeight+4) {
+    if (bottomOfSelectedTextField >= keyboardEndHeight) {
         CGFloat difference = bottomOfSelectedTextField - keyboardEndHeight;
         _keyboardOffset = CGPointMake(0, difference);
         [_subtasksCollectionView setContentOffset:_keyboardOffset animated:YES];
@@ -207,6 +232,13 @@
 {
     CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
     [_subtasksCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
+}
+
+#pragma mark - Touch Handling
+- (void)pressedAddSubtaskModalButton:(UIButton *)button
+{
+    _addSubtaskModalButtonPressedCount++;
+    [_subtasksCollectionView reloadData];
 }
 
 @end

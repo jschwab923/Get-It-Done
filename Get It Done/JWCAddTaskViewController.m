@@ -8,6 +8,7 @@
 
 #import "JWCTask.h"
 #import "JWCTaskManager.h"
+#import "JWCContactsLoader.h"
 
 #import "JWCAddTaskViewController.h"
 #import "JWCAddSubtaskCollectionViewFooter.h"
@@ -15,9 +16,14 @@
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewCellTitlePoints.h"
 #import "JWCCollectionViewCellProof.h"
-#import "JWCCollectionViewFooterPartner.h"
+#import "JWCCollectionViewFooterAddPartner.h"
 
 #import "KGModal.h"
+
+@interface JWCAddTaskViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
+
+@end
 
 @implementation JWCAddTaskViewController
 
@@ -34,6 +40,12 @@
 {
     [super viewDidLoad];
     
+    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
+    } else {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
+    }
+    
     // Setup tap recognizer for dismissing keyboard
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];
     
@@ -42,11 +54,16 @@
     // Register collection view supplementary views
     [self.collectionViewAddTask registerClass:[JWCCollectionViewHeaderAddTask class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER];
      [self.collectionViewAddTask registerClass:[JWCAddSubtaskCollectionViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER];
-    [self.collectionViewAddTask registerClass:[JWCCollectionViewFooterPartner class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER];
+    [self.collectionViewAddTask registerClass:[JWCCollectionViewFooterAddPartner class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER];
     
     // Register collection view cells
     [self.collectionViewAddTask registerClass:[JWCCollectionViewCellTitlePoints class] forCellWithReuseIdentifier:REUSE_TITLE_POINTS];
     [self.collectionViewAddTask registerClass:[JWCTaskDescriptionCollectionViewCell class] forCellWithReuseIdentifier:REUSE_DESCRIPTION];
+    
+    // Load contacts array for use when Add Contact is pressed
+    if (![JWCContactsLoader sharedController].contacts) {
+        [[JWCContactsLoader sharedController] getContactsArray];
+    }
     
 }
 
@@ -180,9 +197,9 @@ referenceSizeForHeaderInSection:(NSInteger)section
 referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 60);
+        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 80);
     } else if (section == 1) {
-        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 40);
+        return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 80);
     }
     return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50);
 }

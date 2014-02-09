@@ -1,18 +1,18 @@
 //
-//  JWCTaskDoneViewController.m
+//  JWCTaskDonePictureViewController.m
 //  Get It Done
 //
-//  Created by Jeff Schwab on 1/31/14.
+//  Created by Jeff Schwab on 2/9/14.
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
-#import "JWCTaskDoneViewController.h"
+#import "JWCTaskDonePictureViewController.h"
 
-@interface JWCTaskDoneViewController ()
+@interface JWCTaskDonePictureViewController ()
 
 @end
 
-@implementation JWCTaskDoneViewController
+@implementation JWCTaskDonePictureViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
+    } else {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
+    }
 }
 
 - (void)didReceiveMemoryWarning

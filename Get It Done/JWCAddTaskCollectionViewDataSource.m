@@ -15,7 +15,7 @@
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewCellTitlePoints.h"
 #import "JWCCollectionViewCellProof.h"
-#import "JWCCollectionViewFooterPartner.h"
+#import "JWCCollectionViewFooterAddPartner.h"
 #import "JWCViewLine.h"
 
 @interface JWCAddTaskCollectionViewDataSource ()
@@ -59,7 +59,9 @@
                     currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
                     JWCCollectionViewCellTitlePoints *tempCell = (JWCCollectionViewCellTitlePoints *)currentCell;
                     tempCell.title.delegate = self;
+                    tempCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     tempCell.points.delegate = self;
+                    tempCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     break;
                 }
                 case 1:
@@ -67,6 +69,7 @@
                     currentCell = (JWCTaskDescriptionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
                     JWCTaskDescriptionCollectionViewCell *tempCell = (JWCTaskDescriptionCollectionViewCell *)currentCell;
                     tempCell.textViewDescription.delegate = self;
+                    tempCell.textViewDescription.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     break;
                 }
                 default:
@@ -118,10 +121,11 @@
             case 0:
             {
                 reusableView = (JWCAddSubtaskCollectionViewFooter *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER forIndexPath:indexPath];
+                
             }
                 break;
             case 1:
-                reusableView = (JWCCollectionViewFooterPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
+                reusableView = (JWCCollectionViewFooterAddPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
             default:
                 break;
         }

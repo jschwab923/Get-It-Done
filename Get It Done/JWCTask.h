@@ -17,6 +17,7 @@
 
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSNumber *points;
+@property (nonatomic) NSNumber *progressPoints;
 @property (nonatomic) NSString *taskDescription;
 @property (nonatomic) NSString *proofType;
 
@@ -29,6 +30,7 @@
 @property (nonatomic) NSDate *due;
 
 @property (nonatomic) NSMutableArray *subTasks;
+@property (nonatomic) NSNumber *numberOfTimesSubtasksUndone;
 
 @property (nonatomic) JWCTaskPartner *partner;
 

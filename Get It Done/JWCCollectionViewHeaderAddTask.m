@@ -17,6 +17,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
         self.headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
+        self.headerLabel.textColor = DEFAULT_TEXT_COLOR;
         [self addSubview:self.headerLabel];
     }
     return self;

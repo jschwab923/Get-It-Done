@@ -33,5 +33,16 @@
 #define SEGUE_PROOF_QUESTIONS @"ProofQuestionsSegue"
 #define SEGUE_PROOF_PICTURE @"ProofPictureSegue"
 
+#define PORTRAIT_IMAGE @"iPhone5_5"
+#define NAVBAR_IMAGE @"iPhone5_5"
+#define LANDSCAPE_IMAGE @"iPhone5_5landscape"
+
+#define PORTRAIT_IMAGE4 @"iPhone4S_5"
+#define NAVBAR_IMAGE4 @"iPhone4S_5"
+#define LANDSCAPE_IMAGE4 @"iPhone4S_5landscape"
+
+#define DEFAULT_PIE_TITLE_COLOR [UIColor whiteColor]
+#define DEFAULT_TEXT_COLOR [UIColor whiteColor]
+
 #endif
 

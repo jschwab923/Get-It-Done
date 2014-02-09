@@ -52,6 +52,8 @@
         self.subTasks = [aDecoder decodeObjectForKey:@"subTasks"];
         self.partner = [aDecoder decodeObjectForKey:@"partner"];
         self.points = [aDecoder decodeObjectForKey:@"points"];
+        self.progressPoints = [aDecoder decodeObjectForKey:@"progressPoints"];
+        self.numberOfTimesSubtasksUndone = [aDecoder decodeObjectForKey:@"numberOfTimesSubtasksUndone"];
     }
     return self;
 }
@@ -70,6 +72,8 @@
     [aCoder encodeObject:self.subTasks forKey:@"subTasks"];
     [aCoder encodeObject:self.partner forKey:@"partner"];
     [aCoder encodeObject:self.points forKey:@"points"];
+    [aCoder encodeObject:self.progressPoints forKey:@"progressPoints"];
+    [aCoder encodeObject:self.numberOfTimesSubtasksUndone forKey:@"numberOfTimesSubtasksUndone"];
 }
 
 - (void)setProofType:(NSString *)proofType

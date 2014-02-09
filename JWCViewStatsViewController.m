@@ -16,6 +16,7 @@
 {
     UILabel *_pointsLabel;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *graphView;
 
@@ -36,6 +37,12 @@
 {
     [super viewDidLoad];
     
+    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
+    } else {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
+    }
+    
     _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
     
     _pointsLabel.font = DEFAULT_FONT;
@@ -45,7 +52,8 @@
     self.graphView.animationGraphEntranceSpeed = 3;
     self.graphView.delegate = self;
     self.graphView.enableTouchReport = YES;
-    self.graphView.colorBottom = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_4.png"]];
+    self.graphView.colorBottom = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_18.png"]];
+    self.graphView.alpha = .5;
     [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
 }
 

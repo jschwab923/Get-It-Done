@@ -10,7 +10,7 @@
 #import "KGModal.h"
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewHeaderAddTask.h"
-#import "JWCCollectionViewFooterPartner.h"
+#import "JWCCollectionViewFooterAddPartner.h"
 #import "JWCCollectionReusableFooterLabel.h"
 #import "JWCTaskManager.h"
 #import "JWCTask.h"
@@ -19,6 +19,9 @@
 {
     NSString *_proofQuestionsLabelText;
     UICollectionView *_proofQuestionsCollectionView;
+    
+    UITextView *_selectedTextView;
+    CGPoint _keyboardOffset;
 }
 @end
 
@@ -28,9 +31,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 //- (void)drawRect:(CGRect)rect
@@ -58,6 +66,7 @@
         pickerViewLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
         pickerViewLabel.font = DEFAULT_FONT;
         pickerViewLabel.textAlignment = NSTextAlignmentCenter;
+        pickerViewLabel.textColor = DEFAULT_TEXT_COLOR;
     }
     
     if (row == 0) {
@@ -81,7 +90,11 @@
             [[[JWCTaskManager sharedManager] pendingTask] setProofType:PROOF_TYPE_DESCRIBE];
             break;
         case 2:
+        {
             [[[JWCTaskManager sharedManager] pendingTask] setProofType:PROOF_TYPE_QUESTIONS];
+            NSString *message = @"Enter in some questions that can only be answered once you've finished the task. Then answer them when you've gotten it done.";
+            [self createModalCollectionViewWithMessage:message];
+        }
             break;
         default:
             break;
@@ -95,15 +108,14 @@
     NSString *message;
     switch ([self.pickerViewProof selectedRowInComponent:0]) {
         case 0:
-            selectedTitle = @"Describe Finished Task";
-            message = @"When you've finished the task, write down a few sentences about it. Reflect on how it went, anything that was difficult, something you learned etc.";
-            break;
-        case 1:
             selectedTitle = @"Take a Picture";
             message = @"Take and upload a picture of something that proves you got it done.";
             break;
+        case 1:
+            selectedTitle = @"Describe Finished Task";
+            message = @"When you've finished the task, write down a few sentences about it. Reflect on how it went, anything that was difficult, something you learned etc.";
+            break;
         case 2:
-            selectedTitle = @"Answer question/s";
             message = @"Enter in some questions that can only be answered once you've finished the task. Then answer them when you've gotten it done.";
         default:
             break;
@@ -112,7 +124,7 @@
     if ([self.pickerViewProof selectedRowInComponent:0] == 2) {
         
         [self createModalCollectionViewWithMessage:message];
-
+        
     } else {
         
         // Determine height of text
@@ -123,14 +135,14 @@
                                                     options:NSStringDrawingUsesLineFragmentOrigin
                                                  attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                     context:nil];
-
+        
         CGRect roundedSizeRect = CGRectMake(0, 0, 250, ceil(boundingRect.size.height)+20);
         UIView *contentView = [[UIView alloc] initWithFrame:roundedSizeRect];
         UITextView *messageTextView = [[UITextView alloc] initWithFrame:roundedSizeRect];
         messageTextView.center = contentView.center;
         
         [contentView addSubview:messageTextView];
-
+        
         messageTextView.editable = NO;
         messageTextView.backgroundColor = [UIColor clearColor];
         messageTextView.text = message;
@@ -144,6 +156,18 @@
 
 - (void)createModalCollectionViewWithMessage:(NSString *)message
 {
+    // Listen for modal view being dismissed and keyboard events
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(modalDismissed:)
+                                                 name:KGModalWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotificationWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardNotificationDismissed:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+    
     _proofQuestionsLabelText = message;
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
@@ -226,27 +250,6 @@
     return CGSizeMake(CGRectGetWidth(_proofQuestionsCollectionView.frame), 35);
 }
 
-#pragma mark - UITextViewDelegate Methods
-- (BOOL)textViewShouldEndEditing:(UITextField *)textField
-{
-    NSArray *visibleIndexPaths = [_proofQuestionsCollectionView indexPathsForVisibleItems];
-    for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
-        JWCTaskDescriptionCollectionViewCell *currentCell = (JWCTaskDescriptionCollectionViewCell *)[_proofQuestionsCollectionView cellForItemAtIndexPath:currentIndexPath];
-        
-        if (![currentCell.textViewDescription.text isEqualToString:@""]){
-            [[JWCTaskManager sharedManager] pendingTask].proofType = PROOF_TYPE_QUESTIONS;
-            if (currentIndexPath.row < [[[JWCTaskManager sharedManager] pendingTask].proofQuestions count])
-            {
-                NSString *editedQuestion = [[[JWCTaskManager sharedManager] pendingTask].proofQuestions objectAtIndex:currentIndexPath.row];
-                editedQuestion = currentCell.textViewDescription.text;
-            } else {
-                [[[JWCTaskManager sharedManager] pendingTask].proofQuestions addObject:currentCell.textViewDescription.text];
-            }
-        }
-    }
-    return YES;
-}
-
 #pragma mark - Gesture Recognizer Methods
 - (void)tappedCollectionView:(UIGestureRecognizer *)tapGesture
 {
@@ -260,6 +263,57 @@
             }
         }
     }
+}
+
+#pragma mark - TextView delegate methods
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    _selectedTextView = textView;
+    return YES;
+}
+
+#pragma mark - Notification Center methods
+- (void)modalDismissed:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    NSArray *visibleIndexPaths = [_proofQuestionsCollectionView indexPathsForVisibleItems];
+    for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
+        JWCTaskDescriptionCollectionViewCell *currentCell = (JWCTaskDescriptionCollectionViewCell *)[_proofQuestionsCollectionView cellForItemAtIndexPath:currentIndexPath];
+        
+        if (currentIndexPath.row < [[[JWCTaskManager sharedManager] pendingTask].proofQuestions count])
+        {
+            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions replaceObjectAtIndex:currentIndexPath.row withObject:currentCell.textViewDescription.text];
+        } else {
+            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions addObject:currentCell.textViewDescription.text];
+        }
+    }
+    //TODO: REMOVE AFTER TESTING
+    NSLog(@"%@", [JWCTaskManager sharedManager].pendingTask.proofQuestions);
+}
+
+- (void)keyboardNotificationWillShow:(NSNotification *)note
+{
+    NSDictionary *userInfo = [note userInfo];
+    
+    NSValue *keyboardEndValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
+    
+    CGFloat bottomOfSelectedTextField = CGRectGetMaxY(_selectedTextView.superview.frame);
+    CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
+    
+    if (bottomOfSelectedTextField >= keyboardEndHeight) {
+        CGFloat difference = bottomOfSelectedTextField - keyboardEndHeight;
+        _keyboardOffset = CGPointMake(0, difference);
+        [_proofQuestionsCollectionView setContentOffset:_keyboardOffset animated:YES];
+    }
+    
+}
+
+- (void)keyboardNotificationDismissed:(NSNotification *)note
+{
+    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
+    [_proofQuestionsCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
 }
 
 @end

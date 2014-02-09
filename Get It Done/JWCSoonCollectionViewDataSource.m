@@ -11,6 +11,7 @@
 #import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
 #import "JWCSubtask.h"
+#import "JWCViewLine.h"
 
 @interface JWCSoonCollectionViewDataSource ()
 
@@ -26,11 +27,17 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
+    JWCViewLine *underline = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(subTaskCell.frame)-1, CGRectGetWidth(subTaskCell.frame), 1)];
+    
+    // Default properties
+    [subTaskCell addSubview:underline];
     
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     NSMutableArray *subTasks = currentTask.subTasks;
     JWCSubtask *currentSubtask = (JWCSubtask *)subTasks[indexPath.row];
+    
+    subTaskCell.buttonSubtaskDone.selected = currentSubtask.done;
     
     subTaskCell.subTaskTextView.text = currentSubtask.subTaskDescription;
     //TODO: Display subtask percent
@@ -54,45 +61,5 @@
     }
     return supplementaryElement;
 }
-
-// TODO: Get cells resizing based on text view content
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    // Get height of text
-//    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
-//    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
-//    
-//    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-//    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
-    
-//    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
-//                                                   options:NSStringDrawingUsesLineFragmentOrigin
-//                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
-//                                                   context:nil];
-    
-    CGFloat heightForOrientation;
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
-        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
-    {
-        heightForOrientation = 40;
-    } else {
-        heightForOrientation = 40;
-    }
-    CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, heightForOrientation);
-    
-    return roundedSize;
-}
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    [self.delegate scrollViewDidScroll:scrollView];
-//}
-
-- (void)    collectionView:(UICollectionView *)collectionView
-  didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
+ 
 @end

@@ -8,16 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CollectionScrollViewDelegate <NSObject>
-
-@optional
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
-
-@end
-
 @interface JWCSoonCollectionViewDataSource : NSObject
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+<UICollectionViewDataSource>
 
-@property (nonatomic, unsafe_unretained) IBOutlet id <CollectionScrollViewDelegate> delegate;
 
 @end

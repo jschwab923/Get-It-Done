@@ -14,15 +14,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+
     }
     return self;
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    
-//}
+- (void)drawRect:(CGRect)rect
+{
+    self.backgroundColor = [UIColor blackColor];
+}
 
 
 @end

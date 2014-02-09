@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCCollectionViewFooterPartner : UICollectionReusableView
+@interface JWCCollectionViewFooterAddPartner : UICollectionReusableView
+<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic) UIImageView *partnerImage;
 @property (nonatomic) UILabel *partnerLabel;
+
+@property (nonatomic) NSArray *contactsWithName;
+
 @end
