@@ -65,13 +65,21 @@
     [self addSubview:addSubtaskButton];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedAddSubtask:)];
-    //TODO: Add gesture to just label and button
-    [addSubtaskLabel addGestureRecognizer:tapRecognizer];
+    [addSubtaskButton addTarget:self action:@selector(tappedAddSubtask:) forControlEvents:UIControlEventTouchUpInside];
     [self addGestureRecognizer:tapRecognizer];
 }
 
-- (void)tappedAddSubtask:(UITapGestureRecognizer *)tapGesture
+- (void)tappedAddSubtask:(id)tapGesture
 {
+    if ([tapGesture isKindOfClass:[UITapGestureRecognizer class]]) {
+        CGPoint tappedLocation = [tapGesture locationInView:self];
+        if ((tappedLocation.x < CGRectGetWidth(self.frame)/2+5) &&
+            tappedLocation.y < CGRectGetMaxY(self.frame)-50) {
+            return;
+        }
+    }
+
+    
     UICollectionViewFlowLayout *contactLayout = [[UICollectionViewFlowLayout alloc] init];
     _subtasksCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 275, 300) collectionViewLayout:contactLayout];
     _subtasksCollectionView.backgroundColor = [UIColor clearColor];
