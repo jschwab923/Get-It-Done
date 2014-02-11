@@ -34,20 +34,23 @@
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAVBAR_IMAGE4]
                                            forBarMetrics:UIBarMetricsDefault];
     }
-    
+        
     [[JWCTaskManager sharedManager] loadCurrentTasks];
-    
     
     NSOperationQueue *loadQueue = [NSOperationQueue new];
     [loadQueue addOperationWithBlock:^{
          [[JWCTaskManager sharedManager] loadDoneTasks];
     }];
     
-    
+    //TODO: REMOVE THIS SHIT
+    NSString *firstName;
+    NSString *testString = @"Timothy HiseMan";
+    firstName = [[testString componentsSeparatedByString:@" "] firstObject];
+    NSLog(@"%@", firstName);
     
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

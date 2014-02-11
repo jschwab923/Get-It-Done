@@ -15,9 +15,40 @@
 {
     if (self = [super init]) {
         self.taskID = [NSUUID UUID];
-        self.subTasks = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (NSMutableArray *)subTasks
+{
+    if (!_subTasks) {
+        _subTasks = [NSMutableArray new];
+    }
+    return _subTasks;
+}
+
+- (NSMutableArray *)proofQuestions
+{
+    if (!_proofQuestions) {
+        _proofQuestions = [NSMutableArray new];
+    }
+    return _proofQuestions;
+}
+
+- (NSMutableArray *)proofQuestionAnswers
+{
+    if (!_proofQuestionAnswers) {
+        _proofQuestionAnswers = [NSMutableArray new];
+    }
+    return _proofQuestionAnswers;
+}
+
+- (JWCTaskPartner *)partner
+{
+    if (!_partner) {
+        _partner = [JWCTaskPartner new];
+    }
+    return _partner;
 }
 
 - (BOOL)containsNilProperties
@@ -53,7 +84,8 @@
         self.partner = [aDecoder decodeObjectForKey:@"partner"];
         self.points = [aDecoder decodeObjectForKey:@"points"];
         self.progressPoints = [aDecoder decodeObjectForKey:@"progressPoints"];
-        self.numberOfTimesSubtasksUndone = [aDecoder decodeObjectForKey:@"numberOfTimesSubtasksUndone"];
+        self.numberOfTimesSubtasksChecked = [aDecoder decodeObjectForKey:@"numberOfTimesSubtasksChecked"];
+        self.proofQuestionAnswers = [aDecoder decodeObjectForKey:@"proofQuestionAnswers"];
     }
     return self;
 }
@@ -73,7 +105,8 @@
     [aCoder encodeObject:self.partner forKey:@"partner"];
     [aCoder encodeObject:self.points forKey:@"points"];
     [aCoder encodeObject:self.progressPoints forKey:@"progressPoints"];
-    [aCoder encodeObject:self.numberOfTimesSubtasksUndone forKey:@"numberOfTimesSubtasksUndone"];
+    [aCoder encodeObject:self.numberOfTimesSubtasksChecked forKey:@"numberOfTimesSubtasksChecked"];
+    [aCoder encodeObject:self.proofQuestionAnswers forKey:@"proofQuestionAnswers"];
 }
 
 - (void)setProofType:(NSString *)proofType
@@ -93,6 +126,17 @@
         }
     }
     
+}
+
+- (NSInteger)numberOfSubtasksDone
+{
+    NSInteger subtasksDone = 0;
+    for (JWCSubtask *currentSubtask in self.subTasks) {
+        if (currentSubtask.done) {
+            subtasksDone++;
+        }
+    }
+    return subtasksDone;
 }
 
 @end

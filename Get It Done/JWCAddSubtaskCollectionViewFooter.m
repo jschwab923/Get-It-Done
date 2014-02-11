@@ -21,7 +21,14 @@
     CGPoint _keyboardOffset;
     
     NSInteger _addSubtaskModalButtonPressedCount;
+    
+    NSInteger _totalPercentLeft;
+    UILabel *_labelPercentLeft;
+    
+    JWCReusableFooterAddSubtaskModalView *_currentFooterCell;
 }
+
+
 @end
 
 @implementation JWCAddSubtaskCollectionViewFooter
@@ -31,7 +38,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        _addSubtaskModalButtonPressedCount = 1;
     }
     return self;
 }
@@ -93,6 +99,16 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
+    _addSubtaskModalButtonPressedCount = 1;
+    _labelPercentLeft = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
+    _labelPercentLeft.textAlignment = NSTextAlignmentCenter;
+    
+    NSInteger tempTotalPercent = 100;
+    for (JWCSubtask *subtask in [JWCTaskManager sharedManager].pendingTask.subTasks) {
+         tempTotalPercent -= subtask.percent.integerValue;
+    }
+    _totalPercentLeft = tempTotalPercent;
+    
     [[KGModal sharedInstance] showWithContentView:_subtasksCollectionView andAnimated:YES];
     
 }
@@ -105,10 +121,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([[JWCTaskManager sharedManager].pendingTask.subTasks count]) {
-        return [[[JWCTaskManager sharedManager] pendingTask].subTasks count] + 1;
+    if (_totalPercentLeft == 0) {
+        return [[JWCTaskManager sharedManager].pendingTask.subTasks count];
+    } else if ([[JWCTaskManager sharedManager].pendingTask.subTasks count]) {
+        return [[JWCTaskManager sharedManager].pendingTask.subTasks count] + 1;
     }
-    return _addSubtaskModalButtonPressedCount;
+    return _addSubtaskModalButtonPressedCount < 3 ? _addSubtaskModalButtonPressedCount : [[JWCTaskManager sharedManager].pendingTask.subTasks count] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -139,14 +157,29 @@
     if (kind == UICollectionElementKindSectionHeader) {
         currentView = (JWCCollectionViewHeaderAddTask *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER forIndexPath:indexPath];
         JWCCollectionViewHeaderAddTask *tempView = (JWCCollectionViewHeaderAddTask *)currentView;
-        tempView.headerLabel.text = @"Description | % of Total";
+        tempView.headerLabel.text = @"Description  |  % of Total";
         tempView.headerLabel.textColor = [UIColor whiteColor];
     } else if (kind == UICollectionElementKindSectionFooter) {
         currentView = (JWCReusableFooterAddSubtaskModalView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AddSubtaskModalFooter" forIndexPath:indexPath];
         JWCReusableFooterAddSubtaskModalView *tempView = (JWCReusableFooterAddSubtaskModalView *)currentView;
+        
+        // Setup member variable so add button can be diabled when 100% reached
+        _currentFooterCell = tempView;
+        
+        [_subtasksCollectionView addSubview:_labelPercentLeft];
+        _labelPercentLeft.textColor = DEFAULT_TEXT_COLOR;
+        _labelPercentLeft.frame = CGRectMake(0, CGRectGetMinY(currentView.frame) , 200, CGRectGetHeight(currentView.frame));
+        
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Total Percent Left: %lu",(long)(100 -[self currentTotalPercent])];
+        
         [tempView.addButton addTarget:self
                                action:@selector(pressedAddSubtaskModalButton:)
                      forControlEvents:UIControlEventTouchUpInside];
+        
+        if (_totalPercentLeft < 1) {
+            _currentFooterCell.addButton.enabled = NO;
+        }
+        
     }
     return currentView;
 }
@@ -171,20 +204,37 @@
 {
     NSMutableArray *pendingSubtasks = [[JWCTaskManager sharedManager] pendingTask].subTasks;
     NSArray *visibleIndexPaths = [_subtasksCollectionView indexPathsForVisibleItems];
+    
     for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
         JWCCollectionViewCellTitlePoints *currentCell = (JWCCollectionViewCellTitlePoints *)[_subtasksCollectionView cellForItemAtIndexPath:currentIndexPath];
-
-        if (currentIndexPath.row < [pendingSubtasks count]) {
-            JWCSubtask *editedSubtask = (JWCSubtask *)pendingSubtasks[currentIndexPath.row];
-            editedSubtask.subTaskDescription = currentCell.title.text;
-            editedSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
-        } else if (![currentCell.title.text isEqualToString:@""]){
-            JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
-            newSubtask.subTaskDescription = currentCell.title.text;
-            newSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
-            [pendingSubtasks addObject:newSubtask];
+        
+        if (![currentCell.title.text isEqualToString:@""] &&
+            ![currentCell.points.text isEqualToString:@""]) {
+            if (currentIndexPath.row < [pendingSubtasks count]) {
+                JWCSubtask *editedSubtask = (JWCSubtask *)pendingSubtasks[currentIndexPath.row];
+                editedSubtask.subTaskDescription = currentCell.title.text;
+                editedSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
+            } else {
+                JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
+                newSubtask.subTaskDescription = currentCell.title.text;
+                newSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
+                [pendingSubtasks addObject:newSubtask];
+            }
         }
     }
+    
+    NSInteger currentTotalPercent = [self currentTotalPercent];
+    if (currentTotalPercent == 100) {
+        _currentFooterCell.addButton.enabled = NO;
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %li", (100 -currentTotalPercent)];
+    } else if (currentTotalPercent > 100) {
+        _currentFooterCell.addButton.enabled = NO;
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Invalid Percent: %li over", (currentTotalPercent-100)];
+    } else {
+        _currentFooterCell.addButton.enabled = YES;
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %li", (100 -currentTotalPercent)];
+    }
+    
     return YES;
 }
 
@@ -217,11 +267,11 @@
     NSValue *keyboardEndValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
     
-    CGFloat bottomOfSelectedTextField = CGRectGetMaxY(_selectedTextField.superview.frame);
+    CGFloat bottomCurrentFooter = CGRectGetMaxY(_currentFooterCell.frame);
     CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
     
-    if (bottomOfSelectedTextField >= keyboardEndHeight) {
-        CGFloat difference = bottomOfSelectedTextField - keyboardEndHeight;
+    if (bottomCurrentFooter >= keyboardEndHeight) {
+        CGFloat difference = bottomCurrentFooter - keyboardEndHeight;
         _keyboardOffset = CGPointMake(0, difference);
         [_subtasksCollectionView setContentOffset:_keyboardOffset animated:YES];
     }
@@ -239,6 +289,17 @@
 {
     _addSubtaskModalButtonPressedCount++;
     [_subtasksCollectionView reloadData];
+}
+
+#pragma mark - Convenience Methods
+- (NSInteger)currentTotalPercent
+{
+    NSInteger totalPercent = 0;
+    for (JWCSubtask *subtask in [JWCTaskManager sharedManager].pendingTask.subTasks) {
+        totalPercent += subtask.percent.integerValue;
+    }
+    
+    return totalPercent;
 }
 
 @end

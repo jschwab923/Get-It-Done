@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.searchBarStyle = UISearchBarStyleMinimal;
+        self.searchBarStyle = UISearchBarStyleDefault;
     }
     return self;
 }

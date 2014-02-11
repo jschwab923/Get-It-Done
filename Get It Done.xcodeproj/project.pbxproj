@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B0D66B818A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0D66B718A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m */; };
+		6B0E1E6F18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0E1E6E18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m */; };
+		6B0E1E7318A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0E1E7218A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m */; };
 		6B0E707F18A6E45C002B249D /* iPhone5_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E707E18A6E45C002B249D /* iPhone5_2@2x.png */; };
 		6B0E708118A6E8AF002B249D /* iPhone5_18@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E708018A6E8AF002B249D /* iPhone5_18@2x.png */; };
 		6B0E708318A6EE7A002B249D /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E708218A6EE7A002B249D /* Circle.png */; };
@@ -73,6 +76,8 @@
 		6BF5BF3E189B645200B4EA9C /* Get_It_DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF3D189B645200B4EA9C /* Get_It_DoneTests.m */; };
 		6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF49189B64A400B4EA9C /* JWCSoonViewController.m */; };
 		6BF5BF4D189B64DB00B4EA9C /* JWCAddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF4C189B64DB00B4EA9C /* JWCAddTaskViewController.m */; };
+		6BF8252018A8AFED00CF0DEB /* JWCTwitterHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF8251F18A8AFED00CF0DEB /* JWCTwitterHandler.m */; };
+		6BF8252218A8B04300CF0DEB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF8252118A8B04300CF0DEB /* Social.framework */; };
 		6BFD0A2B189C547E008C3698 /* JWCTaskDoneDescribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A2A189C547E008C3698 /* JWCTaskDoneDescribeViewController.m */; };
 		6BFD0A2E189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A2D189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m */; };
 		6BFD0A3A189C6A92008C3698 /* iPhone5_26@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFD0A37189C6A92008C3698 /* iPhone5_26@2x.png */; };
@@ -117,6 +122,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B0D66B618A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewFooterContactTypeChooser.h; path = Classes/JWCCollectionViewFooterContactTypeChooser.h; sourceTree = "<group>"; };
+		6B0D66B718A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewFooterContactTypeChooser.m; path = Classes/JWCCollectionViewFooterContactTypeChooser.m; sourceTree = "<group>"; };
+		6B0E1E6D18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewCellAnswerProofQuestions.h; path = "Get It Done/JWCCollectionViewCellAnswerProofQuestions.h"; sourceTree = "<group>"; };
+		6B0E1E6E18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellAnswerProofQuestions.m; path = "Get It Done/JWCCollectionViewCellAnswerProofQuestions.m"; sourceTree = "<group>"; };
+		6B0E1E7118A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCCollectionViewDataSourceProofQuestions.h; sourceTree = "<group>"; };
+		6B0E1E7218A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCCollectionViewDataSourceProofQuestions.m; sourceTree = "<group>"; };
 		6B0E707E18A6E45C002B249D /* iPhone5_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_2@2x.png"; sourceTree = "<group>"; };
 		6B0E708018A6E8AF002B249D /* iPhone5_18@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_18@2x.png"; sourceTree = "<group>"; };
 		6B0E708218A6EE7A002B249D /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
@@ -219,6 +230,9 @@
 		6BF5BF49189B64A400B4EA9C /* JWCSoonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCSoonViewController.m; sourceTree = "<group>"; };
 		6BF5BF4B189B64DB00B4EA9C /* JWCAddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCAddTaskViewController.h; sourceTree = "<group>"; };
 		6BF5BF4C189B64DB00B4EA9C /* JWCAddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCAddTaskViewController.m; sourceTree = "<group>"; };
+		6BF8251E18A8AFED00CF0DEB /* JWCTwitterHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCTwitterHandler.h; path = "Get It Done/JWCTwitterHandler.h"; sourceTree = "<group>"; };
+		6BF8251F18A8AFED00CF0DEB /* JWCTwitterHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCTwitterHandler.m; path = "Get It Done/JWCTwitterHandler.m"; sourceTree = "<group>"; };
+		6BF8252118A8B04300CF0DEB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6BFD0A29189C547E008C3698 /* JWCTaskDoneDescribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCTaskDoneDescribeViewController.h; sourceTree = "<group>"; };
 		6BFD0A2A189C547E008C3698 /* JWCTaskDoneDescribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCTaskDoneDescribeViewController.m; sourceTree = "<group>"; };
 		6BFD0A2C189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCViewControllerAnimatedTransition.h; sourceTree = "<group>"; };
@@ -281,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF8252218A8B04300CF0DEB /* Social.framework in Frameworks */,
 				6BFFC74D18A2E8830099ACB0 /* AddressBook.framework in Frameworks */,
 				6BFFC74918A2E8410099ACB0 /* MessageUI.framework in Frameworks */,
 				6BF5BF12189B645200B4EA9C /* CoreGraphics.framework in Frameworks */,
@@ -302,6 +317,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B0E1E7018A9592F00883982 /* Proof Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6B0E1E6D18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.h */,
+				6B0E1E6E18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m */,
+			);
+			name = "Proof Cells";
+			sourceTree = "<group>";
+		};
 		6B0E709718A733E3002B249D /* 4S Sizes */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +404,8 @@
 		6B6DF573189C8D910027761B /* View Data Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6B0E1E7118A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.h */,
+				6B0E1E7218A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m */,
 				6B7705BC18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.h */,
 				6B7705BD18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m */,
 				6B6DF570189C8D840027761B /* JWCSoonCollectionViewDataSource.h */,
@@ -401,6 +427,8 @@
 				6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */,
 				6BFFC73C18A2E16C0099ACB0 /* JWCTaskPartner.h */,
 				6BFFC73D18A2E16C0099ACB0 /* JWCTaskPartner.m */,
+				6BF8251E18A8AFED00CF0DEB /* JWCTwitterHandler.h */,
+				6BF8251F18A8AFED00CF0DEB /* JWCTwitterHandler.m */,
 			);
 			name = Model;
 			path = ..;
@@ -439,6 +467,8 @@
 				6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m */,
 				6B135F6E18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.h */,
 				6B135F6F18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m */,
+				6B0D66B618A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.h */,
+				6B0D66B718A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m */,
 			);
 			name = "CollectionView Footers";
 			sourceTree = "<group>";
@@ -446,6 +476,7 @@
 		6B7705C118A18B9A007DF72D /* CollectionView Cells */ = {
 			isa = PBXGroup;
 			children = (
+				6B0E1E7018A9592F00883982 /* Proof Cells */,
 				6B7705CB18A1B077007DF72D /* Soon Cells */,
 				6B7705CA18A1B06C007DF72D /* Add Task Cells */,
 			);
@@ -514,6 +545,7 @@
 		6BF5BF0E189B645200B4EA9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BF8252118A8B04300CF0DEB /* Social.framework */,
 				6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */,
 				6BFFC74818A2E8410099ACB0 /* MessageUI.framework */,
 				6BF5BF0F189B645200B4EA9C /* Foundation.framework */,
@@ -871,8 +903,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B0D66B818A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m in Sources */,
 				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
 				6B1394DC18A4C9F200CB32FA /* BEMAnimations.m in Sources */,
+				6BF8252018A8AFED00CF0DEB /* JWCTwitterHandler.m in Sources */,
 				6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */,
 				6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m in Sources */,
 				6B0E708C18A703A8002B249D /* JWCCollectionHeaderPartner.m in Sources */,
@@ -909,6 +943,8 @@
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
 				6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */,
 				6B135F7018A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m in Sources */,
+				6B0E1E6F18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m in Sources */,
+				6B0E1E7318A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m in Sources */,
 				6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */,
 				6BFD0A65189C6FC3008C3698 /* M13ProgressViewBar.m in Sources */,
 				6BFD0A66189C6FC3008C3698 /* M13ProgressViewBorderedBar.m in Sources */,

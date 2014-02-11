@@ -44,5 +44,7 @@
 #define DEFAULT_PIE_TITLE_COLOR [UIColor whiteColor]
 #define DEFAULT_TEXT_COLOR [UIColor whiteColor]
 
+#define NOTIFICATION_SUBTASK_DONE @"SubtaskDone"
+
 #endif
 

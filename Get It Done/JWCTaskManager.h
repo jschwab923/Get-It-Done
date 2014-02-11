@@ -22,10 +22,6 @@
 
 @property (nonatomic) NSMutableArray *stats;
 
-//TODO: Make this depend on the actual subtask percent values
-@property (nonatomic, readwrite) CGFloat numberOfSubtasksDone;
-
-
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;

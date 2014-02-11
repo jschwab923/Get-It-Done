@@ -7,9 +7,10 @@
 //
 
 #import "JWCTaskDoneDescribeViewController.h"
-#import "JWCTaskManager.m"
+#import "JWCTaskManager.h"
 
 @interface JWCTaskDoneDescribeViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextView *textViewDescription;
 
 @end
@@ -34,6 +35,9 @@
         self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
     }
     
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:tapRecognizer];
+    
     self.textViewDescription.layer.cornerRadius = 5;
     self.textViewDescription.alpha = .8;
 }
@@ -49,6 +53,12 @@
     [[JWCTaskManager sharedManager] currentTaskDone];
 //TODO: Put some more stuff in here, like twitter posting, messaging partner etc.
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Gesture Recognizer Methods
+- (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture
+{
+    [self.textViewDescription endEditing:YES];
 }
 
 @end

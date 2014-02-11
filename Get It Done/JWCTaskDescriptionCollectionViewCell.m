@@ -26,7 +26,7 @@
     self.textViewDescription.frame = CGRectMake(5, 0, CGRectGetWidth(rect)-11,CGRectGetHeight(rect));
     self.textViewDescription.layer.cornerRadius = 3;
     self.textViewDescription.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
-    [self.textViewDescription setReturnKeyType:UIReturnKeyDone];
+    [self.textViewDescription setReturnKeyType:UIReturnKeyDefault];
     self.textViewDescription.tag = TAG_DESCRIPTION_TEXTFIELD;
     [self addSubview:self.textViewDescription];
 }

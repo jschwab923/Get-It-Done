@@ -7,8 +7,13 @@
 //
 
 #import "JWCTaskDoneQuestionsViewController.h"
+#import "JWCCollectionViewCellAnswerProofQuestions.h"
+#import "JWCTaskManager.h"
 
 @interface JWCTaskDoneQuestionsViewController ()
+<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionViewQuestionAnswers;
 
 @end
 
@@ -31,6 +36,7 @@
     } else {
         self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,5 +44,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)pressedSubmitProof:(id)sender
+{
+    NSArray *visibleIndexPaths = [self.collectionViewQuestionAnswers indexPathsForVisibleItems];
+    
+    for (NSIndexPath *indexPath in visibleIndexPaths) {
+        JWCCollectionViewCellAnswerProofQuestions *currentCell = (JWCCollectionViewCellAnswerProofQuestions *)[self.collectionViewQuestionAnswers cellForItemAtIndexPath:indexPath];
+        if (indexPath.row > [[JWCTaskManager sharedManager].currentTask.proofQuestionAnswers count]) {
+            [[JWCTaskManager sharedManager].currentTask.proofQuestionAnswers addObject:currentCell.textViewAnswer.text];
+        }
+    }
+    
+    [[JWCTaskManager sharedManager] currentTaskDone];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UICollectionViewDelegate Methods
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 100);
+}
+
+
 
 @end

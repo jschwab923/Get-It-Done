@@ -11,7 +11,8 @@
 
 @interface JWCTask : NSObject <NSCoding>
 
--(BOOL)containsNilProperties;
+- (BOOL)containsNilProperties;
+- (NSInteger)numberOfSubtasksDone;
 
 @property (nonatomic) NSUUID *taskID;
 
@@ -21,16 +22,17 @@
 @property (nonatomic) NSString *taskDescription;
 @property (nonatomic) NSString *proofType;
 
-// Depends on proof type - NSString/UIImage. Maybe Video
+// Depends on proof type which of these will not be nil
 @property (nonatomic) NSString *proofDescribe;
 @property (nonatomic) NSMutableArray *proofQuestions;
+@property (nonatomic) NSMutableArray *proofQuestionAnswers;
 @property (nonatomic) UIImage *proofImage;
 
 @property (nonatomic) NSDate *start;
 @property (nonatomic) NSDate *due;
 
 @property (nonatomic) NSMutableArray *subTasks;
-@property (nonatomic) NSNumber *numberOfTimesSubtasksUndone;
+@property (nonatomic) NSNumber *numberOfTimesSubtasksChecked;
 
 @property (nonatomic) JWCTaskPartner *partner;
 

@@ -7,6 +7,7 @@
 //
 
 #import "JWCCollectionViewFooterAddPartner.h"
+#import "JWCCollectionViewFooterContactTypeChooser.h"
 #import "JWCSearchBar.h"
 #import "JWCCollectionViewCellContact.h"
 #import "JWCTaskPartner.h"
@@ -22,7 +23,11 @@
     UITapGestureRecognizer *_buttonTouched;
     UICollectionView *_contactsCollectionView;
     JWCSearchBar *_contactsSearchBar;
+    
+    JWCCollectionViewFooterContactTypeChooser *_currentFooter;
 }
+
+@property (strong, nonatomic) APContact *selectedContact;
 @end
 
 @implementation JWCCollectionViewFooterAddPartner
@@ -61,6 +66,11 @@
 
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Gesture Recognizer Methods
 - (void)pressedAddPartner:(UIGestureRecognizer *)tapRecognizer
 {
@@ -72,20 +82,25 @@
     
     _contactsCollectionView.backgroundColor = [UIColor clearColor];
     
+    // Register classes for reuse
     [_contactsCollectionView registerClass:[JWCCollectionViewCellContact class] forCellWithReuseIdentifier:@"ContactsCell"];
+//    [_contactsCollectionView registerClass:[JWCCollectionViewFooterContactTypeChooser class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ContactsTypeChooserCell"];
 
     _contactsCollectionView.dataSource = self;
     _contactsCollectionView.delegate = self;
     
-    // Setup gesture recognizer for keyboard dismissal
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];
-    [_contactsCollectionView addGestureRecognizer:gestureRecognizer];
-    
     _contactsSearchBar = [[JWCSearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(contactsContainerView.frame), 40)];
+    _contactsSearchBar.barTintColor = [UIColor colorWithWhite:1.0 alpha:.8];
     _contactsSearchBar.delegate = self;
     
     [contactsContainerView addSubview:_contactsSearchBar];
     [contactsContainerView addSubview:_contactsCollectionView];
+    
+    
+    // Register for KGModal view dismissed
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(kgModalWillDimissNotification:)
+                                                 name:KGModalWillHideNotification object:nil];
     
     [[KGModal sharedInstance] showWithContentView:contactsContainerView andAnimated:YES];
 }
@@ -109,13 +124,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     JWCCollectionViewCellContact *contactCell = (JWCCollectionViewCellContact *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ContactsCell" forIndexPath:indexPath];
     
     APContact *currentContact = (APContact *)self.contactsWithName[indexPath.row];
     
-    if (currentContact.photo) {
-        contactCell.layer.cornerRadius = 30;
-        contactCell.contactsImage.image = currentContact.photo;
+    if (currentContact.thumbnail) {
+        contactCell.contactsImage.image = currentContact.thumbnail;
     } else {
         contactCell.labelName.text = [NSString stringWithFormat:@"%@ %@", currentContact.firstName, currentContact.lastName];
     }
@@ -123,10 +138,38 @@
     return contactCell;
 }
 
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+//{
+//    UICollectionReusableView *reusableView;
+//    if (kind == UICollectionElementKindSectionFooter) {
+//        JWCCollectionViewFooterContactTypeChooser *footerCell = (JWCCollectionViewFooterContactTypeChooser *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ContactsTypeChooserCell" forIndexPath:indexPath];
+//        reusableView = footerCell;
+//        
+//      _currentFooter = footerCell;
+//    }
+//    return reusableView;
+//}
+
 #pragma mark - UICollectionViewDelegate Methods
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(80, 65);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 50);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    _selectedContact = _contactsWithName[indexPath.row];
+    JWCCollectionViewCellContact *selectedCell = (JWCCollectionViewCellContact *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (selectedCell.labelName.textColor == [UIColor whiteColor]) {
+        selectedCell.labelName.textColor = [UIColor darkBlueColor];
+    } else {
+        selectedCell.labelName.textColor = [UIColor whiteColor];
+    }
 }
 
 
@@ -137,15 +180,27 @@
     [_contactsCollectionView reloadData];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-#pragma mark - Gesture Recognizer methods
-- (void)tappedCollectionView:(UIGestureRecognizer *)gesture
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [_contactsSearchBar endEditing:YES];
+}
+
+#pragma mark - UIScrollViewDelegate methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_contactsSearchBar endEditing:YES];
+}
+
+#pragma mark - Notification Center methods
+- (void)kgModalWillDimissNotification:(id)sender
+{
+    JWCTaskPartner *taskPartner = [JWCTaskPartner new];
+    taskPartner.name = [NSString stringWithFormat:@"%@ %@", _selectedContact.firstName, _selectedContact.lastName];
+    taskPartner.phoneNumbers = _selectedContact.phones;
+    taskPartner.emails = _selectedContact.emails;
+    taskPartner.partnerImage = _selectedContact.thumbnail ?: _selectedContact.photo;
+    
+    [JWCTaskManager sharedManager].pendingTask.partner = taskPartner;
 }
 
 @end

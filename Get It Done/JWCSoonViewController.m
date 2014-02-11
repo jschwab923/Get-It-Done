@@ -32,7 +32,6 @@
     NSLayoutConstraint *_portraitCollectionViewTopConstraint;
     
     JWCViewLine *_underLine;
-    
 }
 
 //Only visible when all subtasks marked as done
@@ -95,7 +94,6 @@
     self.doneButton.font = DEFAULT_FONT;
     self.doneButton.textColor = [UIColor colorWithRed:0.000 green:1.000 blue:0.958 alpha:1.000];
     self.doneButton.textAlignment = NSTextAlignmentCenter;
-    self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     
     self.collectionViewTasks.delegate = self;
     
@@ -110,6 +108,7 @@
 {
     [super viewWillAppear:animated];
     [self updateCustomConstraints];
+    self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     
     if ([[JWCTaskManager sharedManager] getProgressPercent]) {
         [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
@@ -229,36 +228,6 @@
     }
 }
 
-#pragma mark - Convenience Methods
-- (void)showDoneButton
-{
-    [_progressViewPie addSubview:self.doneButton];
-    
-    [UIView animateWithDuration:.4 animations:^{
-        self.doneButton.transform = CGAffineTransformIdentity;
-    }];
-    
-    self.taskDoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doneButtonPressed:)];
-    [self.progressContainerView addGestureRecognizer:self.taskDoneTapRecognizer];
-}
-
-- (void)hideDoneButton
-{
-    if (self.taskDoneTapRecognizer) {
-        [self.progressContainerView removeGestureRecognizer:self.taskDoneTapRecognizer];
-    }
-  
-    [UIView animateWithDuration:.3 animations:^{
-        self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
-    }];
-}
-
-- (void)doneButtonPressed:(id)sender
-{
-    [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
-}
-
-
 #pragma mark - UICollectionViewDelegate Methods
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -280,6 +249,26 @@
     return roundedSize;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    // Get height of text
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    
+    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
+    if (currentTask) {
+        CGRect boundingRect = [currentTask.taskDescription boundingRectWithSize:textSize
+                                                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                                                     attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+                                                                        context:nil];
+        
+        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame), ceil(boundingRect.size.height)+20);
+        
+        return roundedSize;
+    }
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 50);
+}
+
 #pragma mark - Touch Handling
 - (void)collectionViewTapped:(UITapGestureRecognizer *)tapGesture
 {
@@ -289,6 +278,9 @@
     // Tapped the subtask cells
     if (tappedPoint.y > 60) {
         
+        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:
+             [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
+        
         JWCSoonCollectionViewCell *tappedCell = (JWCSoonCollectionViewCell *)[self.collectionViewTasks cellForItemAtIndexPath:tappedIndexPath];
         
         UIButton *tappedCellButton = tappedCell.buttonSubtaskDone;
@@ -297,7 +289,7 @@
         JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[tappedIndexPath.row];
         selectedSubtask.done = !selectedSubtask.done;
         
-        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
         
         [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
                                                withSubtask:selectedSubtask];
@@ -307,14 +299,14 @@
         [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
             [self.progressViewPie setProgress:currentProgressPercent animated:YES];
         } completion:^(BOOL finished) {
-            if (currentProgressPercent >= .99) {
+            if (currentProgressPercent >= .95) {
                 [self showDoneButton];
             } else {
                 [self hideDoneButton];
             }
         }];
         
-        [self updateSmileyFaceProgress:selectedSubtask.done];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
         
     } else { // Tapped the header cell
       
@@ -338,13 +330,39 @@
     }
 }
 
-//TODO: MAKE THIS WORK
-- (void)updateSmileyFaceProgress:(BOOL)subtaskDone
+#pragma mark - Convenience Methods
+- (void)showDoneButton
 {
-    NSIndexPath *headerIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:CGPointMake(85, 12)];
-    JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[self.collectionViewTasks cellForItemAtIndexPath:headerIndexPath];
+    [_progressViewPie addSubview:self.doneButton];
+    [_progressViewPie setProgress:1 animated:YES];
+    [UIView animateWithDuration:.4 animations:^{
+        self.doneButton.transform = CGAffineTransformIdentity;
+    }];
+    
+    self.taskDoneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doneButtonPressed:)];
+    [self.progressContainerView addGestureRecognizer:self.taskDoneTapRecognizer];
+}
 
-    headerCell.imageViewSmiley.image = [UIImage imageNamed:@"Joyful"];
+- (void)hideDoneButton
+{
+    if (self.taskDoneTapRecognizer) {
+        [self.progressContainerView removeGestureRecognizer:self.taskDoneTapRecognizer];
+    }
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
+    }];
+}
+
+- (void)doneButtonPressed:(id)sender
+{
+    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+        [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
+    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+        [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
+    } else {
+        [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
+    }
 }
 
 @end

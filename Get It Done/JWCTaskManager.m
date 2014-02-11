@@ -73,6 +73,7 @@
     } else {
         [_tasks addObject:self.pendingTask];
     }
+    self.pendingTask = [JWCTask new];
 }
 
 - (void)currentTaskDone
@@ -93,7 +94,6 @@
     NSInteger oldProgress = self.currentTask.progressPoints.integerValue;
     if (!subtask.done) {
         self.currentTask.progressPoints = [NSNumber numberWithInteger:(oldProgress-newProgress)];
-        self.currentTask.numberOfTimesSubtasksUndone = [NSNumber numberWithInteger:self.currentTask.numberOfTimesSubtasksUndone.integerValue + 1];
     } else {
         self.currentTask.progressPoints = [NSNumber numberWithInteger:(oldProgress + newProgress)];
     }
@@ -102,10 +102,10 @@
 #pragma mark - Loading and saving methods
 - (void)loadCurrentTasks
 {
-    self.tasks = [self loadArrayFromFile:@"CurrentTasks" fromFolder:@"CurrentTasksFolder"];
+    _tasks = [self loadArrayFromFile:@"CurrentTasks" fromFolder:@"CurrentTasksFolder"];
     
     self.pendingTask = [[JWCTask alloc] init];
-    self.currentTask = [self.tasks firstObject];
+    self.currentTask = [_tasks firstObject];
 }
 
 - (void)loadDoneTasks

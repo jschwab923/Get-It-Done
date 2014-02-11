@@ -71,9 +71,11 @@
 {
     [super viewDidAppear:animated];
     
-    JWCCollectionViewCellProof *proofCell = (JWCCollectionViewCellProof *)[self.collectionViewAddTask cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    
-    [proofCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
+    if (![JWCTaskManager sharedManager].pendingTask.proofType) {
+        JWCCollectionViewCellProof *proofCell = (JWCCollectionViewCellProof *)[self.collectionViewAddTask cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        
+        [proofCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
+    }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -81,16 +83,12 @@
     [self.collectionViewAddTask.collectionViewLayout invalidateLayout];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [JWCTaskManager sharedManager].pendingTask = [[JWCTask alloc] init];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)pressedAddButton:(UIBarButtonItem *)sender
 {
     UILabel *confirmationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
@@ -128,7 +126,7 @@
         confirmationLabel.frame = roundedSizeFrame;
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
     } else {
-        confirmationLabel.text = @"Pending task updated. Press back to commit to getting it done!";
+        confirmationLabel.text = @"Pending task updated. Press + to commit to getting it done!";
         CGRect boundingRect = [confirmationLabel.text
                                boundingRectWithSize:fontSize
                                options:NSStringDrawingUsesLineFragmentOrigin
@@ -137,8 +135,7 @@
         confirmationLabel.frame = roundedSizeFrame;
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
     }
-    
-    
+
 }
 
 #pragma mark - Gesture Recognizer Methods
