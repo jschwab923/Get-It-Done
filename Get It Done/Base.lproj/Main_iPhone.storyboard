@@ -20,35 +20,24 @@
                                 <rect key="frame" x="0.0" y="1" width="320" height="567"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDB-K5-k37">
-                                <rect key="frame" x="-20" y="52" width="360" height="248"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDB-K5-k37">
+                                <rect key="frame" x="0.0" y="1" width="320" height="287"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qN-NO-tgO">
-                                        <rect key="frame" x="20" y="20" width="320" height="50"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qN-NO-tgO">
+                                        <rect key="frame" x="0.0" y="71" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="320" id="9W8-AZ-psC"/>
-                                            <constraint firstAttribute="height" constant="50" id="SVP-0g-hsr"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPy-mY-3j1">
-                                        <rect key="frame" x="105" y="78" width="150" height="150"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPy-mY-3j1">
+                                        <rect key="frame" x="85" y="129" width="150" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="miF-22-kt9"/>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="rbs-Ur-0OD"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="QPy-mY-3j1" secondAttribute="bottom" constant="20" id="Y97-cd-IRb"/>
-                                </constraints>
                             </view>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-sk-Rbl">
                                 <rect key="frame" x="0.0" y="288" width="320" height="280"/>
@@ -224,7 +213,7 @@
                                                         <constraint firstAttribute="height" constant="22" id="xz6-Q1-TBD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -235,6 +224,8 @@
                                                 <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDY-l0-BB7">
                                                     <rect key="frame" x="35" y="-83" width="257" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="kYZ-fK-1W5" id="9aU-Zl-fcy"/>
                                                         <outlet property="delegate" destination="kYZ-fK-1W5" id="Uy6-Tl-H7q"/>
@@ -363,7 +354,7 @@
         <!--Task Done Describe View Controller-->
         <scene sceneID="fMu-Kt-yMc">
             <objects>
-                <viewController id="wol-gf-s8F" customClass="JWCTaskDoneDescribeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDoneDescription" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wol-gf-s8F" customClass="JWCTaskDoneDescribeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A1J-RR-Jag"/>
                         <viewControllerLayoutGuide type="bottom" id="61G-hN-1vZ"/>
@@ -441,7 +432,7 @@
         <!--Task Done Questions View Controller-->
         <scene sceneID="E6D-h6-wlJ">
             <objects>
-                <viewController id="CYa-SA-3zG" customClass="JWCTaskDoneQuestionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDoneQuestions" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CYa-SA-3zG" customClass="JWCTaskDoneQuestionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rUX-6e-lwi"/>
                         <viewControllerLayoutGuide type="bottom" id="rRH-Rs-HVH"/>
@@ -450,7 +441,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iPhone5_5.png" translatesAutoresizingMaskIntoConstraints="NO" id="FBE-a0-JH1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="iPhone5_5.png" translatesAutoresizingMaskIntoConstraints="NO" id="FBE-a0-JH1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -505,6 +496,9 @@
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="evg-ax-jca" id="1Po-Cf-0hT"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -536,6 +530,8 @@
                             <constraint firstAttribute="trailing" secondItem="5bj-U3-XyG" secondAttribute="trailing" constant="98" id="6f4-nD-dAH"/>
                             <constraint firstItem="5bj-U3-XyG" firstAttribute="leading" secondItem="o3X-D2-PVO" secondAttribute="leading" constant="98" id="VFl-X9-jEs"/>
                             <constraint firstItem="Vdv-z6-XL7" firstAttribute="top" secondItem="mlt-Iv-ABU" secondAttribute="bottom" constant="19" id="YE6-Tq-caj"/>
+                            <constraint firstAttribute="trailing" secondItem="FBE-a0-JH1" secondAttribute="trailing" id="YJ2-08-FHQ"/>
+                            <constraint firstItem="FBE-a0-JH1" firstAttribute="leading" secondItem="o3X-D2-PVO" secondAttribute="leading" id="kjW-Ye-MCt"/>
                             <constraint firstItem="Vdv-z6-XL7" firstAttribute="leading" secondItem="o3X-D2-PVO" secondAttribute="leading" constant="20" id="mgC-4b-4dg"/>
                             <constraint firstAttribute="trailing" secondItem="Vdv-z6-XL7" secondAttribute="trailing" constant="20" id="oBe-M1-O8W"/>
                             <constraint firstItem="rRH-Rs-HVH" firstAttribute="top" secondItem="5bj-U3-XyG" secondAttribute="bottom" constant="20" id="oGM-Qy-7xd"/>
@@ -548,6 +544,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okm-Bd-56r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="evg-ax-jca" customClass="JWCTaskDoneQuestionsViewController"/>
                 <customObject id="94D-JN-szF" customClass="JWCCollectionViewDataSourceProofQuestions"/>
             </objects>
             <point key="canvasLocation" x="805" y="971"/>
@@ -555,7 +552,7 @@
         <!--Task Done Picture View Controller-->
         <scene sceneID="a8v-cT-26o">
             <objects>
-                <viewController id="hQQ-Ru-pGG" customClass="JWCTaskDonePictureViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDonePicture" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hQQ-Ru-pGG" customClass="JWCTaskDonePictureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l08-Ba-OKY"/>
                         <viewControllerLayoutGuide type="bottom" id="Kkj-iY-CKp"/>

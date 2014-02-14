@@ -47,6 +47,7 @@
     
     self.partnerLabel.text = @"Who will help you?";
     self.partnerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    self.partnerLabel.textColor = DEFAULT_TEXT_COLOR;
     self.partnerLabel.backgroundColor = [UIColor clearColor];
     
     [self addSubview:self.partnerLabel];

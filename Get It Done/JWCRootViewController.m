@@ -11,8 +11,6 @@
 #import "JWCAddTaskViewController.h"
 #import "JWCViewControllerAnimatedTransition.h"
 
-#import "JWCTwitterHandler.h"
-
 @interface JWCRootViewController ()
 
 @end
@@ -51,11 +49,6 @@
 {
     JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
     return animator;
-}
-- (IBAction)tweet:(id)sender
-{
-    JWCTwitterHandler *twitterTest = [JWCTwitterHandler new];
-    [twitterTest sendCustomTweet];
 }
 
 

@@ -14,14 +14,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-
+        self.backgroundColor = DEFAULT_PIE_TITLE_COLOR;
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = DEFAULT_PIE_TITLE_COLOR;
 }
 
 

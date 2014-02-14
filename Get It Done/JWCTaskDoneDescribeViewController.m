@@ -8,6 +8,8 @@
 
 #import "JWCTaskDoneDescribeViewController.h"
 #import "JWCTaskManager.h"
+#import "JWCMessageController.h"
+#import "KGModal.h"
 
 @interface JWCTaskDoneDescribeViewController ()
 
@@ -50,9 +52,18 @@
 - (IBAction)pressedSubmitProofButton:(id)sender
 {
     [JWCTaskManager sharedManager].currentTask.proofDescribe = self.textViewDescription.text;
-    [[JWCTaskManager sharedManager] currentTaskDone];
-//TODO: Put some more stuff in here, like twitter posting, messaging partner etc.
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[JWCTaskManager sharedManager].currentTask.proofDescribe isEqualToString:@""]) {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
+        messageLabel.font = DEFAULT_FONT;
+        messageLabel.textColor = DEFAULT_TEXT_COLOR;
+        messageLabel.text = @"You've got to describe what you got done!";
+        messageLabel.backgroundColor = [UIColor clearColor];
+        [[KGModal sharedInstance] showWithContentView:messageLabel];
+    } else {
+        [[JWCTaskManager sharedManager] currentTaskDone];
+        //TODO: Put some more stuff in here, like twitter posting, messaging partner etc.
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - Gesture Recognizer Methods

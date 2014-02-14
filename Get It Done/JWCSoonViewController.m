@@ -32,6 +32,8 @@
     NSLayoutConstraint *_portraitCollectionViewTopConstraint;
     
     JWCViewLine *_underLine;
+    
+    CGRect _originalContainerViewFrame;
 }
 
 //Only visible when all subtasks marked as done
@@ -67,18 +69,21 @@
 {
     [super viewDidLoad];
     
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
-    } else {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
-    }
+
+    self.imageViewBackground.image = [UIImage new];
+    self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+    self.collectionViewTasks.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+   
+    self.viewLabelProgressContainter.backgroundColor = DEFAULT_FOREGROUND_COLOR;
+    self.viewLabelProgressContainter.autoresizesSubviews = YES;
+    self.viewLabelProgressContainter.layer.shadowColor = [UIColor colorWithRed:0.110 green:0.040 blue:0.194 alpha:0.620].CGColor;
+    self.viewLabelProgressContainter.layer.shadowOffset = CGSizeMake(0, -3);
+    _originalContainerViewFrame = self.viewLabelProgressContainter.frame;
     
     self.label.textColor = DEFAULT_PIE_TITLE_COLOR;
     
-    _underLine = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.collectionViewTasks.frame), CGRectGetWidth(self.view.frame), 1)];
-    _underLine.layer.shadowOpacity = .8;
-    _underLine.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-    [self.view addSubview:_underLine];
+    _underLine = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.collectionViewTasks.frame)-3, CGRectGetWidth(self.viewLabelProgressContainter.frame), 1)];
+    [self.viewLabelProgressContainter addSubview:_underLine];
 
     
     self.progressViewPie = [[M13ProgressViewPie alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
@@ -96,25 +101,26 @@
     self.doneButton.textAlignment = NSTextAlignmentCenter;
     
     self.collectionViewTasks.delegate = self;
+    self.collectionViewTasks.directionalLockEnabled = YES;
     
     // Setup task done gesture recognier
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewTapped:)];
     [self.collectionViewTasks addGestureRecognizer:tapGestureRecognizer];
     
-    [self setUpConstraintsAndFramesForCurrentDevice];
+//    [self setUpConstraintsAndFramesForCurrentDevice];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateCustomConstraints];
+//    [self updateCustomConstraints];
     self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     
     if ([[JWCTaskManager sharedManager] getProgressPercent]) {
         [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
                                  animated:YES];
     } else {
-        [self.progressViewPie setProgress:.1 animated:YES];
+        [self.progressViewPie setProgress:1 animated:YES];
     }
     [self.collectionViewTasks reloadData];
 }
@@ -145,13 +151,27 @@
 }
 
 #pragma mark - ScrollView Methods
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    CGPoint scrollViewContentOffset = [scrollView contentOffset];
+    if (scrollViewContentOffset.y > 120) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.viewLabelProgressContainter.center = CGPointMake(CGRectGetMidX(self.viewLabelProgressContainter.frame), -CGRectGetHeight(self.viewLabelProgressContainter.frame)+64);
+            self.collectionViewTasks.frame = CGRectMake(0, 64, CGRectGetWidth(self.collectionViewTasks.frame), CGRectGetHeight(self.view.frame) - 64);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 //{
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait) {
-//        CGFloat newHeight = 150.f - scrollView.contentOffset.y;
-//        [_progressViewPie setFrame:CGRectMake(scrollView.contentOffset.y / 2.f, 0, newHeight , newHeight)];
-//        [_progressViewPie setNeedsDisplay];
-//    }
+//    
+//}
+//
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+//{
+//    
 //}
 
 #pragma mark - Contraints and Orientation Methods

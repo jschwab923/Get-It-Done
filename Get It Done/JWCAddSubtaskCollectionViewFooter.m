@@ -53,6 +53,7 @@
                                                                          CGRectGetWidth(rect)/3, CGRectGetHeight(rect))];
     addSubtaskLabel.backgroundColor = [UIColor clearColor];
     addSubtaskLabel.text = @"Add Subtask";
+    addSubtaskLabel.textColor = DEFAULT_TEXT_COLOR;
     addSubtaskLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
     [self addSubview:addSubtaskLabel];
     
@@ -62,6 +63,7 @@
     addSubtaskButton.contentMode = UIViewContentModeScaleToFill;
     [addSubtaskButton setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
     addSubtaskButton.backgroundColor = [UIColor clearColor];
+    addSubtaskButton.tintColor = DEFAULT_TEXT_COLOR;
     [self addSubview:addSubtaskButton];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedAddSubtask:)];
@@ -225,7 +227,7 @@
             } else {
                 JWCSubtask *newSubtask = [[JWCSubtask alloc] init];
                 newSubtask.subTaskDescription = currentCell.title.text;
-                newSubtask.percent = [NSNumber numberWithInt:currentCell.points.text.intValue];
+                newSubtask.percent = [NSNumber numberWithInteger:currentCell.points.text.integerValue];
                 [pendingSubtasks addObject:newSubtask];
             }
         }
@@ -234,13 +236,13 @@
     NSInteger currentTotalPercent = [self currentTotalPercent];
     if (currentTotalPercent == 100) {
         _currentFooterCell.addButton.enabled = NO;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %li", (100 -currentTotalPercent)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 -currentTotalPercent)];
     } else if (currentTotalPercent > 100) {
         _currentFooterCell.addButton.enabled = NO;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Invalid Percent: %li over", (currentTotalPercent-100)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Invalid Percent: %i over", (currentTotalPercent-100)];
     } else {
         _currentFooterCell.addButton.enabled = YES;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %li", (100 -currentTotalPercent)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 -currentTotalPercent)];
     }
     
     return YES;

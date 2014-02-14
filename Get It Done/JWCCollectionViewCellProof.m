@@ -274,19 +274,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    NSArray *visibleIndexPaths = [_proofQuestionsCollectionView indexPathsForVisibleItems];
-    for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
-        JWCTaskDescriptionCollectionViewCell *currentCell = (JWCTaskDescriptionCollectionViewCell *)[_proofQuestionsCollectionView cellForItemAtIndexPath:currentIndexPath];
-        
-        if (currentIndexPath.row < [[[JWCTaskManager sharedManager] pendingTask].proofQuestions count])
-        {
-            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions replaceObjectAtIndex:currentIndexPath.row withObject:currentCell.textViewDescription.text];
-        } else {
-            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions addObject:currentCell.textViewDescription.text];
-        }
-    }
-    //TODO: REMOVE AFTER TESTING
-    NSLog(@"%@", [JWCTaskManager sharedManager].pendingTask.proofQuestions);
+    [self saveCurrentTextViewText];
 }
 
 #pragma mark - Notification Center methods

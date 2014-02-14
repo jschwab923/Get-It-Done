@@ -17,7 +17,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIFont fontWithName:@"HelveticaNeue-Thin" size:18], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                    [UIFont fontWithName:@"HelveticaNeue-Thin" size:18], NSFontAttributeName, [UIColor colorWithWhite:.9 alpha:.9], NSForegroundColorAttributeName, nil];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -26,9 +26,9 @@
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     
     if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:LANDSCAPE_IMAGE] forBarMetrics:UIBarMetricsLandscapePhone];
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAVBAR_IMAGE]
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
                                            forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setShadowImage:[UIImage new]];
     } else {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:LANDSCAPE_IMAGE4] forBarMetrics:UIBarMetricsLandscapePhone];
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAVBAR_IMAGE4]
@@ -41,12 +41,6 @@
     [loadQueue addOperationWithBlock:^{
          [[JWCTaskManager sharedManager] loadDoneTasks];
     }];
-    
-    //TODO: REMOVE THIS SHIT
-    NSString *firstName;
-    NSString *testString = @"Timothy HiseMan";
-    firstName = [[testString componentsSeparatedByString:@" "] firstObject];
-    NSLog(@"%@", firstName);
     
     return YES;
 }
