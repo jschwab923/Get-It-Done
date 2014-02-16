@@ -36,4 +36,8 @@
 - (void)loadDoneTasks;
 - (BOOL)saveDoneTasks;
 
+- (void)loadStatsManager;
+- (BOOL)saveStatsManager;
+- (NSMutableDictionary *)getStatsDictionary;
+
 @end

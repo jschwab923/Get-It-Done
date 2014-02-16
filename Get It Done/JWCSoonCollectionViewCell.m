@@ -16,15 +16,16 @@
     if (self) {
         self.subTaskTextView.textColor = DEFAULT_TEXT_COLOR;
         self.subTaskTextView.font = DEFAULT_FONT;
+
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
+    [self addSubview:self.underLine];
     self.subTaskTextView.textColor = DEFAULT_TEXT_COLOR;
     self.subTaskTextView.font = DEFAULT_FONT;
 }
-
 
 @end

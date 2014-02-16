@@ -52,6 +52,14 @@
 		6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */; };
 		6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */; };
 		6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m */; };
+		6B799C3018B142B4008B1113 /* denim.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C2E18B142B4008B1113 /* denim.jpg */; };
+		6B799C3118B142B4008B1113 /* rough.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C2F18B142B4008B1113 /* rough.jpg */; };
+		6B799C3D18B14363008B1113 /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C3718B14363008B1113 /* APAddressBook.m */; };
+		6B799C3E18B14363008B1113 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C3918B14363008B1113 /* APContact.m */; };
+		6B799C3F18B14363008B1113 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C3B18B14363008B1113 /* LICENSE.txt */; };
+		6B799C4018B14363008B1113 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C3C18B14363008B1113 /* README.md */; };
+		6B799C4318B14FD6008B1113 /* JWCStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4218B14FD6008B1113 /* JWCStatsManager.m */; };
+		6B799C4618B15540008B1113 /* NSDate+DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4518B15540008B1113 /* NSDate+DateFormatter.m */; };
 		6B7B6A0D18AB3C490099A60F /* iPhone5_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A0C18AB3C490099A60F /* iPhone5_6@2x.png */; };
 		6B7B6A1018AB3F8E0099A60F /* iPhone5_6Blurred@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */; };
 		6B7B6A1318AB416C0099A60F /* iPhone4S_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */; };
@@ -107,10 +115,6 @@
 		6BFFC74718A2E7270099ACB0 /* JWCContactsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */; };
 		6BFFC74918A2E8410099ACB0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BFFC74818A2E8410099ACB0 /* MessageUI.framework */; };
 		6BFFC74D18A2E8830099ACB0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */; };
-		6BFFC77918A2EAE80099ACB0 /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */; };
-		6BFFC77A18A2EAE80099ACB0 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC76918A2EAE80099ACB0 /* APContact.m */; };
-		6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */; };
-		6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BFFC76C18A2EAE80099ACB0 /* README.md */; };
 		6BFFC78218A309DB0099ACB0 /* JWCSubtask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +205,19 @@
 		6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellTitlePoints.m; path = "Get It Done/JWCCollectionViewCellTitlePoints.m"; sourceTree = "<group>"; };
 		6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewFooterAddPartner.h; path = "Get It Done/JWCCollectionViewFooterAddPartner.h"; sourceTree = "<group>"; };
 		6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewFooterAddPartner.m; path = "Get It Done/JWCCollectionViewFooterAddPartner.m"; sourceTree = "<group>"; };
+		6B799C2E18B142B4008B1113 /* denim.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = denim.jpg; sourceTree = "<group>"; };
+		6B799C2F18B142B4008B1113 /* rough.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rough.jpg; sourceTree = "<group>"; };
+		6B799C3618B14363008B1113 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
+		6B799C3718B14363008B1113 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
+		6B799C3818B14363008B1113 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
+		6B799C3918B14363008B1113 /* APContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APContact.m; sourceTree = "<group>"; };
+		6B799C3A18B14363008B1113 /* APTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTypes.h; sourceTree = "<group>"; };
+		6B799C3B18B14363008B1113 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		6B799C3C18B14363008B1113 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6B799C4118B14FD6008B1113 /* JWCStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCStatsManager.h; path = "Get It Done/JWCStatsManager.h"; sourceTree = "<group>"; };
+		6B799C4218B14FD6008B1113 /* JWCStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCStatsManager.m; path = "Get It Done/JWCStatsManager.m"; sourceTree = "<group>"; };
+		6B799C4418B15540008B1113 /* NSDate+DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormatter.h"; sourceTree = "<group>"; };
+		6B799C4518B15540008B1113 /* NSDate+DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormatter.m"; sourceTree = "<group>"; };
 		6B7B6A0C18AB3C490099A60F /* iPhone5_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_6@2x.png"; sourceTree = "<group>"; };
 		6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_6Blurred@2x.png"; sourceTree = "<group>"; };
 		6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4S_6@2x.png"; sourceTree = "<group>"; };
@@ -286,13 +303,6 @@
 		6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCContactsLoader.m; path = "Get It Done/JWCContactsLoader.m"; sourceTree = "<group>"; };
 		6BFFC74818A2E8410099ACB0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6BFFC74C18A2E8830099ACB0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		6BFFC76618A2EAE80099ACB0 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
-		6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
-		6BFFC76818A2EAE80099ACB0 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
-		6BFFC76918A2EAE80099ACB0 /* APContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APContact.m; sourceTree = "<group>"; };
-		6BFFC76A18A2EAE80099ACB0 /* APTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTypes.h; sourceTree = "<group>"; };
-		6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		6BFFC76C18A2EAE80099ACB0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6BFFC78018A309DB0099ACB0 /* JWCSubtask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCSubtask.h; path = "Get It Done/JWCSubtask.h"; sourceTree = "<group>"; };
 		6BFFC78118A309DB0099ACB0 /* JWCSubtask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCSubtask.m; path = "Get It Done/JWCSubtask.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -423,6 +433,8 @@
 		6B6DF577189C8DAB0027761B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6B799C4118B14FD6008B1113 /* JWCStatsManager.h */,
+				6B799C4218B14FD6008B1113 /* JWCStatsManager.m */,
 				6BFFC74518A2E7270099ACB0 /* JWCContactsLoader.h */,
 				6BFFC74618A2E7270099ACB0 /* JWCContactsLoader.m */,
 				6B6DF574189C8DA20027761B /* JWCTaskManager.h */,
@@ -527,6 +539,44 @@
 				6B6DF56D189C8B9B0027761B /* JWCSoonCollectionViewCell.m */,
 			);
 			name = "Soon Cells";
+			sourceTree = "<group>";
+		};
+		6B799C3218B14363008B1113 /* APAddressBook-master */ = {
+			isa = PBXGroup;
+			children = (
+				6B799C3318B14363008B1113 /* AddressBook */,
+				6B799C3518B14363008B1113 /* Classes */,
+				6B799C3B18B14363008B1113 /* LICENSE.txt */,
+				6B799C3C18B14363008B1113 /* README.md */,
+			);
+			path = "APAddressBook-master";
+			sourceTree = "<group>";
+		};
+		6B799C3318B14363008B1113 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				6B799C3418B14363008B1113 /* AddressBook */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
+		6B799C3418B14363008B1113 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
+		6B799C3518B14363008B1113 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6B799C3618B14363008B1113 /* APAddressBook.h */,
+				6B799C3718B14363008B1113 /* APAddressBook.m */,
+				6B799C3818B14363008B1113 /* APContact.h */,
+				6B799C3918B14363008B1113 /* APContact.m */,
+				6B799C3A18B14363008B1113 /* APTypes.h */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		6BF5BF03189B645100B4EA9C = {
@@ -635,6 +685,8 @@
 		6BFD0A30189C68FB008C3698 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				6B799C2E18B142B4008B1113 /* denim.jpg */,
+				6B799C2F18B142B4008B1113 /* rough.jpg */,
 				6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */,
 				6B7B6A1218AB416C0099A60F /* iPhone4S_6Blurred@2x.png */,
 				6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */,
@@ -733,6 +785,8 @@
 		6BFD0A6E189C73D3008C3698 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				6B799C4418B15540008B1113 /* NSDate+DateFormatter.h */,
+				6B799C4518B15540008B1113 /* NSDate+DateFormatter.m */,
 				6BFD0A6F189C7410008C3698 /* UIColor+GetItDoneColors.h */,
 				6BFD0A70189C7410008C3698 /* UIColor+GetItDoneColors.m */,
 			);
@@ -752,36 +806,13 @@
 		6BFFC73818A2E03E0099ACB0 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				6B799C3218B14363008B1113 /* APAddressBook-master */,
 				6B1394D318A4C9F200CB32FA /* BEMLineGraph */,
-				6BFFC74E18A2EAE80099ACB0 /* APAddressBook-master */,
 				6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */,
 				6B178909189D8CDD003664C5 /* SAMultisectorControl */,
 				6BFFC73718A2E02B0099ACB0 /* KGModalView */,
 			);
 			name = "Third Party";
-			sourceTree = "<group>";
-		};
-		6BFFC74E18A2EAE80099ACB0 /* APAddressBook-master */ = {
-			isa = PBXGroup;
-			children = (
-				6BFFC76518A2EAE80099ACB0 /* Classes */,
-				6BFFC76B18A2EAE80099ACB0 /* LICENSE.txt */,
-				6BFFC76C18A2EAE80099ACB0 /* README.md */,
-			);
-			name = "APAddressBook-master";
-			path = "../../../../../Downloads/APAddressBook-master";
-			sourceTree = "<group>";
-		};
-		6BFFC76518A2EAE80099ACB0 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				6BFFC76618A2EAE80099ACB0 /* APAddressBook.h */,
-				6BFFC76718A2EAE80099ACB0 /* APAddressBook.m */,
-				6BFFC76818A2EAE80099ACB0 /* APContact.h */,
-				6BFFC76918A2EAE80099ACB0 /* APContact.m */,
-				6BFFC76A18A2EAE80099ACB0 /* APTypes.h */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -864,6 +895,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B799C3118B142B4008B1113 /* rough.jpg in Resources */,
 				6B0E709A18A733E3002B249D /* iPhone4S_5@2x.png in Resources */,
 				6B11A3FF18A5973E009FBDCB /* license.txt in Resources */,
 				6BF5BF26189B645200B4EA9C /* Main_iPad.storyboard in Resources */,
@@ -875,6 +907,7 @@
 				6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */,
 				6B7B6A1318AB416C0099A60F /* iPhone4S_6@2x.png in Resources */,
 				6BFD0A3B189C6A92008C3698 /* iPhone5_33@2x.png in Resources */,
+				6B799C3F18B14363008B1113 /* LICENSE.txt in Resources */,
 				6B0E708318A6EE7A002B249D /* Circle.png in Resources */,
 				6BF5BF2B189B645200B4EA9C /* Images.xcassets in Resources */,
 				6BF5316C18A4D7D700D90E5E /* iPhone5_7@2x.png in Resources */,
@@ -884,14 +917,14 @@
 				6B0E707F18A6E45C002B249D /* iPhone5_2@2x.png in Resources */,
 				6BF5316B18A4D7D700D90E5E /* iPhone5_5@2x.png in Resources */,
 				6BF5317118A4D80100D90E5E /* iPhone5_4@2x.png in Resources */,
-				6BFFC77B18A2EAE80099ACB0 /* LICENSE.txt in Resources */,
 				6B7B6A1418AB416C0099A60F /* iPhone4S_6Blurred@2x.png in Resources */,
 				6B0E708618A6F2EC002B249D /* iPhone5_18flipped@2x.png in Resources */,
-				6BFFC77C18A2EAE80099ACB0 /* README.md in Resources */,
 				6B0E708118A6E8AF002B249D /* iPhone5_18@2x.png in Resources */,
+				6B799C3018B142B4008B1113 /* denim.jpg in Resources */,
 				6B7B6A1018AB3F8E0099A60F /* iPhone5_6Blurred@2x.png in Resources */,
 				6BF5316E18A4D7D700D90E5E /* iPhone5_15@2x.png in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,
+				6B799C4018B14363008B1113 /* README.md in Resources */,
 				6B0E709D18A73820002B249D /* iPhone4S_5landscape@2x.png in Resources */,
 				6B7B6A0D18AB3C490099A60F /* iPhone5_6@2x.png in Resources */,
 				6BF5BF1A189B645200B4EA9C /* InfoPlist.strings in Resources */,
@@ -920,10 +953,11 @@
 				6B0D66B818A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m in Sources */,
 				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
 				6B1394DC18A4C9F200CB32FA /* BEMAnimations.m in Sources */,
+				6B799C3E18B14363008B1113 /* APContact.m in Sources */,
 				6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */,
+				6B799C4318B14FD6008B1113 /* JWCStatsManager.m in Sources */,
 				6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m in Sources */,
 				6B0E708C18A703A8002B249D /* JWCCollectionHeaderPartner.m in Sources */,
-				6BFFC77A18A2EAE80099ACB0 /* APContact.m in Sources */,
 				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
 				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
 				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,
@@ -948,7 +982,6 @@
 				6BFD0A64189C6FC3008C3698 /* M13ProgressView.m in Sources */,
 				6BFD0A69189C6FC3008C3698 /* M13ProgressViewPie.m in Sources */,
 				6B271D8018A2AC8A00518805 /* JWCBottomUpSegue.m in Sources */,
-				6BFFC77918A2EAE80099ACB0 /* APAddressBook.m in Sources */,
 				6B0E709218A70477002B249D /* JWCCollectionViewCellContact.m in Sources */,
 				6B271D8318A2ACEE00518805 /* JWCViewStatsViewController.m in Sources */,
 				6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */,
@@ -956,11 +989,13 @@
 				6B1394DE18A4C9F200CB32FA /* BEMLine.m in Sources */,
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
 				6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */,
+				6B799C3D18B14363008B1113 /* APAddressBook.m in Sources */,
 				6B135F7018A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m in Sources */,
 				6B0E1E6F18A9591D00883982 /* JWCCollectionViewCellAnswerProofQuestions.m in Sources */,
 				6B0E1E7318A95C0C00883982 /* JWCCollectionViewDataSourceProofQuestions.m in Sources */,
 				6B6DF572189C8D840027761B /* JWCSoonCollectionViewDataSource.m in Sources */,
 				6BFD0A65189C6FC3008C3698 /* M13ProgressViewBar.m in Sources */,
+				6B799C4618B15540008B1113 /* NSDate+DateFormatter.m in Sources */,
 				6BFD0A66189C6FC3008C3698 /* M13ProgressViewBorderedBar.m in Sources */,
 				6BF5BF29189B645200B4EA9C /* JWCRootViewController.m in Sources */,
 				6BFD0A62189C6FC3008C3698 /* UIImage+ImageEffects.m in Sources */,

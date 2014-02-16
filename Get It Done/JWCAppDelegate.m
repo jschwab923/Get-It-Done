@@ -17,29 +17,24 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIFont fontWithName:@"HelveticaNeue-Thin" size:18], NSFontAttributeName, [UIColor colorWithWhite:.9 alpha:.9], NSForegroundColorAttributeName, nil];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+                                    [UIFont fontWithName:@"HelveticaNeue-Thin" size:18], NSFontAttributeName, DEFAULT_PIE_TITLE_COLOR, NSForegroundColorAttributeName, nil];
+    ;
+    [[UINavigationBar appearance] setTintColor:DEFAULT_PIE_TITLE_COLOR];
     
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
     
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
                                            forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setShadowImage:[UIImage new]];
-    } else {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:LANDSCAPE_IMAGE4] forBarMetrics:UIBarMetricsLandscapePhone];
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAVBAR_IMAGE4]
-                                           forBarMetrics:UIBarMetricsDefault];
-    }
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    
         
     [[JWCTaskManager sharedManager] loadCurrentTasks];
     
     NSOperationQueue *loadQueue = [NSOperationQueue new];
     [loadQueue addOperationWithBlock:^{
-         [[JWCTaskManager sharedManager] loadDoneTasks];
+        [[JWCTaskManager sharedManager] loadDoneTasks];
+        [[JWCTaskManager sharedManager] loadStatsManager];
     }];
     
     return YES;
@@ -51,6 +46,8 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     [[JWCTaskManager sharedManager] saveCurrentTasks];
     [[JWCTaskManager sharedManager] saveDoneTasks];
+    
+    [[JWCTaskManager sharedManager] saveStatsManager];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

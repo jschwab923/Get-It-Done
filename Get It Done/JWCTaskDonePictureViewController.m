@@ -44,13 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
-    } else {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
-    }
-    
-    
+   
+    self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     
     self.imageViewProofPicture.layer.cornerRadius = 10;
     self.imageViewProofPicture.layer.masksToBounds = YES;
@@ -106,7 +101,8 @@
 - (IBAction)pressedSubmitProof:(id)sender
 {
     if (self.proofSent) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[JWCTaskManager sharedManager] currentTaskDone];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     } else if ([JWCTaskManager sharedManager].currentTask.proofImage) {
         if ([JWCTaskManager sharedManager].currentTask.partner) {
             [self sendInfoToPartner];
@@ -166,7 +162,7 @@
 #pragma mark - Convenience Methods
 - (void)sendInfoToPartner
 {
-    UIView *modalView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 250)];
+    UIView *modalView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
     modalView.backgroundColor = [UIColor clearColor];
     
     UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
@@ -183,7 +179,7 @@
     [sendTextButton setTitleColor:DEFAULT_TEXT_COLOR forState:UIControlStateNormal];
     [sendTextButton addTarget:self action:@selector(sendTextMessage:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *sendEmailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 55, 50, 50)];
+    UIButton *sendEmailButton = [[UIButton alloc] initWithFrame:CGRectMake(60, 55, 50, 50)];
     [sendEmailButton setTitle:@"Email" forState:UIControlStateNormal];
     sendEmailButton.titleLabel.font = DEFAULT_FONT;
     [sendEmailButton setTitleColor:DEFAULT_TEXT_COLOR forState:UIControlStateNormal];
@@ -198,6 +194,8 @@
 
 - (void)sendTextMessage:(id)sender
 {
+    [[KGModal sharedInstance] hideAnimated:YES];
+    
     if(![MFMessageComposeViewController canSendText]) {
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
         messageLabel.font = DEFAULT_FONT;
@@ -209,91 +207,25 @@
     } else {
         _messageViewController = [JWCMessageController getTextViewController];
         [_messageViewController setMessageComposeDelegate:self];
-        [_messageViewController setBody:[self messageForText]];
+        [_messageViewController setBody:[JWCMessageController messageForText]];
         [self presentViewController:_messageViewController animated:YES completion:nil];
     }
 }
 
 - (void)sendEmail:(id)sender
 {
+    [[KGModal sharedInstance] hideAnimated:YES];
+    
     _mailComposeViewController = [JWCMessageController getEmailViewController];
     _mailComposeViewController.mailComposeDelegate = self;
     [_mailComposeViewController setSubject:@"Proof that I got my task done!"];
-    [_mailComposeViewController setMessageBody:[self messageForEmail] isHTML:NO];
+    [_mailComposeViewController setMessageBody:[JWCMessageController messageForEmail] isHTML:NO];
     [_mailComposeViewController setToRecipients:[JWCTaskManager sharedManager].currentTask.partner.emails];
     
     NSData *imageData = UIImagePNGRepresentation([JWCTaskManager sharedManager].currentTask.proofImage);
     [_mailComposeViewController addAttachmentData:imageData mimeType:@"image/png" fileName:@"ProofImage"];
     
     [self presentViewController:_mailComposeViewController animated:YES completion:nil];
-}
-
-
-#pragma mark - Convenience Methods
-- (NSString *)messageForText
-{
-    NSString *message;
-    JWCTask *currentTask = [JWCTaskManager sharedManager].currentTask;
-    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE])
-    {
-        message = [NSString stringWithFormat:@"Here's my description proving that I got this task done. Task: %@\n Description:%@", currentTask.title, currentTask.proofDescribe];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
-    {
-        message = [NSString stringWithFormat:@"I took a picture proving that I got this task done. Task: %@\n. I'll be sending it to you later. Bug me if you don't get it soon.", currentTask.title];
-        
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS])
-    {
-        NSString *firstQuestion = [currentTask.proofQuestions firstObject];
-        NSString *firstAnswer = [currentTask.proofQuestionAnswers firstObject];
-        NSString *secondQuestion;
-        NSString *secondAnswer;
-        NSString *thirdQuestion;
-        NSString *thirdAnswer;
-        
-        if ([currentTask.proofQuestions count] > 1) {
-            secondQuestion = currentTask.proofQuestions[1];
-            secondAnswer = currentTask.proofQuestionAnswers[1];
-            
-            thirdQuestion = [currentTask.proofQuestions lastObject];
-            thirdAnswer = [currentTask.proofQuestionAnswers lastObject];
-        }
-        
-        message = [NSString stringWithFormat:@"Here are my answers to the questions proving that I got this task done. Task: %@\n Question1:%@ Answer:%@\nQuestion2:%@ Answer:%@\nQuestion3:%@ Answer:%@", currentTask.title, firstQuestion, firstAnswer, secondQuestion, secondAnswer, thirdQuestion, thirdAnswer];
-    }
-    return message;
-}
-
-- (NSString *)messageForEmail
-{
-    NSString *message;
-    JWCTask *currentTask = [JWCTaskManager sharedManager].currentTask;
-    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE])
-    {
-        message = [NSString stringWithFormat:@"Here's my description proving that I got this task done. Task: %@\n Description:%@", currentTask.title, currentTask.proofDescribe];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
-    {
-        message = [NSString stringWithFormat:@"I took a picture proving that I got this task done. Task: %@\n. I've attached it.", currentTask.title];
-        
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS])
-    {
-        NSString *firstQuestion = [currentTask.proofQuestions firstObject];
-        NSString *firstAnswer = [currentTask.proofQuestionAnswers firstObject];
-        NSString *secondQuestion;
-        NSString *secondAnswer;
-        NSString *thirdQuestion;
-        NSString *thirdAnswer;
-        
-        if ([currentTask.proofQuestions count] > 1) {
-            secondQuestion = currentTask.proofQuestions[1];
-            secondAnswer = currentTask.proofQuestionAnswers[1];
-            
-            thirdQuestion = [currentTask.proofQuestions lastObject];
-            thirdAnswer = [currentTask.proofQuestionAnswers lastObject];
-        }
-        
-        message = [NSString stringWithFormat:@"Here are my answers to the questions proving that I got this task done. Task: %@\n Question1:%@ Answer:%@\nQuestion2:%@ Answer:%@\nQuestion3:%@ Answer:%@", currentTask.title, firstQuestion, firstAnswer, secondQuestion, secondAnswer, thirdQuestion, thirdAnswer];
-    }
-    return message;
 }
 
 #pragma mark - MFMessage/Mail Delegate methods
@@ -338,6 +270,7 @@
             NSLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
+            self.proofSent = YES;
             NSLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
@@ -348,8 +281,6 @@
     }
     
     // Close the Mail Interface
-    self.proofSent = YES;
-    self.buttonSubmitProof.enabled = YES;
     [_mailComposeViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [self pressedSubmitProof:nil];
     }];

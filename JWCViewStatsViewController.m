@@ -37,23 +37,19 @@
 {
     [super viewDidLoad];
     
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        self.imageViewBackground.image = [UIImage new];
-        self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-    } else {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
-    }
-    
+    self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+  
     _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
     
     _pointsLabel.font = DEFAULT_FONT;
     _pointsLabel.textColor = [UIColor darkGrayColor];
     [self.graphView addSubview:_pointsLabel];
     
+    
     self.graphView.animationGraphEntranceSpeed = 3;
     self.graphView.delegate = self;
     self.graphView.enableTouchReport = YES;
-    self.graphView.colorBottom = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_18.png"]];
+    self.graphView.colorBottom = DEFAULT_PIE_TITLE_COLOR;
     self.graphView.alpha = .5;
     [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
 }
@@ -81,22 +77,30 @@
 #pragma mark - BEMSimpleLineGraph Methods
 - (int)numberOfPointsInGraph
 {
-    return 10;
+    NSLog(@"%i", [[[JWCTaskManager sharedManager] getStatsDictionary] count]);
+    return [[[JWCTaskManager sharedManager] getStatsDictionary] count] > 4 ?: 4;
 }
 
 - (float)valueForIndex:(NSInteger)index
 {
-    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
-    return _defaultValues[index];
+    NSArray *pointsArray = [[[JWCTaskManager sharedManager] getStatsDictionary] allValues];
+    if ([pointsArray count] > index) {
+        NSNumber *points = (NSNumber *)pointsArray[index];
+        return points.floatValue;
+    } else {
+        return 5;
+    }
 }
 
 - (void)didTouchGraphWithClosestIndex:(int)index
 {
-    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
-    
-    
-    _pointsLabel.text = [NSString stringWithFormat:@"%i", _defaultValues[index]];
-    
+    NSMutableDictionary *datesAndPoints = [[JWCTaskManager sharedManager] getStatsDictionary];
+    if ([datesAndPoints count] > index) {
+        NSArray *datesArray = [datesAndPoints allKeys];
+        NSArray *pointsArray = [datesAndPoints allValues];
+        NSNumber *pointForDate = (NSNumber *)pointsArray[index];
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", (NSString *)datesArray[index], pointForDate.integerValue];
+    }
 }
 
 @end

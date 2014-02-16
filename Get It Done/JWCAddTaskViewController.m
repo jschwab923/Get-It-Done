@@ -40,12 +40,7 @@
 {
     [super viewDidLoad];
     
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        self.imageViewBackground.image = [UIImage new];
-        self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-    } else {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
-    }
+    self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     
     // Setup tap recognizer for dismissing keyboard
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];

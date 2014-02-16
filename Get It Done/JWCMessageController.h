@@ -13,5 +13,8 @@
 
 + (MFMessageComposeViewController *)getTextViewController;
 + (MFMailComposeViewController *)getEmailViewController;
++ (NSString *)messageForText;
++ (NSString *)messageForEmail;
+
 
 @end
