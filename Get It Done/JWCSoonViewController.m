@@ -70,6 +70,10 @@
 {
     [super viewDidLoad];
     
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
     self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     self.collectionViewTasks.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     
@@ -112,7 +116,6 @@
     UISwipeGestureRecognizer *downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewSwipedDown:)];
     [downSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
     
-    [self.collectionViewTasks addGestureRecognizer:sideSwipeGestureRecognizer];
     [self.collectionViewTasks addGestureRecognizer:downSwipeGestureRecognizer];
     
     //    [self setUpConstraintsAndFramesForCurrentDevice];
@@ -262,7 +265,7 @@
     
     // Get height of text
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    CGSize textSize = CGSizeMake(265, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     if (currentTask) {
@@ -273,7 +276,7 @@
                                                                            attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                                               context:nil];
         
-        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+20);
+        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+15);
         
         return roundedSize;
     }
@@ -284,7 +287,7 @@
 {
     // Get height of text
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    CGSize textSize = CGSizeMake(265.0, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     if (currentTask) {
@@ -302,59 +305,70 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Tapped the subtask cells
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    detailsLabel.numberOfLines = 0;
+    detailsLabel.center = self.view.center;
+    detailsLabel.font = DEFAULT_FONT;
+    detailsLabel.textColor = [UIColor whiteColor];
     
+    JWCSubtask *tappedSubtask = [JWCTaskManager sharedManager].currentTask.subTasks[indexPath.row];
+    NSString *stringForDetails = [NSString stringWithFormat:@"Worth %i percent of total", tappedSubtask.percent.intValue];
+    
+    detailsLabel.text = stringForDetails;
+    
+    [[KGModal sharedInstance] showWithContentView:detailsLabel];
 }
 
 #pragma mark - Touch Handling
 - (void)collectionViewCellSwiped:(UISwipeGestureRecognizer *)sideSwipe
 {
-    CGPoint swipePoint = [sideSwipe locationInView:self.collectionViewTasks];
+    JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)sideSwipe.view;
+    NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForCell:swipedCell];
+    [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
     
-    if (swipePoint.y > 50) { // Swiped a cell
-        NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:swipePoint];
-        JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)[self.collectionViewTasks cellForItemAtIndexPath:swipedCellIndexPath];
-        
-        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
-        
-        UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
-        tappedCellButton.selected = !tappedCellButton.selected;
-        
-        JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath .row];
-        selectedSubtask.done = !selectedSubtask.done;
-        
-        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
-        
-        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
-                                               withSubtask:selectedSubtask];
-        
-        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
-        
-        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
-            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
-        } completion:^(BOOL finished) {
-            if (currentProgressPercent >= .95) {
-                [self showDoneButton];
-            } else {
-                [self hideDoneButton];
-            }
-        }];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
-        
-    } else { // Swiped the header
-        
-    }
+    UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
+    tappedCellButton.selected = !tappedCellButton.selected;
+    
+    JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath.row];
+    selectedSubtask.done = !selectedSubtask.done;
+    
+    NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+    
+    [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
+                                           withSubtask:selectedSubtask];
+    
+    CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
+    
+    [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+        [self.progressViewPie setProgress:currentProgressPercent animated:YES];
+    } completion:^(BOOL finished) {
+        if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
+            [self showDoneButton];
+        } else {
+            [self hideDoneButton];
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
+    
 }
 
 - (void)collectionViewSwipedDown:(UISwipeGestureRecognizer *)downSwipe
 {
-    if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64) {
+    CGFloat scrollViewContentOffsetY = self.collectionViewTasks.contentOffset.y;
+    if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64 && scrollViewContentOffsetY == 0) {
         [UIView animateKeyframesWithDuration:.7 delay:0 options:0 animations:^{
             self.viewLabelProgressContainter.frame = _originalContainerViewFrame;
-            self.collectionViewTasks.frame = _originalCollectionViewFrame;
+            self.collectionViewTasks.frame = CGRectMake(_originalCollectionViewFrame.origin.x, _originalCollectionViewFrame.origin.y, CGRectGetWidth(_originalCollectionViewFrame), CGRectGetHeight(self.collectionViewTasks.frame));
         } completion:^(BOOL finished) {
-
+            self.collectionViewTasks.frame = _originalCollectionViewFrame;
+        }];
+    } else if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64 &&scrollViewContentOffsetY < -50) {
+        [UIView animateKeyframesWithDuration:.7 delay:0 options:0 animations:^{
+            self.viewLabelProgressContainter.frame = _originalContainerViewFrame;
+            self.collectionViewTasks.frame = CGRectMake(_originalCollectionViewFrame.origin.x, _originalCollectionViewFrame.origin.y, CGRectGetWidth(_originalCollectionViewFrame), CGRectGetHeight(self.collectionViewTasks.frame));
+        } completion:^(BOOL finished) {
+            self.collectionViewTasks.frame = _originalCollectionViewFrame;
         }];
     }
 }

@@ -40,11 +40,11 @@
     _currentDateString = [NSDate getCurrentMonthDayYearString];
     
     _defaultTask = [JWCTask new];
-    _defaultTask.title = @"Something to get done today. Tap for the description";
-    _defaultTask.taskDescription = @"This is a more detail description of what needs to get done";
+    _defaultTask.title = @"Something to get done today. Will reset each day. Tap for more info.";
+    _defaultTask.taskDescription = @"Tasks will reset at the beginning of each day, so make sure you get everything done! When you enter a task the description will show up here.";
     for (int i = 1; i < 5; i++) {
         JWCSubtask *defaultSubtask = [JWCSubtask new];
-        defaultSubtask.subTaskDescription = [NSString stringWithFormat:@"This is subtask #%i. Swipe right to mark it done.", i];
+        defaultSubtask.subTaskDescription = [NSString stringWithFormat:@"This is subtask #%i. Swipe right to mark it done, left to undo marking it done. Tap for details.", i];
         defaultSubtask.percent = @(100/4);
         [_defaultTask.subTasks addObject:defaultSubtask];
     }
@@ -75,14 +75,6 @@
     return _doneTasks;
 }
 
-- (NSArray *)stats
-{
-    if (!_stats) {
-        _stats = [NSMutableArray new];
-    }
-    return _stats;
-}
-
 - (JWCTask *)currentTask
 {
     if (!_currentTask) {
@@ -99,6 +91,7 @@
     if (!_tasks) {
         _tasks = [NSMutableArray new];
     }
+    
     [_tasks addObject:task];
 }
 
@@ -152,7 +145,9 @@
 #pragma mark - Loading and saving methods
 - (void)loadCurrentTasks
 {
-    _tasks = [self loadObjectFromFile:@"CurrentTasks" fromFolder:@"CurrentTasksFolder"];
+    if ([_currentDateString isEqualToString:[[_statsManager.datesAndPoints allKeys] firstObject]]) {
+        _tasks = [[self loadObjectFromFile:@"CurrentTasks" fromFolder:@"CurrentTasksFolder"] mutableCopy];
+    }
     
     self.pendingTask = [[JWCTask alloc] init];
     self.currentTask = [_tasks firstObject];
@@ -160,12 +155,15 @@
 
 - (void)loadDoneTasks
 {
-    self.doneTasks = [self loadObjectFromFile:@"DoneTasks" fromFolder:@"DoneTasksFolder"];
+    self.doneTasks = [[self loadObjectFromFile:@"DoneTasks" fromFolder:@"DoneTasksFolder"] mutableCopy];
 }
 
 - (BOOL)saveCurrentTasks
 {
-    return [self createFolder:@"CurrentTasksFolder" andFile:@"CurrentTasks" withObject:self.tasks];
+    if (!(self.currentTask == _defaultTask)) {
+        return [self createFolder:@"CurrentTasksFolder" andFile:@"CurrentTasks" withObject:self.tasks];
+    }
+    return YES;
 }
 
 - (BOOL)saveDoneTasks
@@ -202,7 +200,7 @@
     NSString *currentTasksFilePath = [currentTasksDirectory stringByAppendingPathComponent:file];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:currentTasksDirectory]) {
-        return [[NSKeyedUnarchiver unarchiveObjectWithFile:currentTasksFilePath] mutableCopy];
+        return [NSKeyedUnarchiver unarchiveObjectWithFile:currentTasksFilePath];
     } else {
         return nil;
     }
@@ -212,6 +210,10 @@
 {
     if (!(_statsManager = [self loadObjectFromFile:@"statsManager" fromFolder:@"StatsFolder"])) {
         _statsManager = [JWCStatsManager new];
+    }
+    _currentDateString = [NSDate getCurrentMonthDayYearString];
+    if (![_statsManager.datesAndPoints objectForKey:_currentDateString]) {
+        [_statsManager.datesAndPoints setObject:[NSNumber numberWithInt:0] forKey:_currentDateString];
     }
 }
 

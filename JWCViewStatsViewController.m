@@ -11,6 +11,7 @@
 #import "BEMSimpleLineGraphView.h"
 #import "JWCTaskManager.h"
 #import "KGModal.h"
+#import "NSDate+DateFormatter.h"
 
 @interface JWCViewStatsViewController () <BEMSimpleLineGraphDelegate, BEMAnimationDelegate>
 {
@@ -39,18 +40,19 @@
     
     self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
   
-    _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+    _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 250, 150)];
     
-    _pointsLabel.font = DEFAULT_FONT;
-    _pointsLabel.textColor = [UIColor darkGrayColor];
-    [self.graphView addSubview:_pointsLabel];
+    _pointsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:30];
+    _pointsLabel.textColor = DEFAULT_TEXT_COLOR;
+    _pointsLabel.numberOfLines = 0;
+    [self.view addSubview:_pointsLabel];
     
     
     self.graphView.animationGraphEntranceSpeed = 3;
     self.graphView.delegate = self;
     self.graphView.enableTouchReport = YES;
     self.graphView.colorBottom = DEFAULT_PIE_TITLE_COLOR;
-    self.graphView.alpha = .5;
+    self.graphView.colorLine = [UIColor clearColor];
     [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
 }
 
@@ -58,6 +60,15 @@
 {
     [super viewWillAppear:animated];
     [self.graphView reloadGraph];
+    
+    NSMutableDictionary *datesAndPoints = [[JWCTaskManager sharedManager] getStatsDictionary];
+    NSString *currentDate = [NSDate getCurrentMonthDayYearString];
+    if ([datesAndPoints objectForKey:currentDate]) {
+        NSNumber *points = [datesAndPoints objectForKey:currentDate];
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", currentDate, points.intValue];
+    } else {
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:\nPoints:"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,7 +88,6 @@
 #pragma mark - BEMSimpleLineGraph Methods
 - (int)numberOfPointsInGraph
 {
-    NSLog(@"%i", [[[JWCTaskManager sharedManager] getStatsDictionary] count]);
     return [[[JWCTaskManager sharedManager] getStatsDictionary] count] > 4 ?: 4;
 }
 
@@ -88,7 +98,7 @@
         NSNumber *points = (NSNumber *)pointsArray[index];
         return points.floatValue;
     } else {
-        return 5;
+        return 0;
     }
 }
 
@@ -100,6 +110,8 @@
         NSArray *pointsArray = [datesAndPoints allValues];
         NSNumber *pointForDate = (NSNumber *)pointsArray[index];
         _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", (NSString *)datesArray[index], pointForDate.integerValue];
+    } else {
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:\nPoints:"];
     }
 }
 

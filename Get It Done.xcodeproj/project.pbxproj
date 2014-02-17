@@ -25,15 +25,10 @@
 		6B0E709D18A73820002B249D /* iPhone4S_5landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E709C18A73820002B249D /* iPhone4S_5landscape@2x.png */; };
 		6B11A3FF18A5973E009FBDCB /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6B11A3FE18A5973E009FBDCB /* license.txt */; };
 		6B11A40118A59775009FBDCB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B11A40018A59775009FBDCB /* README.md */; };
-		6B11A40318A597B0009FBDCB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B11A40218A597B0009FBDCB /* README.md */; };
 		6B135F7018A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F6F18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m */; };
 		6B135F7418A8267E001046CD /* JWCTaskDoneQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F7318A8267E001046CD /* JWCTaskDoneQuestionsViewController.m */; };
 		6B135F7718A82689001046CD /* JWCTaskDonePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F7618A82689001046CD /* JWCTaskDonePictureViewController.m */; };
 		6B1394D218A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B1394D118A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png */; };
-		6B1394DC18A4C9F200CB32FA /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1394D518A4C9F200CB32FA /* BEMAnimations.m */; };
-		6B1394DD18A4C9F200CB32FA /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1394D718A4C9F200CB32FA /* BEMCircle.m */; };
-		6B1394DE18A4C9F200CB32FA /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1394D918A4C9F200CB32FA /* BEMLine.m */; };
-		6B1394DF18A4C9F200CB32FA /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1394DB18A4C9F200CB32FA /* BEMSimpleLineGraphView.m */; };
 		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
 		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
 		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
@@ -60,6 +55,12 @@
 		6B799C4018B14363008B1113 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C3C18B14363008B1113 /* README.md */; };
 		6B799C4318B14FD6008B1113 /* JWCStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4218B14FD6008B1113 /* JWCStatsManager.m */; };
 		6B799C4618B15540008B1113 /* NSDate+DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4518B15540008B1113 /* NSDate+DateFormatter.m */; };
+		6B799C6B18B161F6008B1113 /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4B18B161F6008B1113 /* BEMAnimations.m */; };
+		6B799C6C18B161F6008B1113 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4D18B161F6008B1113 /* BEMCircle.m */; };
+		6B799C6D18B161F6008B1113 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C4F18B161F6008B1113 /* BEMLine.m */; };
+		6B799C6E18B161F6008B1113 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C5118B161F6008B1113 /* BEMSimpleLineGraphView.m */; };
+		6B799C6F18B161F6008B1113 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C5218B161F6008B1113 /* LICENSE */; };
+		6B799C7018B161F6008B1113 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C5318B161F6008B1113 /* README.md */; };
 		6B7B6A0D18AB3C490099A60F /* iPhone5_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A0C18AB3C490099A60F /* iPhone5_6@2x.png */; };
 		6B7B6A1018AB3F8E0099A60F /* iPhone5_6Blurred@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */; };
 		6B7B6A1318AB416C0099A60F /* iPhone4S_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */; };
@@ -153,7 +154,6 @@
 		6B0E709C18A73820002B249D /* iPhone4S_5landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4S_5landscape@2x.png"; sourceTree = "<group>"; };
 		6B11A3FE18A5973E009FBDCB /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		6B11A40018A59775009FBDCB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		6B11A40218A597B0009FBDCB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6B135F6E18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCReusableFooterAddSubtaskModalView.h; path = "Get It Done/JWCReusableFooterAddSubtaskModalView.h"; sourceTree = "<group>"; };
 		6B135F6F18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCReusableFooterAddSubtaskModalView.m; path = "Get It Done/JWCReusableFooterAddSubtaskModalView.m"; sourceTree = "<group>"; };
 		6B135F7218A8267E001046CD /* JWCTaskDoneQuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCTaskDoneQuestionsViewController.h; sourceTree = "<group>"; };
@@ -161,14 +161,6 @@
 		6B135F7518A82689001046CD /* JWCTaskDonePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCTaskDonePictureViewController.h; sourceTree = "<group>"; };
 		6B135F7618A82689001046CD /* JWCTaskDonePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCTaskDonePictureViewController.m; sourceTree = "<group>"; };
 		6B1394D118A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone5_33DarkUpperRight@2x.png"; path = "../../../../../Pictures/Get It Done Elements/Backgrounds/iPhone5_33DarkUpperRight@2x.png"; sourceTree = "<group>"; };
-		6B1394D418A4C9F200CB32FA /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
-		6B1394D518A4C9F200CB32FA /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
-		6B1394D618A4C9F200CB32FA /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
-		6B1394D718A4C9F200CB32FA /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
-		6B1394D818A4C9F200CB32FA /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
-		6B1394D918A4C9F200CB32FA /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
-		6B1394DA18A4C9F200CB32FA /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
-		6B1394DB18A4C9F200CB32FA /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		6B17890A189D8CDD003664C5 /* SAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMath.h; sourceTree = "<group>"; };
 		6B17890B189D8CDD003664C5 /* SAMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMath.m; sourceTree = "<group>"; };
 		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
@@ -218,6 +210,16 @@
 		6B799C4218B14FD6008B1113 /* JWCStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCStatsManager.m; path = "Get It Done/JWCStatsManager.m"; sourceTree = "<group>"; };
 		6B799C4418B15540008B1113 /* NSDate+DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormatter.h"; sourceTree = "<group>"; };
 		6B799C4518B15540008B1113 /* NSDate+DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormatter.m"; sourceTree = "<group>"; };
+		6B799C4A18B161F6008B1113 /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
+		6B799C4B18B161F6008B1113 /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
+		6B799C4C18B161F6008B1113 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		6B799C4D18B161F6008B1113 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		6B799C4E18B161F6008B1113 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		6B799C4F18B161F6008B1113 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		6B799C5018B161F6008B1113 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		6B799C5118B161F6008B1113 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
+		6B799C5218B161F6008B1113 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6B799C5318B161F6008B1113 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6B7B6A0C18AB3C490099A60F /* iPhone5_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_6@2x.png"; sourceTree = "<group>"; };
 		6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_6Blurred@2x.png"; sourceTree = "<group>"; };
 		6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4S_6@2x.png"; sourceTree = "<group>"; };
@@ -369,22 +371,6 @@
 				6B135F7618A82689001046CD /* JWCTaskDonePictureViewController.m */,
 			);
 			name = "Task Done Controllers";
-			sourceTree = "<group>";
-		};
-		6B1394D318A4C9F200CB32FA /* BEMLineGraph */ = {
-			isa = PBXGroup;
-			children = (
-				6B11A40218A597B0009FBDCB /* README.md */,
-				6B1394D418A4C9F200CB32FA /* BEMAnimations.h */,
-				6B1394D518A4C9F200CB32FA /* BEMAnimations.m */,
-				6B1394D618A4C9F200CB32FA /* BEMCircle.h */,
-				6B1394D718A4C9F200CB32FA /* BEMCircle.m */,
-				6B1394D818A4C9F200CB32FA /* BEMLine.h */,
-				6B1394D918A4C9F200CB32FA /* BEMLine.m */,
-				6B1394DA18A4C9F200CB32FA /* BEMSimpleLineGraphView.h */,
-				6B1394DB18A4C9F200CB32FA /* BEMSimpleLineGraphView.m */,
-			);
-			path = BEMLineGraph;
 			sourceTree = "<group>";
 		};
 		6B178909189D8CDD003664C5 /* SAMultisectorControl */ = {
@@ -575,6 +561,31 @@
 				6B799C3818B14363008B1113 /* APContact.h */,
 				6B799C3918B14363008B1113 /* APContact.m */,
 				6B799C3A18B14363008B1113 /* APTypes.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6B799C4718B161F6008B1113 /* BEMSimpleLineGraph-master */ = {
+			isa = PBXGroup;
+			children = (
+				6B799C4918B161F6008B1113 /* Classes */,
+				6B799C5218B161F6008B1113 /* LICENSE */,
+				6B799C5318B161F6008B1113 /* README.md */,
+			);
+			path = "BEMSimpleLineGraph-master";
+			sourceTree = "<group>";
+		};
+		6B799C4918B161F6008B1113 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6B799C4A18B161F6008B1113 /* BEMAnimations.h */,
+				6B799C4B18B161F6008B1113 /* BEMAnimations.m */,
+				6B799C4C18B161F6008B1113 /* BEMCircle.h */,
+				6B799C4D18B161F6008B1113 /* BEMCircle.m */,
+				6B799C4E18B161F6008B1113 /* BEMLine.h */,
+				6B799C4F18B161F6008B1113 /* BEMLine.m */,
+				6B799C5018B161F6008B1113 /* BEMSimpleLineGraphView.h */,
+				6B799C5118B161F6008B1113 /* BEMSimpleLineGraphView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -806,8 +817,8 @@
 		6BFFC73818A2E03E0099ACB0 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				6B799C4718B161F6008B1113 /* BEMSimpleLineGraph-master */,
 				6B799C3218B14363008B1113 /* APAddressBook-master */,
-				6B1394D318A4C9F200CB32FA /* BEMLineGraph */,
 				6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */,
 				6B178909189D8CDD003664C5 /* SAMultisectorControl */,
 				6BFFC73718A2E02B0099ACB0 /* KGModalView */,
@@ -900,7 +911,6 @@
 				6B11A3FF18A5973E009FBDCB /* license.txt in Resources */,
 				6BF5BF26189B645200B4EA9C /* Main_iPad.storyboard in Resources */,
 				6B11A40118A59775009FBDCB /* README.md in Resources */,
-				6B11A40318A597B0009FBDCB /* README.md in Resources */,
 				6B0E708918A6FEF9002B249D /* iPhone5_18landscapeflipped@2x.png in Resources */,
 				6B0E709618A731D2002B249D /* iPhone5_5DarkDown@2x.png in Resources */,
 				6BFD0A3C189C6A92008C3698 /* iPhone5_34@2x.png in Resources */,
@@ -925,6 +935,8 @@
 				6BF5316E18A4D7D700D90E5E /* iPhone5_15@2x.png in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,
 				6B799C4018B14363008B1113 /* README.md in Resources */,
+				6B799C7018B161F6008B1113 /* README.md in Resources */,
+				6B799C6F18B161F6008B1113 /* LICENSE in Resources */,
 				6B0E709D18A73820002B249D /* iPhone4S_5landscape@2x.png in Resources */,
 				6B7B6A0D18AB3C490099A60F /* iPhone5_6@2x.png in Resources */,
 				6BF5BF1A189B645200B4EA9C /* InfoPlist.strings in Resources */,
@@ -952,16 +964,15 @@
 			files = (
 				6B0D66B818A86F900093FE74 /* JWCCollectionViewFooterContactTypeChooser.m in Sources */,
 				6B7705BB18A175B9007DF72D /* JWCTaskDescriptionCollectionViewCell.m in Sources */,
-				6B1394DC18A4C9F200CB32FA /* BEMAnimations.m in Sources */,
 				6B799C3E18B14363008B1113 /* APContact.m in Sources */,
 				6B501C5418A16629005478E6 /* JWCCollectionViewHeaderAddTask.m in Sources */,
 				6B799C4318B14FD6008B1113 /* JWCStatsManager.m in Sources */,
+				6B799C6D18B161F6008B1113 /* BEMLine.m in Sources */,
 				6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m in Sources */,
 				6B0E708C18A703A8002B249D /* JWCCollectionHeaderPartner.m in Sources */,
 				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
 				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
 				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,
-				6B1394DF18A4C9F200CB32FA /* BEMSimpleLineGraphView.m in Sources */,
 				6BFD0A63189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m in Sources */,
 				6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */,
 				6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */,
@@ -972,6 +983,7 @@
 				6B477ECF18A1D89500A1CD9A /* JWCTask.m in Sources */,
 				6B0E708F18A70401002B249D /* JWCSearchBar.m in Sources */,
 				6BFD0A2E189C5C4D008C3698 /* JWCViewControllerAnimatedTransition.m in Sources */,
+				6B799C6C18B161F6008B1113 /* BEMCircle.m in Sources */,
 				6BFD0A6B189C6FC3008C3698 /* M13ProgressViewSegmentedBar.m in Sources */,
 				6BFFC73E18A2E16C0099ACB0 /* JWCTaskPartner.m in Sources */,
 				6BF5BF1C189B645200B4EA9C /* main.m in Sources */,
@@ -984,9 +996,9 @@
 				6B271D8018A2AC8A00518805 /* JWCBottomUpSegue.m in Sources */,
 				6B0E709218A70477002B249D /* JWCCollectionViewCellContact.m in Sources */,
 				6B271D8318A2ACEE00518805 /* JWCViewStatsViewController.m in Sources */,
+				6B799C6E18B161F6008B1113 /* BEMSimpleLineGraphView.m in Sources */,
 				6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */,
 				6BFD0A6D189C6FC3008C3698 /* M13ProgressViewStripedBar.m in Sources */,
-				6B1394DE18A4C9F200CB32FA /* BEMLine.m in Sources */,
 				6BFD0A6C189C6FC3008C3698 /* M13ProgressViewSegmentedRing.m in Sources */,
 				6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */,
 				6B799C3D18B14363008B1113 /* APAddressBook.m in Sources */,
@@ -1000,11 +1012,11 @@
 				6BF5BF29189B645200B4EA9C /* JWCRootViewController.m in Sources */,
 				6BFD0A62189C6FC3008C3698 /* UIImage+ImageEffects.m in Sources */,
 				6BFD0A2B189C547E008C3698 /* JWCTaskDoneDescribeViewController.m in Sources */,
+				6B799C6B18B161F6008B1113 /* BEMAnimations.m in Sources */,
 				6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */,
 				6B7705BE18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m in Sources */,
 				6BFD0A71189C7410008C3698 /* UIColor+GetItDoneColors.m in Sources */,
 				6BF5BF4D189B64DB00B4EA9C /* JWCAddTaskViewController.m in Sources */,
-				6B1394DD18A4C9F200CB32FA /* BEMCircle.m in Sources */,
 				6B135F7718A82689001046CD /* JWCTaskDonePictureViewController.m in Sources */,
 				6BFD0A61189C6FC3008C3698 /* M13ProgressHUD.m in Sources */,
 				6B17890E189D8CDD003664C5 /* SAMath.m in Sources */,

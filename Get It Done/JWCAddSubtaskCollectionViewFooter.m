@@ -131,12 +131,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (_totalPercentLeft == 0) {
+    if ((100-[self currentTotalPercent]) == 0) {
         return [[JWCTaskManager sharedManager].pendingTask.subTasks count];
     } else if ([[JWCTaskManager sharedManager].pendingTask.subTasks count]) {
         return [[JWCTaskManager sharedManager].pendingTask.subTasks count] + 1;
     }
-    return _addSubtaskModalButtonPressedCount < 3 ? _addSubtaskModalButtonPressedCount : [[JWCTaskManager sharedManager].pendingTask.subTasks count] + 1;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -179,12 +179,12 @@
         [_subtasksCollectionView addSubview:_labelPercentLeft];
         _labelPercentLeft.textColor = DEFAULT_TEXT_COLOR;
         _labelPercentLeft.frame = CGRectMake(0, CGRectGetMinY(currentView.frame) , 200, CGRectGetHeight(currentView.frame));
-        
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Total Percent Left: %lu",(long)(100 -[self currentTotalPercent])];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent Left: %lu",(long)(100 - [self currentTotalPercent])];
         
         [tempView.addButton addTarget:self
                                action:@selector(pressedAddSubtaskModalButton:)
                      forControlEvents:UIControlEventTouchUpInside];
+        _currentFooterCell.addButton.enabled = NO;
         
         if (_totalPercentLeft < 1) {
             _currentFooterCell.addButton.enabled = NO;
@@ -215,8 +215,16 @@
     NSMutableArray *pendingSubtasks = [[JWCTaskManager sharedManager] pendingTask].subTasks;
     NSArray *visibleIndexPaths = [_subtasksCollectionView indexPathsForVisibleItems];
     
+    BOOL textFieldEmpty = NO;
+    
     for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
         JWCCollectionViewCellTitlePoints *currentCell = (JWCCollectionViewCellTitlePoints *)[_subtasksCollectionView cellForItemAtIndexPath:currentIndexPath];
+        
+        if ([currentCell.title.text isEqualToString:@""] ||
+            [currentCell.points.text isEqualToString:@""])
+        {
+            textFieldEmpty = YES;
+        }
         
         if (![currentCell.title.text isEqualToString:@""] &&
             ![currentCell.points.text isEqualToString:@""]) {
@@ -236,13 +244,21 @@
     NSInteger currentTotalPercent = [self currentTotalPercent];
     if (currentTotalPercent == 100) {
         _currentFooterCell.addButton.enabled = NO;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 -currentTotalPercent)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 - currentTotalPercent)];
+        [KGModal sharedInstance].tapOutsideToDismiss = YES;
+        [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeLeft;
     } else if (currentTotalPercent > 100) {
         _currentFooterCell.addButton.enabled = NO;
+        [KGModal sharedInstance].tapOutsideToDismiss = NO;
+        [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
         _labelPercentLeft.text = [NSString stringWithFormat:@"Invalid Percent: %i over", (currentTotalPercent-100)];
-    } else {
-        _currentFooterCell.addButton.enabled = YES;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 -currentTotalPercent)];
+    } else if (currentTotalPercent != 0){
+        if (!textFieldEmpty) {
+            [KGModal sharedInstance].tapOutsideToDismiss = YES;
+            [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeLeft;
+            _currentFooterCell.addButton.enabled = YES;
+        }
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 - currentTotalPercent)];
     }
     
     return YES;
@@ -250,6 +266,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    _currentFooterCell.addButton.enabled = NO;
     _selectedTextField = textField;
     return YES;
 }
@@ -279,19 +296,25 @@
     
     CGFloat bottomCurrentFooter = CGRectGetMaxY(_currentFooterCell.frame);
     CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
+    CGFloat keyboardEndY = CGRectGetMinY(keyboardEndFrame);
+    CGFloat differenceBetweenYAndHeight = keyboardEndY - keyboardEndHeight;
     
     if (bottomCurrentFooter >= keyboardEndHeight) {
         CGFloat difference = bottomCurrentFooter - keyboardEndHeight;
+        if ([UIScreen mainScreen].bounds.size.height == 480) {
+            difference += differenceBetweenYAndHeight;
+        }
         _keyboardOffset = CGPointMake(0, difference);
         [_subtasksCollectionView setContentOffset:_keyboardOffset animated:YES];
+
     }
     
 }
 
 - (void)keyboardNotificationDismissed:(NSNotification *)note
 {
-    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
-    [_subtasksCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
+//    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
+//    [_subtasksCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
 }
 
 #pragma mark - Touch Handling

@@ -20,8 +20,6 @@
 // Used to persist temporary progress when adding a task
 @property (nonatomic) JWCTask *pendingTask;
 
-@property (nonatomic) NSMutableArray *stats;
-
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;

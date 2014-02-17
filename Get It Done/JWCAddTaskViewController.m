@@ -69,7 +69,7 @@
     
     if (![JWCTaskManager sharedManager].pendingTask.proofType) {
         JWCCollectionViewCellProof *proofCell = (JWCCollectionViewCellProof *)[self.collectionViewAddTask cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-        
+        [JWCTaskManager sharedManager].pendingTask.proofType = PROOF_TYPE_DESCRIBE;
         [proofCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
     }
 }
@@ -121,17 +121,8 @@
         CGRect roundedSizeFrame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.8, ceil(boundingRect.size.height)+15);
         confirmationLabel.frame = roundedSizeFrame;
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
-    } else {
-        confirmationLabel.text = @"Pending task updated. Press + to commit to getting it done!";
-        CGRect boundingRect = [confirmationLabel.text
-                               boundingRectWithSize:fontSize
-                               options:NSStringDrawingUsesLineFragmentOrigin
-                               attributes:[NSDictionary dictionaryWithObjectsAndKeys:confirmationLabel.font, NSFontAttributeName, nil] context:nil];
-        CGRect roundedSizeFrame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.8, ceil(boundingRect.size.height)+15);
-        confirmationLabel.frame = roundedSizeFrame;
-        [[KGModal sharedInstance] showWithContentView:confirmationLabel];
+        [self.collectionViewAddTask reloadData];
     }
-
 }
 
 #pragma mark - Gesture Recognizer Methods

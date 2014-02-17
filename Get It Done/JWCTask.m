@@ -57,7 +57,6 @@
         if (currentSubtask.percent < 0) {
             return YES;
         }
-            
     }
     
     return

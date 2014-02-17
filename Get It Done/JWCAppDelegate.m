@@ -28,13 +28,13 @@
                                            forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[UIImage new]];
     
-        
+    
+    [[JWCTaskManager sharedManager] loadStatsManager];    
     [[JWCTaskManager sharedManager] loadCurrentTasks];
     
     NSOperationQueue *loadQueue = [NSOperationQueue new];
     [loadQueue addOperationWithBlock:^{
         [[JWCTaskManager sharedManager] loadDoneTasks];
-        [[JWCTaskManager sharedManager] loadStatsManager];
     }];
     
     return YES;

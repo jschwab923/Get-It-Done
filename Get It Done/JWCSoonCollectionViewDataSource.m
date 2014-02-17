@@ -11,6 +11,7 @@
 #import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
 #import "JWCSubtask.h"
+#import "KGModal.h"
 #import "JWCViewLine.h"
 
 @interface JWCSoonCollectionViewDataSource ()
@@ -44,11 +45,18 @@
     JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
     JWCViewLine *underline = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(subTaskCell.frame)-1, CGRectGetWidth(subTaskCell.frame), 1)];
     
+    // Setup task done gesture recognier
+    UISwipeGestureRecognizer *sideSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwiped:)];
+    [sideSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+    [subTaskCell addGestureRecognizer:sideSwipeGestureRecognizer];
+    
     // Default properties
     if (subTaskCell.underLine) {
-        subTaskCell.underLine = nil;
+        [subTaskCell.underLine removeFromSuperview];
     }
+    
     subTaskCell.underLine = underline;
+    [subTaskCell addSubview:underline];
     
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
@@ -69,7 +77,11 @@
 {
     UICollectionReusableView *supplementaryElement;
     if (kind == UICollectionElementKindSectionHeader) {
+    
         JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
+        
+        UITapGestureRecognizer *tapGestureHeaderCell = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedHeader:)];
+        [headerCell addGestureRecognizer:tapGestureHeaderCell];
         
         _currentHeader = headerCell;
         
@@ -109,6 +121,31 @@
         }
     }
     [_currentHeader.imageViewSmiley setNeedsDisplay];
+}
+
+#pragma mark - Gesture Recognizer Methods
+- (void)tappedHeader:(UITapGestureRecognizer *)tapGesture
+{
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    NSString *currentTaskDescription = [JWCTaskManager sharedManager].currentTask.taskDescription;
+
+    CGRect boundingRect = [currentTaskDescription boundingRectWithSize:textSize
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                           attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+                                                              context:nil];
+        
+    CGSize roundedSize = CGSizeMake(225, ceil(boundingRect.size.height)+20);
+    
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, roundedSize.width, roundedSize.height)];
+    
+    detailsLabel.numberOfLines = 0;
+    detailsLabel.font = DEFAULT_FONT;
+    detailsLabel.textColor = [UIColor whiteColor];
+    
+    detailsLabel.text = currentTaskDescription;
+    
+    [[KGModal sharedInstance] showWithContentView:detailsLabel];
 }
 
 @end

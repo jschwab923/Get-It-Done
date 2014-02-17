@@ -16,48 +16,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Get It Done/JWCSoonCollectionViewDataSource.m"
-            timestampString = "414210004.038707"
+            filePath = "Get It Done/JWCTaskManager.m"
+            timestampString = "414289279.618112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-collectionView:numberOfItemsInSection:"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-currentTask"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Get It Done/JWCSoonCollectionViewDataSource.m"
-            timestampString = "414210005.446107"
+            filePath = "Get It Done/JWCTaskManager.m"
+            timestampString = "414289281.269888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-tasks"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Get It Done/JWCSoonViewController.m"
-            timestampString = "414210021.128792"
+            filePath = "Get It Done/JWCTaskManager.m"
+            timestampString = "414289283.152365"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-addTask:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
