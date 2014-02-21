@@ -14,15 +14,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+    
     }
     return self;
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-// 
-//}
+- (void)drawRect:(CGRect)rect
+{
+    self.subTaskTextView.textColor = DEFAULT_TEXT_COLOR;
+    self.subTaskTextView.font = DEFAULT_FONT;
+}
 
 
 @end

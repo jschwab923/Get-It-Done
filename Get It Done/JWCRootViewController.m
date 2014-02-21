@@ -33,7 +33,6 @@
     [super prepareForSegue:segue sender:sender];
     
     UIViewController *destinationViewController = segue.destinationViewController;
-    
     destinationViewController.transitioningDelegate = self;
     destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
     

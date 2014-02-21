@@ -11,4 +11,6 @@
 @interface JWCSubtask : NSObject <NSCoding>
 @property (nonatomic) NSString *subTaskDescription;
 @property (nonatomic) NSNumber *percent;
+
+@property (nonatomic) NSInteger done;
 @end

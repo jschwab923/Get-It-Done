@@ -37,9 +37,25 @@
     }];
 }
 
-//- (NSArray *)arrayOfPeopleWithName:(NSString *)name
-//{
-//    
-//}
+- (NSArray *)arrayOfPeopleWithName:(NSString *)name
+{
+    if (!self.contacts) {
+        NSOperationQueue *contactsLoadQueue = [[NSOperationQueue alloc] init];
+        [contactsLoadQueue addOperationWithBlock:^{
+            [self getContactsArray];
+        }];
+    }
+        
+    
+    NSArray *arrayWithNames = [[NSArray alloc] init];
+    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"firstName BEGINSWITH [cd] %@",name];
+    
+    if (self.contacts) {
+        arrayWithNames = [self.contacts filteredArrayUsingPredicate:namePredicate];
+    } else {
+        arrayWithNames = nil;
+    }
+    return arrayWithNames;
+}
 
 @end

@@ -8,20 +8,36 @@
 
 #import <Foundation/Foundation.h>
 #import "JWCTask.h"
+#import "JWCSubtask.h"
 
 @interface JWCTaskManager : NSObject 
 
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
 
+@property (nonatomic) NSMutableArray *doneTasks;
+
 // Used to persist temporary progress when adding a task
 @property (nonatomic) JWCTask *pendingTask;
+
+@property (nonatomic) NSMutableArray *stats;
+
+//TODO: Make this depend on the actual subtask percent values
+@property (nonatomic, readwrite) CGFloat numberOfSubtasksDone;
 
 
 + (JWCTaskManager *)sharedManager;
 
 - (void)addTask:(JWCTask *)task;
 - (void)commitPendingTask;
-- (void)setUpTasksArray;
+- (void)currentTaskDone;
+- (CGFloat)getProgressPercent;
+- (void)updateTaskProgress:(NSNumber *)points withSubtask:(JWCSubtask *)subtask;
+
+- (void)loadCurrentTasks;
+- (BOOL)saveCurrentTasks;
+
+- (void)loadDoneTasks;
+- (BOOL)saveDoneTasks;
 
 @end

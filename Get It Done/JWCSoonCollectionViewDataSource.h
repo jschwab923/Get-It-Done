@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface JWCSoonCollectionViewDataSource : NSObject
-<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+<UICollectionViewDataSource>
 
 
 @end

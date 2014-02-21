@@ -11,6 +11,7 @@
 #import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
 #import "JWCSubtask.h"
+#import "JWCViewLine.h"
 
 @interface JWCSoonCollectionViewDataSource ()
 
@@ -26,12 +27,17 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
+    JWCViewLine *underline = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(subTaskCell.frame)-1, CGRectGetWidth(subTaskCell.frame), 1)];
     
-    //TODO: Customize cell based on current task
+    // Default properties
+    [subTaskCell addSubview:underline];
+    
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     NSMutableArray *subTasks = currentTask.subTasks;
     JWCSubtask *currentSubtask = (JWCSubtask *)subTasks[indexPath.row];
+    
+    subTaskCell.buttonSubtaskDone.selected = currentSubtask.done;
     
     subTaskCell.subTaskTextView.text = currentSubtask.subTaskDescription;
     //TODO: Display subtask percent
@@ -55,30 +61,5 @@
     }
     return supplementaryElement;
 }
-
-// TODO: Get cells resizing based on text view content
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
  
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
-    
-    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
-    
-    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
-                                                   options:NSStringDrawingUsesLineFragmentOrigin
-                                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
-                                                   context:nil];
-    CGSize roundedSize = CGSizeMake(ceil(boundingRect.size.width), ceil(boundingRect.size.height)+10);
-    
-    return roundedSize;
-}
-
-- (void)    collectionView:(UICollectionView *)collectionView
-  didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JWCTaskDoneViewController : UIViewController
+@interface JWCTaskDoneDescribeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 
 @end

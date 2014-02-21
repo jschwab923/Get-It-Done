@@ -10,6 +10,7 @@
 #import "JWCAddSubtaskCollectionViewFooter.h"
 
 @interface JWCAddTaskViewController : UIViewController
+<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewAddTask;
 

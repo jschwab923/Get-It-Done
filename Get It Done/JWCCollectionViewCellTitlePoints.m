@@ -18,6 +18,8 @@
         self.title = [[UITextField alloc] init];
         self.points = [[UITextField alloc] init];
         
+        self.frame = CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), CGRectGetHeight(frame));
+        
         self.title.placeholder = @"Title";
         self.points.placeholder = @"Points";
     }
@@ -28,16 +30,14 @@
 {
     self.title.frame = CGRectMake(5, 0, CGRectGetWidth(rect)*.7, 30);
     self.title.center = CGPointMake(self.title.center.x, CGRectGetMidY(rect));
-    self.title.backgroundColor = [UIColor whiteColor];
     self.title.layer.cornerRadius = 3;
     self.title.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
     self.title.tag = TAG_TITLE_TEXTVIEW;
     [self addSubview:self.title];
 
-    self.points.frame = CGRectMake(CGRectGetWidth(self.title.bounds)+10, 0, CGRectGetWidth(rect)*.25, 30);
+    self.points.frame = CGRectMake(CGRectGetWidth(self.title.frame)+10, 0, CGRectGetWidth(rect)*.25, 30);
     self.points.center = CGPointMake(self.points.center.x, CGRectGetMidY(rect));
     self.points.keyboardType = UIKeyboardTypeNumberPad;
-    self.points.backgroundColor = [UIColor whiteColor];
     self.points.layer.cornerRadius = 3;
     self.points.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17];
     self.points.tag = TAG_POINTS_TEXTVIEW;

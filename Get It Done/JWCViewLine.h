@@ -1,13 +1,13 @@
 //
-//  JWCLeftSegue.h
+//  JWCViewLine.h
 //  Get It Done
 //
-//  Created by Jeff Schwab on 2/5/14.
+//  Created by Jeff Schwab on 2/6/14.
 //  Copyright (c) 2014 Jeff Schwab. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface JWCLeftSegue : UIStoryboardSegue
+@interface JWCViewLine : UIView
 
 @end

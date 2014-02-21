@@ -11,6 +11,6 @@
 @interface JWCSoonCollectionViewHeader : UICollectionReusableView
 
 @property (weak, nonatomic) IBOutlet UITextView *taskDescriptionTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *taskImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewSmiley;
 
 @end

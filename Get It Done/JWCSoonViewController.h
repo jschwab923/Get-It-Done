@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface JWCSoonViewController : UIViewController
-<UICollectionViewDelegate, UIViewControllerTransitioningDelegate>
+<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end

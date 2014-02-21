@@ -15,7 +15,8 @@
 #import "JWCTaskDescriptionCollectionViewCell.h"
 #import "JWCCollectionViewCellTitlePoints.h"
 #import "JWCCollectionViewCellProof.h"
-#import "JWCCollectionViewFooterPartner.h"
+#import "JWCCollectionViewFooterAddPartner.h"
+#import "JWCViewLine.h"
 
 @interface JWCAddTaskCollectionViewDataSource ()
 
@@ -23,6 +24,7 @@
 
 @implementation JWCAddTaskCollectionViewDataSource
 
+#pragma mark - UICollectionViewDataSource Methods
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
@@ -46,7 +48,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     UICollectionViewCell *currentCell;
     
     switch (indexPath.section) {
@@ -57,7 +59,9 @@
                     currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
                     JWCCollectionViewCellTitlePoints *tempCell = (JWCCollectionViewCellTitlePoints *)currentCell;
                     tempCell.title.delegate = self;
+                    tempCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     tempCell.points.delegate = self;
+                    tempCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     break;
                 }
                 case 1:
@@ -65,6 +69,7 @@
                     currentCell = (JWCTaskDescriptionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
                     JWCTaskDescriptionCollectionViewCell *tempCell = (JWCTaskDescriptionCollectionViewCell *)currentCell;
                     tempCell.textViewDescription.delegate = self;
+                    tempCell.textViewDescription.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
                     break;
                 }
                 default:
@@ -91,49 +96,51 @@
         
         switch (indexPath.section) {
             case 0:
+            {
                 header.headerLabel.text = @"What needs to get done?";
+                JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.7, 1)];
+                titleUnderline.backgroundColor = [UIColor blackColor];
+                [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
+            }
             case 1:
+            {
                 header.headerLabel.text = @"How will you prove it's done?";
+                JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.8, 1)];
+                titleUnderline.backgroundColor = [UIColor blackColor];
+                [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
+            }
             default:
                 break;
         }
     } else if (kind == UICollectionElementKindSectionFooter) {
         switch (indexPath.section) {
             case 0:
+            {
                 reusableView = (JWCAddSubtaskCollectionViewFooter *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER forIndexPath:indexPath];
+                
+            }
                 break;
             case 1:
-                reusableView = (JWCCollectionViewFooterPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
+                reusableView = (JWCCollectionViewFooterAddPartner *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER forIndexPath:indexPath];
             default:
                 break;
         }
     }
-
+    
     return reusableView;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(250, 50);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(250, 50);
 }
 
 #pragma mark - UITextView/Field Delegate Methods
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    JWCTask *currentPendingTask = [[JWCTaskManager sharedManager] pendingTask];
     if (textField.tag == TAG_TITLE_TEXTVIEW) {
-        currentPendingTask.title = textField.text;
+        [[JWCTaskManager sharedManager] pendingTask].title = textField.text;
     } else if (textField.tag == TAG_POINTS_TEXTVIEW) {
-        currentPendingTask.points = [NSNumber numberWithInteger:[textField.text integerValue]];
+        [[JWCTaskManager sharedManager] pendingTask].points = [NSNumber numberWithInteger:[textField.text integerValue]];
     }
     return YES;
 }
@@ -145,6 +152,5 @@
     }
     return YES;
 }
-
 
 @end

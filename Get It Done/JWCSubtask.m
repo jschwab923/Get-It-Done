@@ -10,11 +10,20 @@
 
 @implementation JWCSubtask
 
+- (id)init
+{
+    if (self = [super init]) {
+        _done = NO;
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
         self.subTaskDescription = [aDecoder decodeObjectForKey:@"subTaskDescription"];
         self.percent = [aDecoder decodeObjectForKey:@"percent"];
+        self.done = [[aDecoder decodeObjectForKey:@"done"] integerValue];
     }
     return self;
 }
@@ -23,6 +32,7 @@
 {
     [aCoder encodeObject:self.subTaskDescription forKey:@"subTaskDescription"];
     [aCoder encodeObject:self.percent forKey:@"percent"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.done] forKey:@"done"];
 }
 
 @end

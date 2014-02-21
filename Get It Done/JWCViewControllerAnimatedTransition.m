@@ -29,12 +29,13 @@
         toViewController.view.center = CGPointMake(-CGRectGetWidth(fromViewController.view.frame)/2,fromViewController.view.center.y);
         [toViewController.view.layer setShadowColor:[UIColor blackColor].CGColor];
         [toViewController.view.layer setShadowOpacity:.5];
-        [toViewController.view.layer setShadowOffset:CGSizeMake(5, 5)];
+        [toViewController.view.layer setShadowOffset:CGSizeMake(7, 7)];
         
-        [UIView animateKeyframesWithDuration:.4 delay:0 options:0 animations:^{
+        [UIView animateWithDuration:.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGPoint fromViewOriginalCenter = fromViewController.view.center;
-            fromViewController.view.center = CGPointMake(CGRectGetWidth(fromViewController.view.frame) + fromViewOriginalCenter.x, fromViewOriginalCenter.y);
+            fromViewController.view.center = CGPointMake(CGRectGetWidth(fromViewController.view.frame), fromViewOriginalCenter.y);
             toViewController.view.center = fromViewOriginalCenter;
+            
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
         }];

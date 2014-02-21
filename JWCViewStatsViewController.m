@@ -8,8 +8,17 @@
 
 #import "JWCViewStatsViewController.h"
 #import "JWCViewControllerAnimatedTransition.h"
+#import "BEMSimpleLineGraphView.h"
+#import "JWCTaskManager.h"
+#import "KGModal.h"
 
-@interface JWCViewStatsViewController ()
+@interface JWCViewStatsViewController () <BEMSimpleLineGraphDelegate, BEMAnimationDelegate>
+{
+    UILabel *_pointsLabel;
+}
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
+
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *graphView;
 
 @end
 
@@ -27,7 +36,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
+    } else {
+        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
+    }
+    
+    _pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+    
+    _pointsLabel.font = DEFAULT_FONT;
+    _pointsLabel.textColor = [UIColor darkGrayColor];
+    [self.graphView addSubview:_pointsLabel];
+    
+    self.graphView.animationGraphEntranceSpeed = 3;
+    self.graphView.delegate = self;
+    self.graphView.enableTouchReport = YES;
+    self.graphView.colorBottom = [UIColor colorWithPatternImage:[UIImage imageNamed:@"iPhone5_18.png"]];
+    self.graphView.alpha = .5;
+    [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.graphView reloadGraph];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,31 +69,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Custom Transition Methods
-- (IBAction)pressedBack:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super prepareForSegue:self.segue sender:sender];
-    
-    UIViewController *destinationViewController = self.segue.destinationViewController;
+    UIViewController *destinationViewController = self.segue.sourceViewController;
     
     destinationViewController.transitioningDelegate = self;
     destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+#pragma mark - BEMSimpleLineGraph Methods
+- (int)numberOfPointsInGraph
 {
-    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
-    animator.presenting = YES;
-    return animator;
+    return 10;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+- (float)valueForIndex:(NSInteger)index
 {
-    JWCViewControllerAnimatedTransition *animator = [JWCViewControllerAnimatedTransition new];
-    return animator;
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
+    return _defaultValues[index];
 }
-- (IBAction)panGesturePanned:(id)sender
+
+- (void)didTouchGraphWithClosestIndex:(int)index
 {
+    int _defaultValues[] = {3, 8, 5, 7, 8, 10, 6, 10, 6, 4};
+    
+    
+    _pointsLabel.text = [NSString stringWithFormat:@"%i", _defaultValues[index]];
     
 }
 
