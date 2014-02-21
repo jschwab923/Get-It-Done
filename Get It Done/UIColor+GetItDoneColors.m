@@ -39,6 +39,36 @@
     return [UIColor colorWithRed:0.134 green:0.326 blue:0.483 alpha:1.000];
 }
 
++ (UIColor *)blueGrayColor
+{
+    return [UIColor colorWithRed:0.145 green:0.160 blue:0.198 alpha:1.000];
+}
+
++ (UIColor *)darkBlueGrayColor
+{
+    return [UIColor colorWithRed:0.077 green:0.092 blue:0.119 alpha:1.000];
+}
+
++ (UIColor *)lightBluePurpleColor
+{
+    return [UIColor colorWithRed:0.64 green:0.67 blue:0.83 alpha:1.000];
+}
+
++ (UIColor *)blueGreenColor
+{
+    return [UIColor colorWithRed:0.498 green:0.6 blue:0.596 alpha:1.000];
+}
+
++ (UIColor *)darkPurpleColor
+{
+    return [UIColor colorWithRed:0.245 green:0.219 blue:0.292 alpha:1.000];
+}
+
++ (UIColor *)lightDarkGrayColor
+{
+    return [UIColor colorWithRed:0.250 green:0.263 blue:0.296 alpha:1.000];
+}
+
 
 + (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor

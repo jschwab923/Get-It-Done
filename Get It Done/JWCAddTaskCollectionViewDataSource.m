@@ -53,32 +53,51 @@
     
     switch (indexPath.section) {
         case 0:
+        {
             switch (indexPath.row) {
                 case 0:
                 {
-                    currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
+                    currentCell = [collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
                     JWCCollectionViewCellTitlePoints *tempCell = (JWCCollectionViewCellTitlePoints *)currentCell;
                     tempCell.title.delegate = self;
-                    tempCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
+                    tempCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.6];
+                    tempCell.title.text = [JWCTaskManager sharedManager].pendingTask.title ?: @"";
                     tempCell.points.delegate = self;
-                    tempCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
+                    tempCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.6];
+                    NSInteger pendingPoints = [JWCTaskManager sharedManager].pendingTask.points.integerValue;
+                    if (pendingPoints > 0) {
+                        tempCell.points.text = [NSString stringWithFormat:@"%li", (long)pendingPoints];
+                    }
+                    
                     break;
                 }
                 case 1:
                 {
-                    currentCell = (JWCTaskDescriptionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
+                    currentCell = [collectionView dequeueReusableCellWithReuseIdentifier:REUSE_DESCRIPTION forIndexPath:indexPath];
                     JWCTaskDescriptionCollectionViewCell *tempCell = (JWCTaskDescriptionCollectionViewCell *)currentCell;
                     tempCell.textViewDescription.delegate = self;
-                    tempCell.textViewDescription.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
+                    tempCell.textViewDescription.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.6];
+                    tempCell.textViewDescription.text = [JWCTaskManager sharedManager].pendingTask.taskDescription ?: @"Describe what needs to get done";
                     break;
                 }
                 default:
                     break;
             }
             break;
+        }
         case 1:
-            currentCell = (JWCCollectionViewCellProof *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProofCell" forIndexPath:indexPath];
+        {
+            currentCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ProofCell" forIndexPath:indexPath];
+            JWCCollectionViewCellProof *tempCell = (JWCCollectionViewCellProof *)currentCell;
+            if ([[JWCTaskManager sharedManager].pendingTask.proofType isEqualToString: PROOF_TYPE_PICTURE]) {
+                [tempCell.pickerViewProof selectRow:0 inComponent:0 animated:YES];
+            } else if ([[JWCTaskManager sharedManager].pendingTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+                [tempCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
+            } else if ([[JWCTaskManager sharedManager].pendingTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+                [tempCell.pickerViewProof selectRow:2 inComponent:0 animated:YES];
+            }
             break;
+        }
         default:
             break;
     }
@@ -99,7 +118,6 @@
             {
                 header.headerLabel.text = @"What needs to get done?";
                 JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.7, 1)];
-                titleUnderline.backgroundColor = [UIColor blackColor];
                 [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
@@ -108,7 +126,6 @@
             {
                 header.headerLabel.text = @"How will you prove it's done?";
                 JWCViewLine *titleUnderline = [[JWCViewLine alloc] initWithFrame:CGRectMake(5, CGRectGetHeight(header.frame)*.9, CGRectGetWidth(header.headerLabel.frame)*.8, 1)];
-                titleUnderline.backgroundColor = [UIColor blackColor];
                 [header addSubview:titleUnderline];
                 reusableView = header;
                 break;
@@ -141,6 +158,21 @@
         [[JWCTaskManager sharedManager] pendingTask].title = textField.text;
     } else if (textField.tag == TAG_POINTS_TEXTVIEW) {
         [[JWCTaskManager sharedManager] pendingTask].points = [NSNumber numberWithInteger:[textField.text integerValue]];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField endEditing:YES];
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if (textView.tag == TAG_DESCRIPTION_TEXTFIELD &&
+        [textView.text isEqualToString:@"Describe what needs to get done"]) {
+        textView.text = @"";
     }
     return YES;
 }

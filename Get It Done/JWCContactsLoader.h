@@ -17,4 +17,5 @@
 - (NSArray *)arrayOfPeopleWithName:(NSString *)name;
 
 - (void)getContactsArray;
+
 @end

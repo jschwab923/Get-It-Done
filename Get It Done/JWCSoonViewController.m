@@ -20,7 +20,7 @@
 
 #import "JWCSoonCollectionViewDataSource.h"
 
-@interface JWCSoonViewController () 
+@interface JWCSoonViewController ()
 
 {
     NSLayoutConstraint *_landScapeCollectionViewTopConstraint;
@@ -33,6 +33,8 @@
     
     JWCViewLine *_underLine;
     
+    CGRect _originalContainerViewFrame;
+    CGRect _originalCollectionViewFrame;
 }
 
 //Only visible when all subtasks marked as done
@@ -59,7 +61,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        
     }
     return self;
 }
@@ -68,19 +70,21 @@
 {
     [super viewDidLoad];
     
-    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 568) {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE];
-    } else {
-        self.imageViewBackground.image = [UIImage imageNamed:PORTRAIT_IMAGE4];
-    }
+    self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+    self.collectionViewTasks.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+    
+    self.viewLabelProgressContainter.backgroundColor = DEFAULT_FOREGROUND_COLOR;
+    self.viewLabelProgressContainter.autoresizesSubviews = YES;
+    self.viewLabelProgressContainter.layer.shadowColor = [UIColor colorWithRed:0.110 green:0.040 blue:0.194 alpha:0.620].CGColor;
+    self.viewLabelProgressContainter.layer.shadowOffset = CGSizeMake(0, -3);
+    [self.view bringSubviewToFront:self.viewLabelProgressContainter];
+    _originalContainerViewFrame = self.viewLabelProgressContainter.frame;
     
     self.label.textColor = DEFAULT_PIE_TITLE_COLOR;
     
-    _underLine = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.collectionViewTasks.frame), CGRectGetWidth(self.view.frame), 1)];
-    _underLine.layer.shadowOpacity = .8;
-    _underLine.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-    [self.view addSubview:_underLine];
-
+    _underLine = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.collectionViewTasks.frame)-3, CGRectGetWidth(self.viewLabelProgressContainter.frame), 1)];
+    [self.viewLabelProgressContainter addSubview:_underLine];
+    
     
     self.progressViewPie = [[M13ProgressViewPie alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
     [self.progressContainerView addSubview:self.progressViewPie];
@@ -95,34 +99,46 @@
     self.doneButton.font = DEFAULT_FONT;
     self.doneButton.textColor = [UIColor colorWithRed:0.000 green:1.000 blue:0.958 alpha:1.000];
     self.doneButton.textAlignment = NSTextAlignmentCenter;
-    self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     
     self.collectionViewTasks.delegate = self;
+    self.collectionViewTasks.directionalLockEnabled = YES;
+    _originalCollectionViewFrame = self.collectionViewTasks.frame;
     
     // Setup task done gesture recognier
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewTapped:)];
-    [self.collectionViewTasks addGestureRecognizer:tapGestureRecognizer];
+    UISwipeGestureRecognizer *sideSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewCellSwiped:)];
+    [sideSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
     
-    [self setUpConstraintsAndFramesForCurrentDevice];
+    // Setup swipe down to bring back progress pie
+    UISwipeGestureRecognizer *downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewSwipedDown:)];
+    [downSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
+    
+    [self.collectionViewTasks addGestureRecognizer:sideSwipeGestureRecognizer];
+    [self.collectionViewTasks addGestureRecognizer:downSwipeGestureRecognizer];
+    
+    //    [self setUpConstraintsAndFramesForCurrentDevice];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateCustomConstraints];
+    //    [self updateCustomConstraints];
+    self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     
-    if ([[JWCTaskManager sharedManager] getProgressPercent]) {
+    if ([[JWCTaskManager sharedManager] getProgressPercent] > .01) {
         [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
                                  animated:YES];
     } else {
-        [self.progressViewPie setProgress:.1 animated:YES];
+        [self.progressViewPie setProgress:.2 animated:YES];
     }
     [self.collectionViewTasks reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (![[JWCTaskManager sharedManager] getProgressPercent]) {
+    if ([[JWCTaskManager sharedManager] getProgressPercent] > .07) {
+        [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
+                                 animated:YES];
+    } else {
         [self.progressViewPie setProgress:0 animated:YES];
     }
 }
@@ -142,90 +158,204 @@
 #pragma mark - Rotation Handling
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self updateCustomConstraints];
+    //    [self updateCustomConstraints];
 }
 
 #pragma mark - ScrollView Methods
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait) {
-//        CGFloat newHeight = 150.f - scrollView.contentOffset.y;
-//        [_progressViewPie setFrame:CGRectMake(scrollView.contentOffset.y / 2.f, 0, newHeight , newHeight)];
-//        [_progressViewPie setNeedsDisplay];
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint scrollViewContentOffset = [scrollView contentOffset];
+    if (scrollViewContentOffset.y > 70) {
+        [UIView animateKeyframesWithDuration:.2 delay:0 options:0 animations:^{
+            self.collectionViewTasks.frame = CGRectMake(0, 64, CGRectGetWidth(self.collectionViewTasks.frame), CGRectGetHeight(self.view.frame) - 64);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:.7 animations:^{
+                self.viewLabelProgressContainter.center = CGPointMake(CGRectGetMidX(self.viewLabelProgressContainter.frame), -CGRectGetHeight(self.viewLabelProgressContainter.frame)/2+20);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+    } else if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64) {
+        if (scrollViewContentOffset.y < 0) {
+            [self collectionViewSwipedDown:nil];
+        }
+    }
+}
 
 #pragma mark - Contraints and Orientation Methods
-
-- (void)updateCustomConstraints
-{
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
-        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
-    {
-        [_underLine removeFromSuperview];
-        [self.view removeConstraints:@[_portraitCollectionViewBottomConstraint,
-                                       _portraitCollectionViewTopConstraint]];
-        
-        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
-                                    _landScapeCollectionViewLeftConstraint,
-                                    _landScapeCollectionViewBottomConstraint,
-                                    _landScapeProgressViewLeftConstraint]];
-        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
-    } else {
-        [self.view addSubview:_underLine];
-        [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
-                                       _landScapeCollectionViewLeftConstraint,
-                                       _landScapeProgressViewLeftConstraint,
-                                       _landScapeCollectionViewBottomConstraint]];
-        
-        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
-                                    _portraitCollectionViewTopConstraint]];
-        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
-    }
-}
-
-- (void)setUpConstraintsAndFramesForCurrentDevice
-{
-    // Setup contraints for handling rotation
-    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeRight multiplier:1 constant:5];
-    _landScapeCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    
-    _landScapeProgressViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
-    
-    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.viewLabelProgressContainter attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
-    
-    
-    // Add appropriate constraints based on initial device orientation and screen size
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
-        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
-    {
-        if (screenSize.height == 480) {
-            [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
-                                        _landScapeProgressViewLeftConstraint,
-                                        _landScapeCollectionViewBottomConstraint]];
-        } else if (screenSize.height == 568) {
-            [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
-                                        _landScapeProgressViewLeftConstraint,
-                                        _landScapeCollectionViewBottomConstraint]];
-        }
-    } else {
-        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
-                                    _portraitCollectionViewTopConstraint]];
-    }
-}
+//
+//- (void)updateCustomConstraints
+//{
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
+//        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+//    {
+//        [_underLine removeFromSuperview];
+//        [self.view removeConstraints:@[_portraitCollectionViewBottomConstraint,
+//                                       _portraitCollectionViewTopConstraint]];
+//        
+//        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
+//                                    _landScapeCollectionViewLeftConstraint,
+//                                    _landScapeCollectionViewBottomConstraint,
+//                                    _landScapeProgressViewLeftConstraint]];
+//        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
+//    } else {
+//        [self.view addSubview:_underLine];
+//        [self.view removeConstraints:@[_landScapeCollectionViewTopConstraint,
+//                                       _landScapeCollectionViewLeftConstraint,
+//                                       _landScapeProgressViewLeftConstraint,
+//                                       _landScapeCollectionViewBottomConstraint]];
+//        
+//        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
+//                                    _portraitCollectionViewTopConstraint]];
+//        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
+//    }
+//}
+//
+//- (void)setUpConstraintsAndFramesForCurrentDevice
+//{
+//    // Setup contraints for handling rotation
+//    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+//    _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeRight multiplier:1 constant:5];
+//    _landScapeCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+//    
+//    _landScapeProgressViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
+//    
+//    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+//    _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.viewLabelProgressContainter attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
+//    
+//    
+//    // Add appropriate constraints based on initial device orientation and screen size
+//    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+//    
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
+//        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+//    {
+//        if (screenSize.height == 480) {
+//            [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
+//                                        _landScapeProgressViewLeftConstraint,
+//                                        _landScapeCollectionViewBottomConstraint]];
+//        } else if (screenSize.height == 568) {
+//            [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
+//                                        _landScapeProgressViewLeftConstraint,
+//                                        _landScapeCollectionViewBottomConstraint]];
+//        }
+//    } else {
+//        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
+//                                    _portraitCollectionViewTopConstraint]];
+//    }
+//}
 
 #pragma mark - Custom Transition Methods
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString: @"ViewStatsSeque"]) {
         JWCViewStatsViewController *destinationViewController = (JWCViewStatsViewController *)segue.destinationViewController;
-    
+        
         destinationViewController.modalPresentationStyle = UIModalPresentationCustom;
         destinationViewController.segue = segue;
+    }
+}
+
+#pragma mark - UICollectionViewDelegate Methods
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    // Get height of text
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    
+    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
+    if (currentTask) {
+        JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
+        
+        CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
+                                                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                                                           attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+                                                                              context:nil];
+        
+        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+20);
+        
+        return roundedSize;
+    }
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 50);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    // Get height of text
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    
+    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
+    if (currentTask) {
+        CGRect boundingRect = [currentTask.title boundingRectWithSize:textSize
+                                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                                           attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+                                                              context:nil];
+        
+        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame), ceil(boundingRect.size.height)+20);
+        
+        return roundedSize;
+    }
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 70);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Tapped the subtask cells
+    
+}
+
+#pragma mark - Touch Handling
+- (void)collectionViewCellSwiped:(UISwipeGestureRecognizer *)sideSwipe
+{
+    CGPoint swipePoint = [sideSwipe locationInView:self.collectionViewTasks];
+    
+    if (swipePoint.y > 50) { // Swiped a cell
+        NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:swipePoint];
+        JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)[self.collectionViewTasks cellForItemAtIndexPath:swipedCellIndexPath];
+        
+        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
+        
+        UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
+        tappedCellButton.selected = !tappedCellButton.selected;
+        
+        JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath .row];
+        selectedSubtask.done = !selectedSubtask.done;
+        
+        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+        
+        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
+                                               withSubtask:selectedSubtask];
+        
+        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
+        
+        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
+        } completion:^(BOOL finished) {
+            if (currentProgressPercent >= .95) {
+                [self showDoneButton];
+            } else {
+                [self hideDoneButton];
+            }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
+        
+    } else { // Swiped the header
+        
+    }
+}
+
+- (void)collectionViewSwipedDown:(UISwipeGestureRecognizer *)downSwipe
+{
+    if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64) {
+        [UIView animateKeyframesWithDuration:.7 delay:0 options:0 animations:^{
+            self.viewLabelProgressContainter.frame = _originalContainerViewFrame;
+            self.collectionViewTasks.frame = _originalCollectionViewFrame;
+        } completion:^(BOOL finished) {
+
+        }];
     }
 }
 
@@ -233,7 +363,7 @@
 - (void)showDoneButton
 {
     [_progressViewPie addSubview:self.doneButton];
-    
+    [_progressViewPie setProgress:1 animated:YES];
     [UIView animateWithDuration:.4 animations:^{
         self.doneButton.transform = CGAffineTransformIdentity;
     }];
@@ -247,7 +377,7 @@
     if (self.taskDoneTapRecognizer) {
         [self.progressContainerView removeGestureRecognizer:self.taskDoneTapRecognizer];
     }
-  
+    
     [UIView animateWithDuration:.3 animations:^{
         self.doneButton.transform = CGAffineTransformMakeScale(0, 0);
     }];
@@ -255,96 +385,14 @@
 
 - (void)doneButtonPressed:(id)sender
 {
-    [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
-}
-
-
-#pragma mark - UICollectionViewDelegate Methods
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    // Get height of text
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
-    
-    JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-    JWCSubtask *currentSubTask = (JWCSubtask *)[currentTask.subTasks objectAtIndex:indexPath.row];
-    
-    CGRect boundingRect = [currentSubTask.subTaskDescription boundingRectWithSize:textSize
-                                                                          options:NSStringDrawingUsesLineFragmentOrigin
-                                                                       attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
-                                                                          context:nil];
-    
-    CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+15);
-    
-    return roundedSize;
-}
-
-#pragma mark - Touch Handling
-- (void)collectionViewTapped:(UITapGestureRecognizer *)tapGesture
-{
-    CGPoint tappedPoint = [tapGesture locationInView:self.collectionViewTasks];
-    NSIndexPath *tappedIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:tappedPoint];
-    
-    // Tapped the subtask cells
-    if (tappedPoint.y > 60) {
-        
-        JWCSoonCollectionViewCell *tappedCell = (JWCSoonCollectionViewCell *)[self.collectionViewTasks cellForItemAtIndexPath:tappedIndexPath];
-        
-        UIButton *tappedCellButton = tappedCell.buttonSubtaskDone;
-        tappedCellButton.selected = !tappedCellButton.selected;
-        
-        JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[tappedIndexPath.row];
-        selectedSubtask.done = !selectedSubtask.done;
-        
-        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
-        
-        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
-                                               withSubtask:selectedSubtask];
-        
-        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
-        
-        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
-            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
-        } completion:^(BOOL finished) {
-            if (currentProgressPercent >= .99) {
-                [self showDoneButton];
-            } else {
-                [self hideDoneButton];
-            }
-        }];
-        
-        [self updateSmileyFaceProgress:selectedSubtask.done];
-        
-    } else { // Tapped the header cell
-      
-        // Get height of text
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-        CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
-        
-        JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
-        
-        CGRect boundingRect = [currentTask.taskDescription boundingRectWithSize:textSize
-                                                                        options:NSStringDrawingUsesLineFragmentOrigin
-                                                                    attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
-                                                                              context:nil];
-        UILabel *labelCurrentTaskDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.7, ceil(boundingRect.size.height)+20)];
-        labelCurrentTaskDescription.numberOfLines = 0;
-        labelCurrentTaskDescription.text = [JWCTaskManager sharedManager].currentTask.taskDescription;
-        labelCurrentTaskDescription.font = DEFAULT_FONT;
-        labelCurrentTaskDescription.textColor = DEFAULT_TEXT_COLOR;
-        
-        [[KGModal sharedInstance] showWithContentView:labelCurrentTaskDescription];
+    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+        [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
+    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+        [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
+    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
+    {
+        [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
     }
-}
-
-//TODO: MAKE THIS WORK
-- (void)updateSmileyFaceProgress:(BOOL)subtaskDone
-{
-    NSIndexPath *headerIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:CGPointMake(85, 12)];
-    JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[self.collectionViewTasks cellForItemAtIndexPath:headerIndexPath];
-
-    headerCell.imageViewSmiley.image = [UIImage imageNamed:@"Joyful"];
 }
 
 @end

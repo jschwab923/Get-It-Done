@@ -272,24 +272,17 @@
     return YES;
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self saveCurrentTextViewText];
+}
+
 #pragma mark - Notification Center methods
 - (void)modalDismissed:(id)sender
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    NSArray *visibleIndexPaths = [_proofQuestionsCollectionView indexPathsForVisibleItems];
-    for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
-        JWCTaskDescriptionCollectionViewCell *currentCell = (JWCTaskDescriptionCollectionViewCell *)[_proofQuestionsCollectionView cellForItemAtIndexPath:currentIndexPath];
-        
-        if (currentIndexPath.row < [[[JWCTaskManager sharedManager] pendingTask].proofQuestions count])
-        {
-            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions replaceObjectAtIndex:currentIndexPath.row withObject:currentCell.textViewDescription.text];
-        } else {
-            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions addObject:currentCell.textViewDescription.text];
-        }
-    }
-    //TODO: REMOVE AFTER TESTING
-    NSLog(@"%@", [JWCTaskManager sharedManager].pendingTask.proofQuestions);
+    [self saveCurrentTextViewText];
 }
 
 - (void)keyboardNotificationWillShow:(NSNotification *)note
@@ -314,6 +307,23 @@
 {
     CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
     [_proofQuestionsCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
+    
+    [self saveCurrentTextViewText];
+}
+
+- (void)saveCurrentTextViewText
+{
+    NSArray *visibleIndexPaths = [_proofQuestionsCollectionView indexPathsForVisibleItems];
+    for (NSIndexPath *currentIndexPath in visibleIndexPaths) {
+        JWCTaskDescriptionCollectionViewCell *currentCell = (JWCTaskDescriptionCollectionViewCell *)[_proofQuestionsCollectionView cellForItemAtIndexPath:currentIndexPath];
+        
+        if (currentIndexPath.row < [[[JWCTaskManager sharedManager] pendingTask].proofQuestions count])
+        {
+            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions replaceObjectAtIndex:currentIndexPath.row withObject:currentCell.textViewDescription.text];
+        } else {
+            [[[JWCTaskManager sharedManager] pendingTask].proofQuestions addObject:currentCell.textViewDescription.text];
+        }
+    }
 }
 
 @end

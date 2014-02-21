@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JWCViewLine.h"
 @interface JWCSoonCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UITextView *subTaskTextView;
 @property (weak, nonatomic) IBOutlet UIButton *buttonSubtaskDone;
+@property (nonatomic) JWCViewLine *underLine;
 
 @end

@@ -9,11 +9,17 @@
 
 @interface UIColor (GetItDoneColors)
 
-+ (UIColor *) colorFromHexCode:(NSString *)hexString;
++ (UIColor *)colorFromHexCode:(NSString *)hexString;
 
-+ (UIColor *) darkBlueColor;
++ (UIColor *)darkBlueColor;
++ (UIColor *)blueGrayColor;
++ (UIColor *)darkBlueGrayColor;
++ (UIColor *)lightBluePurpleColor;
++ (UIColor *)blueGreenColor;
++ (UIColor *)darkPurpleColor;
++ (UIColor *)lightDarkGrayColor;
 
-+ (UIColor *) blendedColorWithForegroundColor:(UIColor *)foregroundColor
++ (UIColor *)blendedColorWithForegroundColor:(UIColor *)foregroundColor
                               backgroundColor:(UIColor *)backgroundColor
                                  percentBlend:(CGFloat) percentBlend;
 

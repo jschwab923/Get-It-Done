@@ -12,7 +12,8 @@
 <NSCoding>
 
 @property (nonatomic) NSString *name;
-@property (nonatomic) NSString *email;
-@property (nonatomic) NSString *phoneNumber;
+@property (nonatomic) NSArray *emails;
+@property (nonatomic) NSArray *phoneNumbers;
+@property (nonatomic) UIImage *partnerImage;
 
 @end

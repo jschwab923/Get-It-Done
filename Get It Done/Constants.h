@@ -37,12 +37,19 @@
 #define NAVBAR_IMAGE @"iPhone5_5"
 #define LANDSCAPE_IMAGE @"iPhone5_5landscape"
 
-#define PORTRAIT_IMAGE4 @"iPhone4S_5"
-#define NAVBAR_IMAGE4 @"iPhone4S_5"
+#define PORTRAIT_IMAGE4 @"iPhone4S_6Blurred"
+#define NAVBAR_IMAGE4 @"iPhone4S_6Blurred"
 #define LANDSCAPE_IMAGE4 @"iPhone4S_5landscape"
 
-#define DEFAULT_PIE_TITLE_COLOR [UIColor whiteColor]
-#define DEFAULT_TEXT_COLOR [UIColor whiteColor]
+#define DEFAULT_PIE_TITLE_COLOR [UIColor lightBluePurpleColor]
+#define DEFAULT_TEXT_COLOR [UIColor colorWithRed:0.832 green:0.856 blue:0.885 alpha:1.000]
+#define DEFAULT_BACKGROUND_COLOR [UIColor blueGrayColor]
+//#define DEFAULT_BACKGROUND_COLOR [UIColor colorWithPatternImage:[UIImage imageNamed:@"denim.jpg"]]
+#define DEFAULT_FOREGROUND_COLOR [UIColor darkBlueGrayColor]
+#define DEFAULT_TITLE_COLOR [UIColor blueGreenColor]
+
+
+#define NOTIFICATION_SUBTASK_DONE @"SubtaskDone"
 
 #endif
 
