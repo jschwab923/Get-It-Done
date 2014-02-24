@@ -14,7 +14,21 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     JWCCollectionViewCellAnswerProofQuestions *currentCell = (JWCCollectionViewCellAnswerProofQuestions *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ProofAnswerQuestionsCell" forIndexPath:indexPath];
+    
+    currentCell.textViewAnswer.delegate = collectionView.delegate;
+    
+    // Setup toolbar for keyboard dismissal
+    UIToolbar *doneToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    doneToolbar.barStyle = UIBarStyleBlackTranslucent;
+    doneToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:collectionView.delegate action:@selector(dismissKeyboardWithApply)],
+                         nil];
+    [doneToolbar sizeToFit];
+    
+    currentCell.textViewAnswer.inputAccessoryView = doneToolbar;
+    
     JWCTask *currentTask = [JWCTaskManager sharedManager].currentTask;
     
     if (currentTask.proofQuestions > 0) {

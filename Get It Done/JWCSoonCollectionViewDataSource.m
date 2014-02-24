@@ -46,10 +46,13 @@
     JWCViewLine *underline = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(subTaskCell.frame)-1, CGRectGetWidth(subTaskCell.frame), 1)];
     
     // Setup task done gesture recognier
-    UISwipeGestureRecognizer *sideSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwiped:)];
-    [sideSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
-    [subTaskCell addGestureRecognizer:sideSwipeGestureRecognizer];
-    
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwipedRight:)];
+    [rightSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+    [subTaskCell addGestureRecognizer:rightSwipeGestureRecognizer];
+    // Setup task undone gesture recognizer
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwipedLeft:)];
+    [leftSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [subTaskCell addGestureRecognizer:leftSwipeGestureRecognizer];
     // Default properties
     if (subTaskCell.underLine) {
         [subTaskCell.underLine removeFromSuperview];
@@ -85,6 +88,9 @@
         
         _currentHeader = headerCell;
         
+        // Call method to set the correct smiley
+        [self subtaskDone:nil];
+        
         //TODO: Customize header cell based on current task
         // Properties based on current task
         headerCell.taskDescriptionTextView.text = [[JWCTaskManager sharedManager] currentTask].title;
@@ -118,6 +124,8 @@
         }
         if (subtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
             _currentHeader.imageViewSmiley.image = [UIImage imageNamed:@"Happy"];
+        } else if (subtasksDone >= [[JWCTaskManager sharedManager].currentTask.subTasks count]/1.5) {
+            _currentHeader.imageViewSmiley.image = [UIImage imageNamed:@"Quiet"];
         }
     }
     [_currentHeader.imageViewSmiley setNeedsDisplay];

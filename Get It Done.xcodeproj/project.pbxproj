@@ -24,13 +24,10 @@
 		6B0E709A18A733E3002B249D /* iPhone4S_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E709818A733E3002B249D /* iPhone4S_5@2x.png */; };
 		6B0E709D18A73820002B249D /* iPhone4S_5landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B0E709C18A73820002B249D /* iPhone4S_5landscape@2x.png */; };
 		6B11A3FF18A5973E009FBDCB /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6B11A3FE18A5973E009FBDCB /* license.txt */; };
-		6B11A40118A59775009FBDCB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6B11A40018A59775009FBDCB /* README.md */; };
 		6B135F7018A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F6F18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m */; };
 		6B135F7418A8267E001046CD /* JWCTaskDoneQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F7318A8267E001046CD /* JWCTaskDoneQuestionsViewController.m */; };
 		6B135F7718A82689001046CD /* JWCTaskDonePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B135F7618A82689001046CD /* JWCTaskDonePictureViewController.m */; };
 		6B1394D218A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B1394D118A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png */; };
-		6B17890E189D8CDD003664C5 /* SAMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890B189D8CDD003664C5 /* SAMath.m */; };
-		6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */; };
 		6B178911189DB962003664C5 /* iPhone5_33landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */; };
 		6B2104DE18A9E44B0033D93E /* JWCMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2104DD18A9E44B0033D93E /* JWCMessageController.m */; };
 		6B271D8018A2AC8A00518805 /* JWCBottomUpSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B271D7F18A2AC8A00518805 /* JWCBottomUpSegue.m */; };
@@ -47,8 +44,6 @@
 		6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C318A18BF4007DF72D /* JWCCollectionViewCellProof.m */; };
 		6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */; };
 		6B7705CE18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m */; };
-		6B799C3018B142B4008B1113 /* denim.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C2E18B142B4008B1113 /* denim.jpg */; };
-		6B799C3118B142B4008B1113 /* rough.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C2F18B142B4008B1113 /* rough.jpg */; };
 		6B799C3D18B14363008B1113 /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C3718B14363008B1113 /* APAddressBook.m */; };
 		6B799C3E18B14363008B1113 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B799C3918B14363008B1113 /* APContact.m */; };
 		6B799C3F18B14363008B1113 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6B799C3B18B14363008B1113 /* LICENSE.txt */; };
@@ -67,6 +62,7 @@
 		6B7B6A1418AB416C0099A60F /* iPhone4S_6Blurred@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7B6A1218AB416C0099A60F /* iPhone4S_6Blurred@2x.png */; };
 		6BA2A7FA18A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */; };
 		6BA2A7FD18A42A450062C4B0 /* JWCViewLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */; };
+		6BD6C31E18B2A51400AEC21C /* JWCLocalNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6C31D18B2A51400AEC21C /* JWCLocalNotificationController.m */; };
 		6BF5316B18A4D7D700D90E5E /* iPhone5_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316618A4D7D700D90E5E /* iPhone5_5@2x.png */; };
 		6BF5316C18A4D7D700D90E5E /* iPhone5_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316718A4D7D700D90E5E /* iPhone5_7@2x.png */; };
 		6BF5316D18A4D7D700D90E5E /* iPhone5_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5316818A4D7D700D90E5E /* iPhone5_8@2x.png */; };
@@ -80,7 +76,6 @@
 		6BF5BF1C189B645200B4EA9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF1B189B645200B4EA9C /* main.m */; };
 		6BF5BF20189B645200B4EA9C /* JWCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF1F189B645200B4EA9C /* JWCAppDelegate.m */; };
 		6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5BF21189B645200B4EA9C /* Main_iPhone.storyboard */; };
-		6BF5BF26189B645200B4EA9C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5BF24189B645200B4EA9C /* Main_iPad.storyboard */; };
 		6BF5BF29189B645200B4EA9C /* JWCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5BF28189B645200B4EA9C /* JWCRootViewController.m */; };
 		6BF5BF2B189B645200B4EA9C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BF5BF2A189B645200B4EA9C /* Images.xcassets */; };
 		6BF5BF32189B645200B4EA9C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF5BF31189B645200B4EA9C /* XCTest.framework */; };
@@ -96,10 +91,8 @@
 		6BFD0A3B189C6A92008C3698 /* iPhone5_33@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFD0A38189C6A92008C3698 /* iPhone5_33@2x.png */; };
 		6BFD0A3C189C6A92008C3698 /* iPhone5_34@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFD0A39189C6A92008C3698 /* iPhone5_34@2x.png */; };
 		6BFD0A3E189C6B88008C3698 /* iPhone5_33Flipped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFD0A3D189C6B88008C3698 /* iPhone5_33Flipped@2x.png */; };
-		6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A42189C6FC3008C3698 /* M13ProgressConsole.m */; };
 		6BFD0A61189C6FC3008C3698 /* M13ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A45189C6FC3008C3698 /* M13ProgressHUD.m */; };
 		6BFD0A62189C6FC3008C3698 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A47189C6FC3008C3698 /* UIImage+ImageEffects.m */; };
-		6BFD0A63189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A4A189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m */; };
 		6BFD0A64189C6FC3008C3698 /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A4D189C6FC3008C3698 /* M13ProgressView.m */; };
 		6BFD0A65189C6FC3008C3698 /* M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A4F189C6FC3008C3698 /* M13ProgressViewBar.m */; };
 		6BFD0A66189C6FC3008C3698 /* M13ProgressViewBorderedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFD0A51189C6FC3008C3698 /* M13ProgressViewBorderedBar.m */; };
@@ -153,7 +146,6 @@
 		6B0E709818A733E3002B249D /* iPhone4S_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4S_5@2x.png"; sourceTree = "<group>"; };
 		6B0E709C18A73820002B249D /* iPhone4S_5landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4S_5landscape@2x.png"; sourceTree = "<group>"; };
 		6B11A3FE18A5973E009FBDCB /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		6B11A40018A59775009FBDCB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6B135F6E18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCReusableFooterAddSubtaskModalView.h; path = "Get It Done/JWCReusableFooterAddSubtaskModalView.h"; sourceTree = "<group>"; };
 		6B135F6F18A804B3001046CD /* JWCReusableFooterAddSubtaskModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCReusableFooterAddSubtaskModalView.m; path = "Get It Done/JWCReusableFooterAddSubtaskModalView.m"; sourceTree = "<group>"; };
 		6B135F7218A8267E001046CD /* JWCTaskDoneQuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCTaskDoneQuestionsViewController.h; sourceTree = "<group>"; };
@@ -161,10 +153,6 @@
 		6B135F7518A82689001046CD /* JWCTaskDonePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCTaskDonePictureViewController.h; sourceTree = "<group>"; };
 		6B135F7618A82689001046CD /* JWCTaskDonePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCTaskDonePictureViewController.m; sourceTree = "<group>"; };
 		6B1394D118A4937400CB32FA /* iPhone5_33DarkUpperRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone5_33DarkUpperRight@2x.png"; path = "../../../../../Pictures/Get It Done Elements/Backgrounds/iPhone5_33DarkUpperRight@2x.png"; sourceTree = "<group>"; };
-		6B17890A189D8CDD003664C5 /* SAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMath.h; sourceTree = "<group>"; };
-		6B17890B189D8CDD003664C5 /* SAMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMath.m; sourceTree = "<group>"; };
-		6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMultisectorControl.h; sourceTree = "<group>"; };
-		6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMultisectorControl.m; sourceTree = "<group>"; };
 		6B178910189DB962003664C5 /* iPhone5_33landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33landscape@2x.png"; sourceTree = "<group>"; };
 		6B2104DC18A9E44B0033D93E /* JWCMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCMessageController.h; path = "Get It Done/JWCMessageController.h"; sourceTree = "<group>"; };
 		6B2104DD18A9E44B0033D93E /* JWCMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCMessageController.m; path = "Get It Done/JWCMessageController.m"; sourceTree = "<group>"; };
@@ -197,8 +185,6 @@
 		6B7705C818A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewCellTitlePoints.m; path = "Get It Done/JWCCollectionViewCellTitlePoints.m"; sourceTree = "<group>"; };
 		6B7705CC18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCCollectionViewFooterAddPartner.h; path = "Get It Done/JWCCollectionViewFooterAddPartner.h"; sourceTree = "<group>"; };
 		6B7705CD18A1B10A007DF72D /* JWCCollectionViewFooterAddPartner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionViewFooterAddPartner.m; path = "Get It Done/JWCCollectionViewFooterAddPartner.m"; sourceTree = "<group>"; };
-		6B799C2E18B142B4008B1113 /* denim.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = denim.jpg; sourceTree = "<group>"; };
-		6B799C2F18B142B4008B1113 /* rough.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rough.jpg; sourceTree = "<group>"; };
 		6B799C3618B14363008B1113 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
 		6B799C3718B14363008B1113 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
 		6B799C3818B14363008B1113 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
@@ -228,6 +214,8 @@
 		6BA2A7F918A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCCollectionReusableFooterLabel.m; path = "Get It Done/JWCCollectionReusableFooterLabel.m"; sourceTree = "<group>"; };
 		6BA2A7FB18A42A450062C4B0 /* JWCViewLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWCViewLine.h; path = "Get It Done/JWCViewLine.h"; sourceTree = "<group>"; };
 		6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWCViewLine.m; path = "Get It Done/JWCViewLine.m"; sourceTree = "<group>"; };
+		6BD6C31C18B2A51400AEC21C /* JWCLocalNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCLocalNotificationController.h; sourceTree = "<group>"; };
+		6BD6C31D18B2A51400AEC21C /* JWCLocalNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCLocalNotificationController.m; sourceTree = "<group>"; };
 		6BF5316618A4D7D700D90E5E /* iPhone5_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_5@2x.png"; sourceTree = "<group>"; };
 		6BF5316718A4D7D700D90E5E /* iPhone5_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_7@2x.png"; sourceTree = "<group>"; };
 		6BF5316818A4D7D700D90E5E /* iPhone5_8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_8@2x.png"; sourceTree = "<group>"; };
@@ -245,7 +233,6 @@
 		6BF5BF1E189B645200B4EA9C /* JWCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JWCAppDelegate.h; sourceTree = "<group>"; };
 		6BF5BF1F189B645200B4EA9C /* JWCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JWCAppDelegate.m; sourceTree = "<group>"; };
 		6BF5BF22189B645200B4EA9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		6BF5BF25189B645200B4EA9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		6BF5BF27189B645200B4EA9C /* JWCRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JWCRootViewController.h; sourceTree = "<group>"; };
 		6BF5BF28189B645200B4EA9C /* JWCRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JWCRootViewController.m; sourceTree = "<group>"; };
 		6BF5BF2A189B645200B4EA9C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -267,14 +254,10 @@
 		6BFD0A38189C6A92008C3698 /* iPhone5_33@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33@2x.png"; sourceTree = "<group>"; };
 		6BFD0A39189C6A92008C3698 /* iPhone5_34@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_34@2x.png"; sourceTree = "<group>"; };
 		6BFD0A3D189C6B88008C3698 /* iPhone5_33Flipped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5_33Flipped@2x.png"; sourceTree = "<group>"; };
-		6BFD0A41189C6FC3008C3698 /* M13ProgressConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressConsole.h; sourceTree = "<group>"; };
-		6BFD0A42189C6FC3008C3698 /* M13ProgressConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressConsole.m; sourceTree = "<group>"; };
 		6BFD0A44189C6FC3008C3698 /* M13ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressHUD.h; sourceTree = "<group>"; };
 		6BFD0A45189C6FC3008C3698 /* M13ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressHUD.m; sourceTree = "<group>"; };
 		6BFD0A46189C6FC3008C3698 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		6BFD0A47189C6FC3008C3698 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		6BFD0A49189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+M13ProgressViewBar.h"; sourceTree = "<group>"; };
-		6BFD0A4A189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+M13ProgressViewBar.m"; sourceTree = "<group>"; };
 		6BFD0A4C189C6FC3008C3698 /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
 		6BFD0A4D189C6FC3008C3698 /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
 		6BFD0A4E189C6FC3008C3698 /* M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBar.h; sourceTree = "<group>"; };
@@ -353,13 +336,6 @@
 			path = "4S Sizes";
 			sourceTree = "<group>";
 		};
-		6B11A3FD18A5967F009FBDCB /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
 		6B135F7118A8265F001046CD /* Task Done Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,24 +349,10 @@
 			name = "Task Done Controllers";
 			sourceTree = "<group>";
 		};
-		6B178909189D8CDD003664C5 /* SAMultisectorControl */ = {
-			isa = PBXGroup;
-			children = (
-				6B11A40018A59775009FBDCB /* README.md */,
-				6B17890A189D8CDD003664C5 /* SAMath.h */,
-				6B17890B189D8CDD003664C5 /* SAMath.m */,
-				6B17890C189D8CDD003664C5 /* SAMultisectorControl.h */,
-				6B17890D189D8CDD003664C5 /* SAMultisectorControl.m */,
-			);
-			name = SAMultisectorControl;
-			path = ../SAMultisectorControl;
-			sourceTree = "<group>";
-		};
 		6B6DF56F189C8C180027761B /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6BF5BF21189B645200B4EA9C /* Main_iPhone.storyboard */,
-				6BF5BF24189B645200B4EA9C /* Main_iPad.storyboard */,
 				6BA2A7FB18A42A450062C4B0 /* JWCViewLine.h */,
 				6BA2A7FC18A42A450062C4B0 /* JWCViewLine.m */,
 				6B0E708D18A70401002B249D /* JWCSearchBar.h */,
@@ -626,9 +588,10 @@
 		6BF5BF15189B645200B4EA9C /* Get It Done */ = {
 			isa = PBXGroup;
 			children = (
-				6B11A3FD18A5967F009FBDCB /* iPad */,
 				6BF5BF1E189B645200B4EA9C /* JWCAppDelegate.h */,
 				6BF5BF1F189B645200B4EA9C /* JWCAppDelegate.m */,
+				6BD6C31C18B2A51400AEC21C /* JWCLocalNotificationController.h */,
+				6BD6C31D18B2A51400AEC21C /* JWCLocalNotificationController.m */,
 				6B6DF577189C8DAB0027761B /* Model */,
 				6B6DF56F189C8C180027761B /* View */,
 				6BF5BF47189B647B00B4EA9C /* Controllers */,
@@ -696,8 +659,6 @@
 		6BFD0A30189C68FB008C3698 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				6B799C2E18B142B4008B1113 /* denim.jpg */,
-				6B799C2F18B142B4008B1113 /* rough.jpg */,
 				6B7B6A1118AB416C0099A60F /* iPhone4S_6@2x.png */,
 				6B7B6A1218AB416C0099A60F /* iPhone4S_6Blurred@2x.png */,
 				6B7B6A0F18AB3F8E0099A60F /* iPhone5_6Blurred@2x.png */,
@@ -728,22 +689,11 @@
 		6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */ = {
 			isa = PBXGroup;
 			children = (
-				6BFD0A40189C6FC3008C3698 /* Console */,
 				6BFD0A43189C6FC3008C3698 /* HUD */,
-				6BFD0A48189C6FC3008C3698 /* NavigationController */,
 				6BFD0A4B189C6FC3008C3698 /* ProgressViews */,
 			);
 			name = M13ProgressSuiteClasses;
 			path = ../Classes;
-			sourceTree = "<group>";
-		};
-		6BFD0A40189C6FC3008C3698 /* Console */ = {
-			isa = PBXGroup;
-			children = (
-				6BFD0A41189C6FC3008C3698 /* M13ProgressConsole.h */,
-				6BFD0A42189C6FC3008C3698 /* M13ProgressConsole.m */,
-			);
-			path = Console;
 			sourceTree = "<group>";
 		};
 		6BFD0A43189C6FC3008C3698 /* HUD */ = {
@@ -755,15 +705,6 @@
 				6BFD0A47189C6FC3008C3698 /* UIImage+ImageEffects.m */,
 			);
 			path = HUD;
-			sourceTree = "<group>";
-		};
-		6BFD0A48189C6FC3008C3698 /* NavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				6BFD0A49189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.h */,
-				6BFD0A4A189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m */,
-			);
-			path = NavigationController;
 			sourceTree = "<group>";
 		};
 		6BFD0A4B189C6FC3008C3698 /* ProgressViews */ = {
@@ -820,7 +761,6 @@
 				6B799C4718B161F6008B1113 /* BEMSimpleLineGraph-master */,
 				6B799C3218B14363008B1113 /* APAddressBook-master */,
 				6BFD0A3F189C6FC3008C3698 /* M13ProgressSuiteClasses */,
-				6B178909189D8CDD003664C5 /* SAMultisectorControl */,
 				6BFFC73718A2E02B0099ACB0 /* KGModalView */,
 			);
 			name = "Third Party";
@@ -906,11 +846,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B799C3118B142B4008B1113 /* rough.jpg in Resources */,
 				6B0E709A18A733E3002B249D /* iPhone4S_5@2x.png in Resources */,
 				6B11A3FF18A5973E009FBDCB /* license.txt in Resources */,
-				6BF5BF26189B645200B4EA9C /* Main_iPad.storyboard in Resources */,
-				6B11A40118A59775009FBDCB /* README.md in Resources */,
 				6B0E708918A6FEF9002B249D /* iPhone5_18landscapeflipped@2x.png in Resources */,
 				6B0E709618A731D2002B249D /* iPhone5_5DarkDown@2x.png in Resources */,
 				6BFD0A3C189C6A92008C3698 /* iPhone5_34@2x.png in Resources */,
@@ -930,7 +867,6 @@
 				6B7B6A1418AB416C0099A60F /* iPhone4S_6Blurred@2x.png in Resources */,
 				6B0E708618A6F2EC002B249D /* iPhone5_18flipped@2x.png in Resources */,
 				6B0E708118A6E8AF002B249D /* iPhone5_18@2x.png in Resources */,
-				6B799C3018B142B4008B1113 /* denim.jpg in Resources */,
 				6B7B6A1018AB3F8E0099A60F /* iPhone5_6Blurred@2x.png in Resources */,
 				6BF5316E18A4D7D700D90E5E /* iPhone5_15@2x.png in Resources */,
 				6BF5BF23189B645200B4EA9C /* Main_iPhone.storyboard in Resources */,
@@ -972,9 +908,6 @@
 				6B0E708C18A703A8002B249D /* JWCCollectionHeaderPartner.m in Sources */,
 				6B6DF56E189C8B9B0027761B /* JWCSoonCollectionViewCell.m in Sources */,
 				6B7705C918A195E5007DF72D /* JWCCollectionViewCellTitlePoints.m in Sources */,
-				6BFD0A60189C6FC3008C3698 /* M13ProgressConsole.m in Sources */,
-				6BFD0A63189C6FC3008C3698 /* UINavigationController+M13ProgressViewBar.m in Sources */,
-				6B17890F189D8CDD003664C5 /* SAMultisectorControl.m in Sources */,
 				6BF5BF4A189B64A400B4EA9C /* JWCSoonViewController.m in Sources */,
 				6BFD0A6A189C6FC3008C3698 /* M13ProgressViewRing.m in Sources */,
 				6BA2A7FA18A4171A0062C4B0 /* JWCCollectionReusableFooterLabel.m in Sources */,
@@ -1015,11 +948,11 @@
 				6B799C6B18B161F6008B1113 /* BEMAnimations.m in Sources */,
 				6B7705C418A18BF4007DF72D /* JWCCollectionViewCellProof.m in Sources */,
 				6B7705BE18A175E5007DF72D /* JWCAddTaskCollectionViewDataSource.m in Sources */,
+				6BD6C31E18B2A51400AEC21C /* JWCLocalNotificationController.m in Sources */,
 				6BFD0A71189C7410008C3698 /* UIColor+GetItDoneColors.m in Sources */,
 				6BF5BF4D189B64DB00B4EA9C /* JWCAddTaskViewController.m in Sources */,
 				6B135F7718A82689001046CD /* JWCTaskDonePictureViewController.m in Sources */,
 				6BFD0A61189C6FC3008C3698 /* M13ProgressHUD.m in Sources */,
-				6B17890E189D8CDD003664C5 /* SAMath.m in Sources */,
 				6BFD0A67189C6FC3008C3698 /* M13ProgressViewFilteredImage.m in Sources */,
 				6BFFC78218A309DB0099ACB0 /* JWCSubtask.m in Sources */,
 				6B6DF5A2189CA48C0027761B /* JWCSoonCollectionViewHeader.m in Sources */,
@@ -1060,15 +993,6 @@
 				6BF5BF22189B645200B4EA9C /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			path = "Get It Done";
-			sourceTree = "<group>";
-		};
-		6BF5BF24189B645200B4EA9C /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6BF5BF25189B645200B4EA9C /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			path = "Get It Done";
 			sourceTree = "<group>";
 		};

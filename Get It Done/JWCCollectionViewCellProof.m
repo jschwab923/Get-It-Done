@@ -213,6 +213,16 @@
     currentCell.textViewDescription.font = DEFAULT_FONT;
     currentCell.textViewDescription.delegate = self;
     
+    // Setup toolbar for keyboard dismissal
+    UIToolbar *doneToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    doneToolbar.barStyle = UIBarStyleBlackTranslucent;
+    doneToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboardWithApplyButton)],
+                         nil];
+    [doneToolbar sizeToFit];
+    
+    currentCell.textViewDescription.inputAccessoryView = doneToolbar;
+    
     return currentCell;
 }
 
@@ -277,6 +287,13 @@
     [self saveCurrentTextViewText];
 }
 
+- (void)dismissKeyboardWithApplyButton
+{
+    if (_selectedTextView) {
+        [_selectedTextView endEditing:YES];
+    }
+}
+
 #pragma mark - Notification Center methods
 - (void)modalDismissed:(id)sender
 {
@@ -293,11 +310,22 @@
     CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
     
     CGFloat bottomOfSelectedTextField = CGRectGetMaxY(_selectedTextView.superview.frame);
-    CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
     
-    if (bottomOfSelectedTextField >= keyboardEndHeight) {
-        CGFloat difference = bottomOfSelectedTextField - keyboardEndHeight;
-        _keyboardOffset = CGPointMake(0, difference);
+    CGRect convertRect = [_proofQuestionsCollectionView convertRect:keyboardEndFrame fromView:self.superview];
+    CGFloat convertedKeyboardY = CGRectGetMinY(convertRect)-30;
+    
+    if (CGRectGetHeight([UIScreen mainScreen].bounds) == 480) {
+        convertedKeyboardY += 30;
+    }
+    
+    if (bottomOfSelectedTextField >= convertedKeyboardY) {
+        CGFloat difference = bottomOfSelectedTextField - convertedKeyboardY;
+        if (CGRectGetHeight([UIScreen mainScreen].bounds) == 480) {
+            difference -= 30;
+        } else {
+            difference -= 50;
+        }
+        _keyboardOffset = CGPointMake(0, difference+CGRectGetHeight(_selectedTextView.frame));
         [_proofQuestionsCollectionView setContentOffset:_keyboardOffset animated:YES];
     }
     

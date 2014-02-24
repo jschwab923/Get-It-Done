@@ -26,6 +26,8 @@
     UILabel *_labelPercentLeft;
     
     JWCReusableFooterAddSubtaskModalView *_currentFooterCell;
+    
+    NSIndexPath *_selectedIndexPath;
 }
 
 
@@ -53,6 +55,7 @@
                                                                          CGRectGetWidth(rect)/3, CGRectGetHeight(rect))];
     addSubtaskLabel.backgroundColor = [UIColor clearColor];
     addSubtaskLabel.text = @"Add Subtask";
+    addSubtaskLabel.numberOfLines = 0;
     addSubtaskLabel.textColor = DEFAULT_TEXT_COLOR;
     addSubtaskLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
     [self addSubview:addSubtaskLabel];
@@ -104,10 +107,6 @@
                                              selector:@selector(keyboardNotificationWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardNotificationDismissed:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
     
     _addSubtaskModalButtonPressedCount = 1;
     _labelPercentLeft = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
@@ -141,6 +140,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Setup toolbar for keyboard dismissal
+    UIToolbar *doneToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    doneToolbar.barStyle = UIBarStyleBlackTranslucent;
+    doneToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboardWithApplyButton)],
+                         nil];
+    [doneToolbar sizeToFit];
     
     JWCCollectionViewCellTitlePoints *currentCell = (JWCCollectionViewCellTitlePoints *)[collectionView dequeueReusableCellWithReuseIdentifier:REUSE_TITLE_POINTS forIndexPath:indexPath];
     
@@ -152,6 +158,9 @@
     
     currentCell.title.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
     currentCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.8];
+    
+    currentCell.title.inputAccessoryView = doneToolbar;
+    currentCell.points.inputAccessoryView = doneToolbar;
     
     if (indexPath.row < [[[JWCTaskManager sharedManager] pendingTask].subTasks count]) {
         JWCSubtask *currentSubtask = (JWCSubtask *)[[JWCTaskManager sharedManager] pendingTask].subTasks[indexPath.row];
@@ -179,14 +188,13 @@
         [_subtasksCollectionView addSubview:_labelPercentLeft];
         _labelPercentLeft.textColor = DEFAULT_TEXT_COLOR;
         _labelPercentLeft.frame = CGRectMake(0, CGRectGetMinY(currentView.frame) , 200, CGRectGetHeight(currentView.frame));
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent Left: %lu",(long)(100 - [self currentTotalPercent])];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent Left: %lu\n*Subtask percents must add up to 100",(long)(100 - [self currentTotalPercent])];
+        _labelPercentLeft.numberOfLines = 0;
         
         [tempView.addButton addTarget:self
                                action:@selector(pressedAddSubtaskModalButton:)
                      forControlEvents:UIControlEventTouchUpInside];
-        _currentFooterCell.addButton.enabled = NO;
-        
-        if (_totalPercentLeft < 1) {
+        if (_totalPercentLeft < 1 || _totalPercentLeft == 100) {
             _currentFooterCell.addButton.enabled = NO;
         }
         
@@ -206,10 +214,35 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame), 20);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 80);
 }
 
 #pragma mark - UITextFieldDelegate Methods
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _currentFooterCell.addButton.enabled = NO;
+    _selectedTextField = textField;
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+        NSString *attemptedEditPoints = [NSString stringWithFormat:@"%@%@", textField.text, string];
+    if (textField.tag == TAG_POINTS_TEXTVIEW && attemptedEditPoints.length > textField.text.length) {
+        NSRegularExpression *regularExpression = [[NSRegularExpression alloc] initWithPattern:@"[0-9]" options:NSRegularExpressionCaseInsensitive error:nil];
+        
+        NSString *regex = [regularExpression stringByReplacingMatchesInString:attemptedEditPoints options:0 range:NSMakeRange(0, attemptedEditPoints.length) withTemplate:@""];
+        
+        if((attemptedEditPoints.integerValue > _totalPercentLeft)
+           || ![regex isEqualToString:@""])
+        {
+            regex = nil;
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     NSMutableArray *pendingSubtasks = [[JWCTaskManager sharedManager] pendingTask].subTasks;
@@ -244,30 +277,18 @@
     NSInteger currentTotalPercent = [self currentTotalPercent];
     if (currentTotalPercent == 100) {
         _currentFooterCell.addButton.enabled = NO;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 - currentTotalPercent)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %lu\n*Subtask percents must add up to 100", (long)(100 - currentTotalPercent)];
         [KGModal sharedInstance].tapOutsideToDismiss = YES;
         [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeLeft;
-    } else if (currentTotalPercent > 100) {
-        _currentFooterCell.addButton.enabled = NO;
-        [KGModal sharedInstance].tapOutsideToDismiss = NO;
-        [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeNone;
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Invalid Percent: %i over", (currentTotalPercent-100)];
     } else if (currentTotalPercent != 0){
         if (!textFieldEmpty) {
             [KGModal sharedInstance].tapOutsideToDismiss = YES;
             [KGModal sharedInstance].closeButtonType = KGModalCloseButtonTypeLeft;
             _currentFooterCell.addButton.enabled = YES;
         }
-        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %i", (100 - currentTotalPercent)];
+        _labelPercentLeft.text = [NSString stringWithFormat:@"Percent left: %lu\n*Subtask percents must add up to 100", (long)(100 - currentTotalPercent)];
     }
     
-    return YES;
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    _currentFooterCell.addButton.enabled = NO;
-    _selectedTextField = textField;
     return YES;
 }
 
@@ -289,37 +310,51 @@
 #pragma mark - Notification Center Methods
 - (void)keyboardNotificationWillShow:(NSNotification *)note
 {
+    JWCCollectionViewCellTitlePoints *selectedCell;
+    for (NSIndexPath *ip in [_subtasksCollectionView indexPathsForVisibleItems]) {
+        JWCCollectionViewCellTitlePoints *cell = (JWCCollectionViewCellTitlePoints *)[_subtasksCollectionView cellForItemAtIndexPath:ip];
+        if (cell.title == _selectedTextField) {
+            selectedCell = cell;
+        }
+    }
+    
     NSDictionary *userInfo = [note userInfo];
-
+    
+    
     NSValue *keyboardEndValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
     
     CGFloat bottomCurrentFooter = CGRectGetMaxY(_currentFooterCell.frame);
-    CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
-    CGFloat keyboardEndY = CGRectGetMinY(keyboardEndFrame);
-    CGFloat differenceBetweenYAndHeight = keyboardEndY - keyboardEndHeight;
+ 
+    CGRect convertedKeyboardRect = [_subtasksCollectionView convertRect:keyboardEndFrame fromView:self.superview];
+    CGFloat convertedKeyboardY = CGRectGetMinY(convertedKeyboardRect) - 50;
     
-    if (bottomCurrentFooter >= keyboardEndHeight) {
-        CGFloat difference = bottomCurrentFooter - keyboardEndHeight;
-        if ([UIScreen mainScreen].bounds.size.height == 480) {
-            difference += differenceBetweenYAndHeight;
-        }
-        _keyboardOffset = CGPointMake(0, difference);
+    CGRect convertedSelectedTextFieldRect = [_subtasksCollectionView convertRect:_selectedTextField.frame fromView:selectedCell];
+    CGFloat convertedTextFieldY = CGRectGetMaxY(convertedSelectedTextFieldRect);
+    
+    if (convertedTextFieldY >= convertedKeyboardY && bottomCurrentFooter >= convertedKeyboardY) {
+        CGFloat difference = bottomCurrentFooter - convertedKeyboardY;
+        _keyboardOffset = CGPointMake(0, difference+30+_subtasksCollectionView.contentOffset.y);
         [_subtasksCollectionView setContentOffset:_keyboardOffset animated:YES];
-
     }
-    
 }
 
-- (void)keyboardNotificationDismissed:(NSNotification *)note
+- (void)dismissKeyboardWithApplyButton
 {
-//    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
-//    [_subtasksCollectionView setContentOffset:keyboardOffsetOpposite animated:YES];
+    if (_selectedTextField) {
+        [_selectedTextField endEditing:YES];
+    }
 }
 
 #pragma mark - Touch Handling
 - (void)pressedAddSubtaskModalButton:(UIButton *)button
 {
+    NSInteger tempTotalPercent = 100;
+    for (JWCSubtask *subtask in [JWCTaskManager sharedManager].pendingTask.subTasks) {
+        tempTotalPercent -= subtask.percent.integerValue;
+    }
+    _totalPercentLeft = tempTotalPercent;
+    
     _addSubtaskModalButtonPressedCount++;
     [_subtasksCollectionView reloadData];
 }

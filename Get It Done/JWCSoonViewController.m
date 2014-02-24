@@ -118,6 +118,7 @@
     
     [self.collectionViewTasks addGestureRecognizer:downSwipeGestureRecognizer];
     
+    
     //    [self setUpConstraintsAndFramesForCurrentDevice];
 }
 
@@ -130,6 +131,9 @@
     if ([[JWCTaskManager sharedManager] getProgressPercent] > .01) {
         [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
                                  animated:YES];
+        if ([[JWCTaskManager sharedManager].currentTask numberOfSubtasksDone] == [JWCTaskManager sharedManager].currentTask.subTasks.count) {
+            [self showDoneButton];
+        }
     } else {
         [self.progressViewPie setProgress:.2 animated:YES];
     }
@@ -195,7 +199,7 @@
 //        [_underLine removeFromSuperview];
 //        [self.view removeConstraints:@[_portraitCollectionViewBottomConstraint,
 //                                       _portraitCollectionViewTopConstraint]];
-//        
+//
 //        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
 //                                    _landScapeCollectionViewLeftConstraint,
 //                                    _landScapeCollectionViewBottomConstraint,
@@ -207,7 +211,7 @@
 //                                       _landScapeCollectionViewLeftConstraint,
 //                                       _landScapeProgressViewLeftConstraint,
 //                                       _landScapeCollectionViewBottomConstraint]];
-//        
+//
 //        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
 //                                    _portraitCollectionViewTopConstraint]];
 //        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
@@ -220,16 +224,16 @@
 //    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
 //    _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeRight multiplier:1 constant:5];
 //    _landScapeCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-//    
+//
 //    _landScapeProgressViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
-//    
+//
 //    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
 //    _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.viewLabelProgressContainter attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
-//    
-//    
+//
+//
 //    // Add appropriate constraints based on initial device orientation and screen size
 //    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-//    
+//
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
 //        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
 //    {
@@ -320,37 +324,76 @@
 }
 
 #pragma mark - Touch Handling
-- (void)collectionViewCellSwiped:(UISwipeGestureRecognizer *)sideSwipe
+- (void)collectionViewCellSwipedRight:(UISwipeGestureRecognizer *)sideSwipe
 {
     JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)sideSwipe.view;
     NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForCell:swipedCell];
-    [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
-    
-    UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
-    tappedCellButton.selected = !tappedCellButton.selected;
     
     JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath.row];
-    selectedSubtask.done = !selectedSubtask.done;
     
-    NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+    if (!selectedSubtask.done) {
+        
+        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
+        selectedSubtask.done = YES;
+        // Show task done indicator
+        UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
+        tappedCellButton.selected = YES;
+        
+        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+        
+        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
+                                               withSubtask:selectedSubtask];
+        
+        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
+        
+        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
+        } completion:^(BOOL finished) {
+            if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
+                [self showDoneButton];
+            } else {
+                [self hideDoneButton];
+            }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
+    }
+}
+
+- (void)collectionViewCellSwipedLeft:(UISwipeGestureRecognizer *)sideSwipe
+{
+    JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)sideSwipe.view;
+    NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForCell:swipedCell];
     
-    [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
-                                           withSubtask:selectedSubtask];
+    JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath.row];
     
-    CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
-    
-    [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
-        [self.progressViewPie setProgress:currentProgressPercent animated:YES];
-    } completion:^(BOOL finished) {
-        if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
-            [self showDoneButton];
-        } else {
-            [self hideDoneButton];
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
-    
+    if (selectedSubtask.done) {
+        
+        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
+        selectedSubtask.done = NO;
+        // Remove task done indicator
+        UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
+        tappedCellButton.selected = NO;
+        
+        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+        
+        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
+                                               withSubtask:selectedSubtask];
+        
+        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
+        
+        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
+        } completion:^(BOOL finished) {
+            if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
+                [self showDoneButton];
+            } else {
+                [self hideDoneButton];
+            }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
+    }
 }
 
 - (void)collectionViewSwipedDown:(UISwipeGestureRecognizer *)downSwipe
@@ -399,13 +442,15 @@
 
 - (void)doneButtonPressed:(id)sender
 {
-    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
-        [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
-        [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
-    {
-        [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
+    if (!([JWCTaskManager sharedManager].currentTask == [JWCTaskManager sharedManager].defaultTask)) {
+        if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+            [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
+        } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+            [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
+        } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
+        {
+            [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
+        }
     }
 }
 

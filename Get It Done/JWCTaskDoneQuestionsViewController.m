@@ -13,11 +13,13 @@
 #import "KGModal.h"
 
 @interface JWCTaskDoneQuestionsViewController ()
-<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
+<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UITextViewDelegate>
 
 {
     MFMessageComposeViewController *_messageViewController;
     MFMailComposeViewController *_mailComposeViewController;
+    
+    UITextView *_selectedTextView;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewQuestionAnswers;
@@ -44,6 +46,9 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCollectionView:)];
     [self.collectionViewQuestionAnswers addGestureRecognizer:tapGesture];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNotificationWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardNotificationDismissed:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +86,7 @@
             messageLabel.text = @"Looks like you didn't answer one of the questions!";
             messageLabel.backgroundColor = [UIColor clearColor];
             [[KGModal sharedInstance] showWithContentView:messageLabel];
-        } else if ([JWCTaskManager sharedManager].currentTask.partner) { // All info filled out and ready to send to partner
+        } else if ([JWCTaskManager sharedManager].currentTask.partner.name != nil) { // All info filled out and ready to send to partner
             [self sendInfoToPartner];
         } else { // No partner for current task
             [[JWCTaskManager sharedManager] currentTaskDone];
@@ -215,18 +220,9 @@
 {
     switch (result)
     {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
-            break;
         case MFMailComposeResultSent:
             self.proofSent = YES;
             NSLog(@"Mail sent");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
             break;
         default:
             break;
@@ -236,6 +232,56 @@
     [_mailComposeViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [self pressedSubmitProof:nil];
     }];
+}
+
+#pragma mark - NSNotificationCenter Methods
+- (void)keyboardNotificationWillShow:(NSNotification *)note
+{
+    // TODO: GET THIS WORKING PROPERLY
+    NSDictionary *userInfo = [note userInfo];
+    
+    NSValue *keyboardEndValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = keyboardEndValue.CGRectValue;
+    
+    NSArray *visibleIndexPaths = [_collectionViewQuestionAnswers indexPathsForVisibleItems];
+    for (NSIndexPath *indexPath in visibleIndexPaths) {
+        JWCCollectionViewCellAnswerProofQuestions *currentCell = (JWCCollectionViewCellAnswerProofQuestions *)[_collectionViewQuestionAnswers cellForItemAtIndexPath:indexPath];
+        UITextView *textView = currentCell.textViewAnswer;
+        if ([textView isFirstResponder]) {
+            CGRect bottomOfSelectedTextField = [currentCell convertRect:textView.frame toView:self.collectionViewQuestionAnswers.superview];
+            
+            CGFloat keyboardEndHeight = CGRectGetHeight(keyboardEndFrame);
+            
+            if (CGRectGetMaxY(bottomOfSelectedTextField) >= keyboardEndHeight) {
+                if ([UIScreen mainScreen].bounds.size.height == 480) {
+                    CGFloat _keyboardOffset = CGRectGetMaxY(bottomOfSelectedTextField) - keyboardEndHeight;
+                    [self.collectionViewQuestionAnswers setContentOffset:CGPointMake(0, _keyboardOffset+20) animated:YES];
+                } else {
+                    CGFloat _keyboardOffset = CGRectGetMaxY(bottomOfSelectedTextField) - keyboardEndHeight;
+                    [self.collectionViewQuestionAnswers setContentOffset:CGPointMake(0, _keyboardOffset) animated:YES];
+                }
+            }
+        }
+    }
+}
+
+- (void)dismissKeyboardWithApply
+{
+    if (_selectedTextView) {
+        [_selectedTextView endEditing:YES];
+    }
+}
+
+- (void)keyboardNotificationDismissed:(NSNotification *)note
+{
+    CGPoint keyboardOffsetOpposite = CGPointMake(0, 0);
+    [self.collectionViewQuestionAnswers setContentOffset:keyboardOffsetOpposite animated:YES];
+}
+
+#pragma mark - UITextViewDelegate Methods
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    _selectedTextView = textView;
 }
 
 @end

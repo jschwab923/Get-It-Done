@@ -16,6 +16,11 @@
 @interface JWCViewStatsViewController () <BEMSimpleLineGraphDelegate, BEMAnimationDelegate>
 {
     UILabel *_pointsLabel;
+    
+    NSMutableDictionary *_datesAndPoints;
+    NSSortDescriptor *_dateSort;
+    NSArray *_datesArray;
+
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 
@@ -54,6 +59,7 @@
     self.graphView.colorBottom = DEFAULT_PIE_TITLE_COLOR;
     self.graphView.colorLine = [UIColor clearColor];
     [self performSegueWithIdentifier:@"SoonViewSegue" sender:self];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,11 +69,13 @@
     
     NSMutableDictionary *datesAndPoints = [[JWCTaskManager sharedManager] getStatsDictionary];
     NSString *currentDate = [NSDate getCurrentMonthDayYearString];
+   
     if ([datesAndPoints objectForKey:currentDate]) {
         NSNumber *points = [datesAndPoints objectForKey:currentDate];
         _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", currentDate, points.intValue];
     } else {
-        _pointsLabel.text = [NSString stringWithFormat:@"Date:\nPoints:"];
+        [datesAndPoints setObject:@0 forKey:currentDate];
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", currentDate, 0];
     }
 }
 
@@ -88,14 +96,21 @@
 #pragma mark - BEMSimpleLineGraph Methods
 - (int)numberOfPointsInGraph
 {
-    return [[[JWCTaskManager sharedManager] getStatsDictionary] count] > 4 ?: 4;
+    if([[[JWCTaskManager sharedManager] getStatsDictionary] count] > 1) {
+        return [[[JWCTaskManager sharedManager] getStatsDictionary] count];
+    } else {
+        return 4;
+    }
 }
 
 - (float)valueForIndex:(NSInteger)index
 {
-    NSArray *pointsArray = [[[JWCTaskManager sharedManager] getStatsDictionary] allValues];
-    if ([pointsArray count] > index) {
-        NSNumber *points = (NSNumber *)pointsArray[index];
+    _datesAndPoints = [[JWCTaskManager sharedManager] getStatsDictionary];
+    _dateSort = [[NSSortDescriptor alloc] initWithKey:@"description" ascending:YES];
+    _datesArray = [[_datesAndPoints allKeys] sortedArrayUsingDescriptors:@[_dateSort]];
+    
+    if ([_datesArray count] > index) {
+        NSNumber *points = (NSNumber *)[_datesAndPoints objectForKey:_datesArray[index]];
         return points.floatValue;
     } else {
         return 0;
@@ -104,12 +119,10 @@
 
 - (void)didTouchGraphWithClosestIndex:(int)index
 {
-    NSMutableDictionary *datesAndPoints = [[JWCTaskManager sharedManager] getStatsDictionary];
-    if ([datesAndPoints count] > index) {
-        NSArray *datesArray = [datesAndPoints allKeys];
-        NSArray *pointsArray = [datesAndPoints allValues];
-        NSNumber *pointForDate = (NSNumber *)pointsArray[index];
-        _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%i", (NSString *)datesArray[index], pointForDate.integerValue];
+    
+    if ([_datesAndPoints count] > index) {
+        NSNumber *pointForDate = (NSNumber *)[_datesAndPoints objectForKey:_datesArray[index]];
+        _pointsLabel.text = [NSString stringWithFormat:@"Date:%@ Points:%li",(NSString *)_datesArray[index], (long)pointForDate.integerValue];
     } else {
         _pointsLabel.text = [NSString stringWithFormat:@"Date:\nPoints:"];
     }

@@ -12,7 +12,6 @@
 
 @interface JWCTaskManager ()
 {
-    JWCTask *_defaultTask;
     JWCStatsManager *_statsManager;
     
     NSMutableArray *_tasks;
@@ -160,7 +159,7 @@
 
 - (BOOL)saveCurrentTasks
 {
-    if (!(self.currentTask == _defaultTask)) {
+    if (!([self.currentTask.taskDescription isEqualToString:_defaultTask.taskDescription])) {
         return [self createFolder:@"CurrentTasksFolder" andFile:@"CurrentTasks" withObject:self.tasks];
     }
     return YES;

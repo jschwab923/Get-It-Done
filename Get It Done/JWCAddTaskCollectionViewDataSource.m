@@ -19,7 +19,10 @@
 #import "JWCViewLine.h"
 
 @interface JWCAddTaskCollectionViewDataSource ()
-
+{
+    UITextField *_selectedTextField;
+    UITextView *_selectedTextView;
+}
 @end
 
 @implementation JWCAddTaskCollectionViewDataSource
@@ -48,6 +51,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Setup toolbar for keyboard dismissal
+    UIToolbar *doneToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    doneToolbar.barStyle = UIBarStyleBlackTranslucent;
+    doneToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboardWithApplyButton)],
+                         nil];
+    [doneToolbar sizeToFit];
     
     UICollectionViewCell *currentCell;
     
@@ -64,11 +74,12 @@
                     tempCell.title.text = [JWCTaskManager sharedManager].pendingTask.title ?: @"";
                     tempCell.points.delegate = self;
                     tempCell.points.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.6];
+                    tempCell.points.inputAccessoryView = doneToolbar;
+                    tempCell.title.inputAccessoryView = doneToolbar;
                     NSInteger pendingPoints = [JWCTaskManager sharedManager].pendingTask.points.integerValue;
                     if (pendingPoints > 0) {
                         tempCell.points.text = [NSString stringWithFormat:@"%li", (long)pendingPoints];
                     }
-                    
                     break;
                 }
                 case 1:
@@ -78,6 +89,7 @@
                     tempCell.textViewDescription.delegate = self;
                     tempCell.textViewDescription.backgroundColor = [UIColor colorWithWhite:1.0 alpha:.6];
                     tempCell.textViewDescription.text = [JWCTaskManager sharedManager].pendingTask.taskDescription ?: @"Describe what needs to get done";
+                    tempCell.textViewDescription.inputAccessoryView = doneToolbar;
                     break;
                 }
                 default:
@@ -101,6 +113,7 @@
         default:
             break;
     }
+    
     return currentCell;
 }
 
@@ -152,6 +165,12 @@
 }
 
 #pragma mark - UITextView/Field Delegate Methods
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _selectedTextField = textField;
+    return YES;
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField.tag == TAG_TITLE_TEXTVIEW) {
@@ -170,6 +189,7 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    _selectedTextView = textView;
     if (textView.tag == TAG_DESCRIPTION_TEXTFIELD &&
         [textView.text isEqualToString:@"Describe what needs to get done"]) {
         textView.text = @"";
@@ -183,6 +203,16 @@
         [[JWCTaskManager sharedManager] pendingTask].taskDescription = textView.text;
     }
     return YES;
+}
+
+- (void)dismissKeyboardWithApplyButton
+{
+    if (_selectedTextField) {
+        [_selectedTextField endEditing:YES];
+    }
+    if (_selectedTextView) {
+        [_selectedTextView endEditing:YES];
+    }
 }
 
 @end

@@ -14,6 +14,11 @@
 
 + (JWCContactsLoader *)sharedController;
 
+/**
+ * Method to search and sort an array of contacts based on a string
+ * @param name Name string to search the list of contacts for
+ * @return Returns an array of people with names that 'begin with' name
+ **/
 - (NSArray *)arrayOfPeopleWithName:(NSString *)name;
 
 - (void)getContactsArray;

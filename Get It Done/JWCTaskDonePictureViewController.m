@@ -104,7 +104,7 @@
         [[JWCTaskManager sharedManager] currentTaskDone];
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     } else if ([JWCTaskManager sharedManager].currentTask.proofImage) {
-        if ([JWCTaskManager sharedManager].currentTask.partner) {
+        if ([JWCTaskManager sharedManager].currentTask.partner.name != nil) {
             [self sendInfoToPartner];
         } else {
             [[JWCTaskManager sharedManager] currentTaskDone];

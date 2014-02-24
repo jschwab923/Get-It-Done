@@ -78,7 +78,7 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="CheckPlain"/>
+                                                    <state key="selected" image="Checkmark"/>
                                                     <state key="highlighted" image="CheckPlain"/>
                                                 </button>
                                             </subviews>
@@ -596,7 +596,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone5_33.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jx4-Xo-ZaL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIconLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Jx4-Xo-ZaL">
                                 <rect key="frame" x="40" y="98" width="240" height="280"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -687,9 +687,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppIconLarge" width="512" height="512"/>
         <image name="CheckPlain" width="48" height="33"/>
+        <image name="Checkmark" width="50" height="47"/>
         <image name="Quiet" width="80" height="80"/>
-        <image name="iPhone5_33.png" width="320" height="567"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

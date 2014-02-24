@@ -12,6 +12,8 @@
 
 @interface JWCTaskManager : NSObject 
 
+@property (nonatomic) JWCTask *defaultTask;
+
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
 
