@@ -63,7 +63,7 @@
         self.title == nil ||
         self.taskDescription == nil ||
         self.proofType == nil ||
-        self.subTasks == nil ||
+        self.subTasks.count == 0 ||
         self.points <= 0;
 }
 

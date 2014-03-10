@@ -54,7 +54,7 @@
     UILabel *addSubtaskLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(rect)-130, 0,
                                                                          CGRectGetWidth(rect)/3, CGRectGetHeight(rect))];
     addSubtaskLabel.backgroundColor = [UIColor clearColor];
-    addSubtaskLabel.text = @"Add Subtask";
+    addSubtaskLabel.text = @"Add Subtask *required";
     addSubtaskLabel.numberOfLines = 0;
     addSubtaskLabel.textColor = DEFAULT_TEXT_COLOR;
     addSubtaskLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
@@ -227,7 +227,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-        NSString *attemptedEditPoints = [NSString stringWithFormat:@"%@%@", textField.text, string];
+    NSString *attemptedEditPoints = [NSString stringWithFormat:@"%@%@", textField.text, string];
     if (textField.tag == TAG_POINTS_TEXTVIEW && attemptedEditPoints.length > textField.text.length) {
         NSRegularExpression *regularExpression = [[NSRegularExpression alloc] initWithPattern:@"[0-9]" options:NSRegularExpressionCaseInsensitive error:nil];
         
