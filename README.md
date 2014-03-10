@@ -1,7 +1,8 @@
-Get It Done  Now Available in the App Store 
-
-https://itunes.apple.com/us/app/get-it-done-stop-multitasking/id827253579?ls=1&mt=8
+Get It Done : Stop multiasking start getting things done  
 ===========
+
+Now Available in the App Store 
+https://itunes.apple.com/us/app/get-it-done-stop-multitasking/id827253579?ls=1&mt=8
 
 Not your average to-do list.
 
