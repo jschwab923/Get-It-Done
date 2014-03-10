@@ -15,8 +15,6 @@
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     format.dateFormat = @"MM/dd/yyyy";
     
-    NSLog(@"%@", [format stringFromDate:[NSDate date]]);
-    
     return [format stringFromDate:[NSDate new]];
 }
 

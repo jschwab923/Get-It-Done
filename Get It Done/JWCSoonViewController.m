@@ -70,6 +70,10 @@
 {
     [super viewDidLoad];
     
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
     self.view.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     self.collectionViewTasks.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     
@@ -112,8 +116,8 @@
     UISwipeGestureRecognizer *downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewSwipedDown:)];
     [downSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
     
-    [self.collectionViewTasks addGestureRecognizer:sideSwipeGestureRecognizer];
     [self.collectionViewTasks addGestureRecognizer:downSwipeGestureRecognizer];
+    
     
     //    [self setUpConstraintsAndFramesForCurrentDevice];
 }
@@ -127,6 +131,9 @@
     if ([[JWCTaskManager sharedManager] getProgressPercent] > .01) {
         [self.progressViewPie setProgress:[[JWCTaskManager sharedManager] getProgressPercent]
                                  animated:YES];
+        if ([[JWCTaskManager sharedManager].currentTask numberOfSubtasksDone] == [JWCTaskManager sharedManager].currentTask.subTasks.count) {
+            [self showDoneButton];
+        }
     } else {
         [self.progressViewPie setProgress:.2 animated:YES];
     }
@@ -192,7 +199,7 @@
 //        [_underLine removeFromSuperview];
 //        [self.view removeConstraints:@[_portraitCollectionViewBottomConstraint,
 //                                       _portraitCollectionViewTopConstraint]];
-//        
+//
 //        [self.view addConstraints:@[_landScapeCollectionViewTopConstraint,
 //                                    _landScapeCollectionViewLeftConstraint,
 //                                    _landScapeCollectionViewBottomConstraint,
@@ -204,7 +211,7 @@
 //                                       _landScapeCollectionViewLeftConstraint,
 //                                       _landScapeProgressViewLeftConstraint,
 //                                       _landScapeCollectionViewBottomConstraint]];
-//        
+//
 //        [self.view addConstraints:@[_portraitCollectionViewBottomConstraint,
 //                                    _portraitCollectionViewTopConstraint]];
 //        [self.collectionViewTasks.collectionViewLayout invalidateLayout];
@@ -217,16 +224,16 @@
 //    _landScapeCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
 //    _landScapeCollectionViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.progressContainerView attribute:NSLayoutAttributeRight multiplier:1 constant:5];
 //    _landScapeCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-//    
+//
 //    _landScapeProgressViewLeftConstraint = [NSLayoutConstraint constraintWithItem:self.progressContainerView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:5];
-//    
+//
 //    _portraitCollectionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
 //    _portraitCollectionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.collectionViewTasks attribute:NSLayoutAttributeTop relatedBy:0 toItem:self.viewLabelProgressContainter attribute:NSLayoutAttributeBottom multiplier:1 constant:5];
-//    
-//    
+//
+//
 //    // Add appropriate constraints based on initial device orientation and screen size
 //    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-//    
+//
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight ||
 //        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
 //    {
@@ -262,7 +269,7 @@
     
     // Get height of text
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    CGSize textSize = CGSizeMake(265, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     if (currentTask) {
@@ -273,7 +280,7 @@
                                                                            attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
                                                                               context:nil];
         
-        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+20);
+        CGSize roundedSize = CGSizeMake(CGRectGetWidth(collectionView.frame)-15, ceil(boundingRect.size.height)+15);
         
         return roundedSize;
     }
@@ -284,7 +291,7 @@
 {
     // Get height of text
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
-    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    CGSize textSize = CGSizeMake(265.0, MAXFLOAT);
     
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
     if (currentTask) {
@@ -302,26 +309,35 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Tapped the subtask cells
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    detailsLabel.numberOfLines = 0;
+    detailsLabel.center = self.view.center;
+    detailsLabel.font = DEFAULT_FONT;
+    detailsLabel.textColor = [UIColor whiteColor];
     
+    JWCSubtask *tappedSubtask = [JWCTaskManager sharedManager].currentTask.subTasks[indexPath.row];
+    NSString *stringForDetails = [NSString stringWithFormat:@"Worth %i percent of total", tappedSubtask.percent.intValue];
+    
+    detailsLabel.text = stringForDetails;
+    
+    [[KGModal sharedInstance] showWithContentView:detailsLabel];
 }
 
 #pragma mark - Touch Handling
-- (void)collectionViewCellSwiped:(UISwipeGestureRecognizer *)sideSwipe
+- (void)collectionViewCellSwipedRight:(UISwipeGestureRecognizer *)sideSwipe
 {
-    CGPoint swipePoint = [sideSwipe locationInView:self.collectionViewTasks];
+    JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)sideSwipe.view;
+    NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForCell:swipedCell];
     
-    if (swipePoint.y > 50) { // Swiped a cell
-        NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForItemAtPoint:swipePoint];
-        JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)[self.collectionViewTasks cellForItemAtIndexPath:swipedCellIndexPath];
+    JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath.row];
+    
+    if (!selectedSubtask.done) {
         
         [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
-        
+        selectedSubtask.done = YES;
+        // Show task done indicator
         UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
-        tappedCellButton.selected = !tappedCellButton.selected;
-        
-        JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath .row];
-        selectedSubtask.done = !selectedSubtask.done;
+        tappedCellButton.selected = YES;
         
         NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
         
@@ -333,7 +349,7 @@
         [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
             [self.progressViewPie setProgress:currentProgressPercent animated:YES];
         } completion:^(BOOL finished) {
-            if (currentProgressPercent >= .95) {
+            if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
                 [self showDoneButton];
             } else {
                 [self hideDoneButton];
@@ -341,20 +357,61 @@
         }];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
+    }
+}
+
+- (void)collectionViewCellSwipedLeft:(UISwipeGestureRecognizer *)sideSwipe
+{
+    JWCSoonCollectionViewCell *swipedCell = (JWCSoonCollectionViewCell *)sideSwipe.view;
+    NSIndexPath *swipedCellIndexPath = [self.collectionViewTasks indexPathForCell:swipedCell];
+    
+    JWCSubtask *selectedSubtask =  [[JWCTaskManager sharedManager] currentTask].subTasks[swipedCellIndexPath.row];
+    
+    if (selectedSubtask.done) {
         
-    } else { // Swiped the header
+        [JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked = [NSNumber numberWithInteger:[JWCTaskManager sharedManager].currentTask.numberOfTimesSubtasksChecked.integerValue + 1];
+        selectedSubtask.done = NO;
+        // Remove task done indicator
+        UIButton *tappedCellButton = swipedCell.buttonSubtaskDone;
+        tappedCellButton.selected = NO;
         
+        NSNumber *subTaskPoints = [NSNumber numberWithFloat:(selectedSubtask.percent.floatValue/100.0)*[JWCTaskManager sharedManager].currentTask.points.floatValue];
+        
+        [[JWCTaskManager sharedManager] updateTaskProgress:subTaskPoints
+                                               withSubtask:selectedSubtask];
+        
+        CGFloat currentProgressPercent = [[JWCTaskManager sharedManager] getProgressPercent];
+        
+        [UIView animateWithDuration:.3 delay:0 options:0 animations:^{
+            [self.progressViewPie setProgress:currentProgressPercent animated:YES];
+        } completion:^(BOOL finished) {
+            if ([JWCTaskManager sharedManager].currentTask.numberOfSubtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
+                [self showDoneButton];
+            } else {
+                [self hideDoneButton];
+            }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SUBTASK_DONE object:nil];
     }
 }
 
 - (void)collectionViewSwipedDown:(UISwipeGestureRecognizer *)downSwipe
 {
-    if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64) {
+    CGFloat scrollViewContentOffsetY = self.collectionViewTasks.contentOffset.y;
+    if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64 && scrollViewContentOffsetY == 0) {
         [UIView animateKeyframesWithDuration:.7 delay:0 options:0 animations:^{
             self.viewLabelProgressContainter.frame = _originalContainerViewFrame;
-            self.collectionViewTasks.frame = _originalCollectionViewFrame;
+            self.collectionViewTasks.frame = CGRectMake(_originalCollectionViewFrame.origin.x, _originalCollectionViewFrame.origin.y, CGRectGetWidth(_originalCollectionViewFrame), CGRectGetHeight(self.collectionViewTasks.frame));
         } completion:^(BOOL finished) {
-
+            self.collectionViewTasks.frame = _originalCollectionViewFrame;
+        }];
+    } else if (CGRectGetHeight(self.collectionViewTasks.frame) == CGRectGetHeight(self.view.frame)-64 &&scrollViewContentOffsetY < -50) {
+        [UIView animateKeyframesWithDuration:.7 delay:0 options:0 animations:^{
+            self.viewLabelProgressContainter.frame = _originalContainerViewFrame;
+            self.collectionViewTasks.frame = CGRectMake(_originalCollectionViewFrame.origin.x, _originalCollectionViewFrame.origin.y, CGRectGetWidth(_originalCollectionViewFrame), CGRectGetHeight(self.collectionViewTasks.frame));
+        } completion:^(BOOL finished) {
+            self.collectionViewTasks.frame = _originalCollectionViewFrame;
         }];
     }
 }
@@ -385,13 +442,15 @@
 
 - (void)doneButtonPressed:(id)sender
 {
-    if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
-        [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
-        [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
-    } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
-    {
-        [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
+    if (!([JWCTaskManager sharedManager].currentTask == [JWCTaskManager sharedManager].defaultTask)) {
+        if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_DESCRIBE]) {
+            [self performSegueWithIdentifier:SEGUE_PROOF_DESCRIBE sender:self];
+        } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_QUESTIONS]) {
+            [self performSegueWithIdentifier:SEGUE_PROOF_QUESTIONS sender:self];
+        } else if ([[JWCTaskManager sharedManager].currentTask.proofType isEqualToString:PROOF_TYPE_PICTURE])
+        {
+            [self performSegueWithIdentifier:SEGUE_PROOF_PICTURE sender:self];
+        }
     }
 }
 

@@ -47,6 +47,16 @@
     
     self.textViewDescription.layer.cornerRadius = 5;
     self.textViewDescription.alpha = .8;
+    
+    // Setup toolbar for keyboard dismissal
+    UIToolbar *doneToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    doneToolbar.barStyle = UIBarStyleBlackTranslucent;
+    doneToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboardWithApplyButton)],
+                         nil];
+    [doneToolbar sizeToFit];
+    
+    self.textViewDescription.inputAccessoryView = doneToolbar;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,9 +75,10 @@
         messageLabel.font = DEFAULT_FONT;
         messageLabel.textColor = DEFAULT_TEXT_COLOR;
         messageLabel.text = @"You've got to describe what you got done!";
+        messageLabel.numberOfLines = 0;
         messageLabel.backgroundColor = [UIColor clearColor];
         [[KGModal sharedInstance] showWithContentView:messageLabel];
-    } else if ([JWCTaskManager sharedManager].currentTask.partner){
+    } else if ([JWCTaskManager sharedManager].currentTask.partner.name != nil){
         [JWCTaskManager sharedManager].currentTask.proofDescribe = self.textViewDescription.text;
         [self sendInfoToPartner];
     } else { // No task partner
@@ -79,6 +90,11 @@
 
 #pragma mark - Gesture Recognizer Methods
 - (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture
+{
+    [self.textViewDescription endEditing:YES];
+}
+
+-(void)dismissKeyboardWithApplyButton
 {
     [self.textViewDescription endEditing:YES];
 }
@@ -144,7 +160,8 @@
     _mailComposeViewController.mailComposeDelegate = self;
     [_mailComposeViewController setSubject:@"Proof that I got my task done!"];
     [_mailComposeViewController setMessageBody:[JWCMessageController messageForEmail] isHTML:NO];
-    [_mailComposeViewController setToRecipients:[JWCTaskManager sharedManager].currentTask.partner.emails];
+    NSArray *emails = (NSArray *)[JWCTaskManager sharedManager].currentTask.partner.emails;
+    [_mailComposeViewController setToRecipients:emails];
     
     NSData *imageData = UIImagePNGRepresentation([JWCTaskManager sharedManager].currentTask.proofImage);
     [_mailComposeViewController addAttachmentData:imageData mimeType:@"image/png" fileName:@"ProofImage"];
@@ -188,8 +205,18 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
+            messageLabel.font = DEFAULT_FONT;
+            messageLabel.textColor = DEFAULT_TEXT_COLOR;
+            messageLabel.numberOfLines = 0;
+            messageLabel.text = @"Can't mark the task as done until you send your proof!";
+            messageLabel.backgroundColor = [UIColor clearColor];
+            [[KGModal sharedInstance] showWithContentView:messageLabel];
             break;
+        }
         case MFMailComposeResultSaved:
             NSLog(@"Mail saved");
             break;
@@ -198,8 +225,18 @@
             NSLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+        {
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            
+            UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
+            messageLabel.font = DEFAULT_FONT;
+            messageLabel.textColor = DEFAULT_TEXT_COLOR;
+            messageLabel.numberOfLines = 0;
+            messageLabel.text = @"Something went wrong sending your message. Try again.";
+            messageLabel.backgroundColor = [UIColor clearColor];
+            [[KGModal sharedInstance] showWithContentView:messageLabel];
             break;
+        }
         default:
             break;
     }

@@ -12,6 +12,8 @@
 
 @interface JWCTaskManager : NSObject 
 
+@property (nonatomic) JWCTask *defaultTask;
+
 @property (nonatomic) NSArray *tasks;
 @property (nonatomic) JWCTask *currentTask;
 
@@ -19,8 +21,6 @@
 
 // Used to persist temporary progress when adding a task
 @property (nonatomic) JWCTask *pendingTask;
-
-@property (nonatomic) NSMutableArray *stats;
 
 + (JWCTaskManager *)sharedManager;
 

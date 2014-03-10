@@ -11,6 +11,7 @@
 #import "JWCSoonCollectionViewHeader.h"
 #import "JWCTaskManager.h"
 #import "JWCSubtask.h"
+#import "KGModal.h"
 #import "JWCViewLine.h"
 
 @interface JWCSoonCollectionViewDataSource ()
@@ -44,11 +45,21 @@
     JWCSoonCollectionViewCell *subTaskCell = (JWCSoonCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SubtaskCell" forIndexPath:indexPath];
     JWCViewLine *underline = [[JWCViewLine alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(subTaskCell.frame)-1, CGRectGetWidth(subTaskCell.frame), 1)];
     
+    // Setup task done gesture recognier
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwipedRight:)];
+    [rightSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+    [subTaskCell addGestureRecognizer:rightSwipeGestureRecognizer];
+    // Setup task undone gesture recognizer
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:collectionView.delegate action:@selector(collectionViewCellSwipedLeft:)];
+    [leftSwipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [subTaskCell addGestureRecognizer:leftSwipeGestureRecognizer];
     // Default properties
     if (subTaskCell.underLine) {
-        subTaskCell.underLine = nil;
+        [subTaskCell.underLine removeFromSuperview];
     }
+    
     subTaskCell.underLine = underline;
+    [subTaskCell addSubview:underline];
     
     // Properties based on current task
     JWCTask *currentTask = [[JWCTaskManager sharedManager] currentTask];
@@ -69,9 +80,16 @@
 {
     UICollectionReusableView *supplementaryElement;
     if (kind == UICollectionElementKindSectionHeader) {
+    
         JWCSoonCollectionViewHeader *headerCell = (JWCSoonCollectionViewHeader *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCell" forIndexPath:indexPath];
         
+        UITapGestureRecognizer *tapGestureHeaderCell = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedHeader:)];
+        [headerCell addGestureRecognizer:tapGestureHeaderCell];
+        
         _currentHeader = headerCell;
+        
+        // Call method to set the correct smiley
+        [self subtaskDone:nil];
         
         //TODO: Customize header cell based on current task
         // Properties based on current task
@@ -106,9 +124,36 @@
         }
         if (subtasksDone == [[JWCTaskManager sharedManager].currentTask.subTasks count]) {
             _currentHeader.imageViewSmiley.image = [UIImage imageNamed:@"Happy"];
+        } else if (subtasksDone >= [[JWCTaskManager sharedManager].currentTask.subTasks count]/1.5) {
+            _currentHeader.imageViewSmiley.image = [UIImage imageNamed:@"Quiet"];
         }
     }
     [_currentHeader.imageViewSmiley setNeedsDisplay];
+}
+
+#pragma mark - Gesture Recognizer Methods
+- (void)tappedHeader:(UITapGestureRecognizer *)tapGesture
+{
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18];
+    CGSize textSize = CGSizeMake(225.0, MAXFLOAT);
+    NSString *currentTaskDescription = [JWCTaskManager sharedManager].currentTask.taskDescription;
+
+    CGRect boundingRect = [currentTaskDescription boundingRectWithSize:textSize
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                           attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil]
+                                                              context:nil];
+        
+    CGSize roundedSize = CGSizeMake(225, ceil(boundingRect.size.height)+20);
+    
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, roundedSize.width, roundedSize.height)];
+    
+    detailsLabel.numberOfLines = 0;
+    detailsLabel.font = DEFAULT_FONT;
+    detailsLabel.textColor = [UIColor whiteColor];
+    
+    detailsLabel.text = currentTaskDescription;
+    
+    [[KGModal sharedInstance] showWithContentView:detailsLabel];
 }
 
 @end

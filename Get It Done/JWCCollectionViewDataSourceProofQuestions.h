@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface JWCCollectionViewDataSourceProofQuestions : NSObject
-<UICollectionViewDataSource>
+<UICollectionViewDataSource, UITextViewDelegate>
+
+@property (nonatomic) UITextView *selectedTextView;
 
 @end

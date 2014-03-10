@@ -9,6 +9,7 @@
 #import "JWCTask.h"
 #import "JWCTaskManager.h"
 #import "JWCContactsLoader.h"
+#import "JWCLocalNotificationController.h"
 
 #import "JWCAddTaskViewController.h"
 #import "JWCAddSubtaskCollectionViewFooter.h"
@@ -49,7 +50,7 @@
     
     // Register collection view supplementary views
     [self.collectionViewAddTask registerClass:[JWCCollectionViewHeaderAddTask class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:REUSE_TASK_INFO_HEADER];
-     [self.collectionViewAddTask registerClass:[JWCAddSubtaskCollectionViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER];
+    [self.collectionViewAddTask registerClass:[JWCAddSubtaskCollectionViewFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_ADD_SUBTASK_FOOTER];
     [self.collectionViewAddTask registerClass:[JWCCollectionViewFooterAddPartner class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:REUSE_PARTNER_FOOTER];
     
     // Register collection view cells
@@ -66,10 +67,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     if (![JWCTaskManager sharedManager].pendingTask.proofType) {
         JWCCollectionViewCellProof *proofCell = (JWCCollectionViewCellProof *)[self.collectionViewAddTask cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-        
         [proofCell.pickerViewProof selectRow:1 inComponent:0 animated:YES];
     }
 }
@@ -94,7 +93,10 @@
     CGSize fontSize = CGSizeMake(225, MAXFLOAT);
     confirmationLabel.textColor = [UIColor whiteColor];
     
-   if ([[[JWCTaskManager sharedManager] pendingTask] containsNilProperties]) {
+    if (![JWCTaskManager sharedManager].pendingTask.proofType) {
+        [JWCTaskManager sharedManager].pendingTask.proofType = PROOF_TYPE_DESCRIBE;
+    }
+    if ([[[JWCTaskManager sharedManager] pendingTask] containsNilProperties]) {
         confirmationLabel.text = @"Oops! Looks like something didn't get filled out.";
         CGRect boundingRect = [confirmationLabel.text
                                boundingRectWithSize:fontSize
@@ -102,6 +104,9 @@
                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:confirmationLabel.font, NSFontAttributeName, nil] context:nil];
         CGRect roundedSizeFrame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.8, ceil(boundingRect.size.height)+15);
         confirmationLabel.frame = roundedSizeFrame;
+        
+        [JWCLocalNotificationController registerLocalNotification];
+        
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
         return;
     }
@@ -120,18 +125,13 @@
                                attributes:[NSDictionary dictionaryWithObjectsAndKeys:confirmationLabel.font, NSFontAttributeName, nil] context:nil];
         CGRect roundedSizeFrame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.8, ceil(boundingRect.size.height)+15);
         confirmationLabel.frame = roundedSizeFrame;
+        
+        //Register local notification
+        [JWCLocalNotificationController registerLocalNotification];
+        
         [[KGModal sharedInstance] showWithContentView:confirmationLabel];
-    } else {
-        confirmationLabel.text = @"Pending task updated. Press + to commit to getting it done!";
-        CGRect boundingRect = [confirmationLabel.text
-                               boundingRectWithSize:fontSize
-                               options:NSStringDrawingUsesLineFragmentOrigin
-                               attributes:[NSDictionary dictionaryWithObjectsAndKeys:confirmationLabel.font, NSFontAttributeName, nil] context:nil];
-        CGRect roundedSizeFrame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds)*.8, ceil(boundingRect.size.height)+15);
-        confirmationLabel.frame = roundedSizeFrame;
-        [[KGModal sharedInstance] showWithContentView:confirmationLabel];
+        [self.collectionViewAddTask reloadData];
     }
-
 }
 
 #pragma mark - Gesture Recognizer Methods
